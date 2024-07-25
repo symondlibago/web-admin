@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {useNavigate } from 'react-router-dom';
-import './App.css'; // Make sure to create this CSS file and add the styles mentioned below
+import { useNavigate } from 'react-router-dom';
+import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMapMarker, faHeart, faHeartBroken, faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -89,7 +89,6 @@ function Events() {
   return (
     <div className="gradient-container">
       <div className="container">
-        
         <div className="search-container">
           <FontAwesomeIcon icon={faSearch} size="lg" color="#888" className="search-icon" />
           <input

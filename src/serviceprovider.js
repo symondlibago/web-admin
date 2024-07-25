@@ -57,22 +57,25 @@ const ChooseServiceProv = () => {
     : allEventsData;
 
   const renderEventItem = (item) => (
-    <div className="item-container" onClick={() => handleEventClick(item)}>
-      <img src={require(`./images/${item.image}`)} alt={item.title} className="image" />
-      <p className="title">{item.title}</p>
-      <div className="detail-container">
-        <div className="detail-row">
+    <div className="event-item" onClick={() => handleEventClick(item)} key={item.id}>
+      <img src={require(`./images/${item.image}`)} alt={item.title} className="event-image" />
+      <p className="event-title">{item.title}</p>
+      <div className="event-details">
+        <div className="event-detail-row">
           <FontAwesomeIcon icon={faPlusCircle} size="sm" color="#2A93D5" />
-          <p className="detail-text">{item.provider}</p>
+          <p className="event-detail-text">{item.provider}</p>
         </div>
-        <div className="detail-row">
+        <div className="event-detail-row">
           <FontAwesomeIcon icon={faCashRegister} size="sm" color="#2A93D5" />
-          <p className="detail-text">{item.price}</p>
+          <p className="event-detail-text">{item.price}</p>
         </div>
       </div>
       <div
-        className={`heart-icon ${likedEvents[item.id] ? 'heart-liked' : ''}`}
-        onClick={() => toggleLike(item.id)}
+        className={`like-icon ${likedEvents[item.id] ? 'liked' : ''}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleLike(item.id);
+        }}
       >
         <FontAwesomeIcon
           icon={likedEvents[item.id] ? faHeart : faHeartBroken}
@@ -84,25 +87,25 @@ const ChooseServiceProv = () => {
   );
 
   return (
-    <div className="gradient-container">
-      <div className="container">
+    <div className="gradient-background">
+      <div className="main-container">
         {/* Header section */}
-        <div className="scroll-view">
+        <div className="scrollable-content">
           <div className="content">
             {/* Centered Create Event Text */}
-            <p className="header-text">Service Provider</p>
+            <p className="header-title">Service Provider</p>
             {/* Fading Line */}
-            <div className="line"></div>
+            <div className="separator-line"></div>
             {/* Event Types Section */}
-            <p className="event-types-text">Add Service Provider</p>
-            <div className="scroll-view-horizontal">
+            <p className="service-type-label">Add Service Provider</p>
+            <div className="horizontal-scroll">
               {eventTypes.map((type, index) => (
                 <button
                   key={index}
                   className={`event-type-button ${selectedType === type ? 'selected' : ''}`}
                   onClick={() => setSelectedType(type)}
                 >
-                  <p className={`event-type-text ${selectedType === type ? 'selected-text' : ''}`}>
+                  <p className={`event-type-text ${selectedType === type ? 'selected' : ''}`}>
                     {type}
                   </p>
                 </button>
@@ -110,22 +113,22 @@ const ChooseServiceProv = () => {
             </div>
             
             {/* Scrollable Events List */}
-            <div className="flat-list-container">
+            <div className="event-list-container">
               {filteredEventsData.map(event => renderEventItem(event))}
             </div>
             
             {/* Added Events List */}
             {addedEvents.length > 0 && (
-              <div className="added-events-container">
-                <p className="added-events-header">Added Events</p>
-                <div className="added-events-scroll-view">
+              <div className="added-events-section">
+                <p className="added-events-title">Added Events</p>
+                <div className="added-events-scroll">
                   {addedEvents.map(event => (
                     <div key={event.id} className="added-event-item">
                       <p className="added-event-text">{event.title}</p>
                       <p className="added-event-text">{event.type}</p>
                       <p className="added-event-text">{event.price}</p>
                       <button
-                        className="remove-button"
+                        className="remove-event-button"
                         onClick={() => handleRemoveEvent(event.id)}
                       >
                         <FontAwesomeIcon icon={faTrash} size="lg" color="#FF4C4C" />
@@ -133,11 +136,11 @@ const ChooseServiceProv = () => {
                     </div>
                   ))}
                   <div className="footer-buttons">
-                    <button className="cancel-button" onClick={() => window.history.back()}>
-                      <p className="cancel-button-text">Cancel</p>
+                    <button className="modal-cancel-button" onClick={() => window.history.back()}>
+                      <p className="modal-cancel-button-text">Cancel</p>
                     </button>
-                    <button className="next-button" onClick={() => { /* Your logic for Add to List */ }}>
-                      <p className="next-button-text">Next</p>
+                    <button className="modal-add-button" onClick={() => { /* Your logic for Add to List */ }}>
+                      <p className="modal-add-button-text">Next</p>
                     </button>
                   </div>
                 </div>
@@ -150,21 +153,21 @@ const ChooseServiceProv = () => {
         <Modal
           open={modalVisible}
           onClose={handleCloseModal}
-          className="modal"
+          className="modal-overlay"
         >
-          <div className="modal-container">
-            <div className="modal-content">
+          <div className="modal-content-container">
+            <div className="modal-body">
               {selectedEvent && (
                 <>
                   <p className="modal-title">{selectedEvent.title}</p>
                   <p className="modal-provider">Provider: {selectedEvent.provider}</p>
                   <p className="modal-price">Price: {selectedEvent.price}</p>
-                  <div className="modal-buttons">
-                    <button className="cancel-button" onClick={handleCloseModal}>
-                      <p className="cancel-button-text">Cancel</p>
+                  <div className="modal-actions">
+                    <button className="modal-cancel-button" onClick={handleCloseModal}>
+                      <p className="modal-cancel-button-text">Cancel</p>
                     </button>
-                    <button className="next-button" onClick={handleNext}>
-                      <p className="next-button-text">Add to List</p>
+                    <button className="modal-add-button" onClick={handleNext}>
+                      <p className="modal-add-button-text">Add to List</p>
                     </button>
                   </div>
                 </>
@@ -172,7 +175,6 @@ const ChooseServiceProv = () => {
             </div>
           </div>
         </Modal>
-
       </div>
     </div>
   );

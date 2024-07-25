@@ -8,6 +8,9 @@ import Notification from './notification';
 import Events from './event';
 import CreateEvent from './createevent';
 import ChooseServiceProv from './serviceprovider';
+import Attendees from './attendees';
+import Inventory from './inventory';
+import Equipment from './equipment';
 
 function App() {
   return (
@@ -21,6 +24,12 @@ function App() {
           <Route path="/events" element={<><Navbar /><Events/></>} />
           <Route path="/create-event" element={<><Navbar /><CreateEvent/></>} />
           <Route path="/choose-service-provider" element={<><Navbar /><ChooseServiceProv/></>} />
+          <Route path="/attendee-tracker" element={<><Navbar /><Events/></>} />
+          <Route path="/inventory-tracker" element={<><Navbar /><Events/></>} />
+          <Route path="/attendees" element={<><Navbar /><Attendees/></>} />
+          <Route path="/inventory" element={<><Navbar /><Inventory/></>} />
+          <Route path="/equipment" element={<><Navbar /><Equipment/></>} />
+          <Route path="/logout" element={<Login />} />
         </Routes>
       </div>
     </Router>

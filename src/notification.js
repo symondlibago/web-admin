@@ -168,7 +168,6 @@ const Notification = () => {
         <button onClick={() => window.history.back()} className="back-button">
           <FontAwesomeIcon icon={faArrowLeft} />
         </button>
-        <h1 className="header-text">Notification</h1>
       </div>
       <div className="tabs-container">
         {['All', 'This Week', 'Booking Request', 'Service Provider Request'].map(tab => (

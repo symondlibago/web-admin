@@ -1,0 +1,396 @@
+/* ATTENDEES */
+
+.attendees-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+}
+
+.event-and-chart-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.event-details-container {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.event-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.event-details {
+  flex: 1;
+  margin-left: 20px;
+  padding: 10px;
+  background: #27272A; /* Adjust to your desired color */
+  border-radius: 5px;
+}
+
+.event-title {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.event-info {
+  color: #ccc;
+  margin: 5px 0;
+}
+
+.chart-container {
+  flex: 1;
+  max-width: 300px;
+  height: 150px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent; /* Transparent background */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.legend-item {
+  margin: 0 10px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  padding: 10px;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+
+  border-radius: 5px;
+}
+
+.filter-button {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  border: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.filter-button.active {
+  background-color: #ff0;
+}
+
+.table-container {
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.table-header-cell {
+  color: #fff;
+  flex: 1;
+  text-align: center;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #777;
+}
+
+.table-cell {
+  color: #fff;
+  flex: 1;
+  text-align: center;
+}
+
+.status-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+
+/* INVENTORY */
+
+.inventory-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: white;
+}
+
+.content {
+  padding: 20px;
+  flex: 1;
+}
+
+.header-section {
+  margin-top: 10px;
+}
+
+.header-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B;
+}
+
+.header-highlight {
+  color: #FFC42B;
+}
+
+.header-line {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, white, transparent);
+  margin: 10px 0;
+}
+
+.table {
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  background-color: transparent;
+}
+
+.table-header-text {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid transparent; /* Ensure no visible lines */
+}
+
+.table-row-text {
+  flex: 1;
+  text-align: center;
+}
+
+.summary {
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background: transparent;
+  text-align: center;
+}
+
+.summary-text {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* equipment */
+
+General Styles
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.equipment-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+}
+
+/* Header Styles */
+.header-equipment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: transparent;
+}
+
+.menu-button-equipment {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.header-title-equipment {
+  text-align: center;
+  flex: 1;
+}
+
+.header-text-equipment {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header-highlight {
+  color: white;
+  padding: 0 5px;
+}
+
+.header-line {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, white, transparent);
+  margin: 10px 0;
+}
+
+/* Table Styles */
+.table-container-equipment {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.table-equipment {
+  background-color: transparent;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.table-header-equipment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.table-header-cell-equipment {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-row-equipment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.table-cell-equipment {
+  flex: 1;
+  text-align: center;
+}
+
+/* Buttons */
+.add-button-equipment, .remove-button-equipment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #444;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.add-button-equipment span, .remove-button-equipment span {
+  margin-left: 5px;
+}
+
+/* Summary Styles */
+.summary-equipment {
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.summary-text-equipment {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Modal Styles */
+.modal-overlay-equipment {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-equipment {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  position: relative;
+}
+
+.close-button-equipment {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-input-group-equipment {
+  margin-bottom: 15px;
+}
+
+.modal-input-group-equipment label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.modal-input-group-equipment input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.modal-button-equipment {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
