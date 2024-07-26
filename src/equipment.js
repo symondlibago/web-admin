@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css'; // Import your CSS file
-import { IoMdMenu, IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
+import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 
 let inventoryData = [
   { item: "Spoon", noOfItems: 20, noOfSortItems: 0, status: "" },
@@ -51,12 +51,18 @@ const Equipment = () => {
   return (
     <div className="equipment-container">
       <header className="header-equipment">
+        <button className="menu-button-equipment">
+          <IoMdAddCircle size={24} color="white" />
+        </button>
         <div className="header-title-equipment">
           <h1 className="header-text-equipment">
             <span className="header-highlight">Equipment</span> Tracker
           </h1>
           <hr className="header-line" />
         </div>
+        <button className="menu-button-equipment">
+          <IoMdAddCircle size={24} color="white" />
+        </button>
       </header>
 
       <div className="table-container-equipment">
@@ -92,7 +98,7 @@ const Equipment = () => {
           </button>
         </div>
 
-        <div className="summary">
+        <div className="summary-equipment">
           <div className="summary-text-equipment">Total Items: {totalItems}</div>
           <div className="summary-text-equipment">Total Items Broken: {totalBroken}</div>
           <div className="summary-text-equipment">Total Items Missing: {totalMissing}</div>
@@ -103,7 +109,7 @@ const Equipment = () => {
         <div className="modal-overlay-equipment">
           <div className="modal-content-equipment">
             <button className="close-button-equipment" onClick={() => setModalVisible(false)}>×</button>
-            <h2>Add New Item</h2>
+            <h2 className='modal-title-equipment'>Add New Item</h2>
             <div className="modal-input-group-equipment">
               <label>Name of Item</label>
               <input

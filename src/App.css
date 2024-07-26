@@ -274,7 +274,7 @@ body, html, #root {
   color: white;
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 98.7%;
   z-index: 1000;
 }
 
@@ -1452,12 +1452,14 @@ body, html, #root {
   justify-content: center;
   padding: 10px;
   margin-top: 10px;
-  background-color: #444;
+  background-color: #61481C;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  
 }
+
 
 .add-button-equipment span, .remove-button-equipment span {
   margin-left: 5px;
@@ -1489,10 +1491,11 @@ body, html, #root {
 }
 
 .modal-content-equipment {
-  background: white;
+  background:  #A97E00;
   padding: 20px;
   border-radius: 10px;
   width: 300px;
+  text-align: center;
   position: relative;
 }
 
@@ -1516,7 +1519,7 @@ body, html, #root {
 }
 
 .modal-input-group-equipment input {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -1530,6 +1533,216 @@ body, html, #root {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.modal-title-equipment {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* PROFILE */
+
+/* Gradient Background Container */
+/* Gradient Background Container */
+.gradient-container-profile {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+  overflow: auto; /* Allow scrolling if content overflows */
+}
+
+/* Scroll View Container */
+.scroll-view-profile {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+}
+
+/* Profile Section Styles */
+.profile-section-profile {
+  border: 2px solid #C2B067;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  background-color: transparent;
+  text-align: center;
+  margin-bottom: 30px; /* Ensure spacing from the events list */
+}
+
+/* Profile Picture Styles */
+.profile-picture-profile {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.name-text-profile {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.address-text-profile {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Schedule Container */
+.schedule-container-profile {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.schedule-item-profile {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.schedule-text-profile {
+  color: #fff;
+}
+
+.schedule-time-profile {
+  color: #FFC42B;
+}
+
+.button-container-profile {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.edit-button-profile, .portfolio-button-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.edit-button-profile {
+  background-color: #61481C;
+}
+
+.edit-button-text-profile {
+  color: #FFC42B;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.portfolio-button-profile {
+  background-color: #CEB64C;
+}
+
+.portfolio-button-text-profile {
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+/* Header Text and Line Styles */
+.header-text-profile {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B;
+  text-align: center;
+  margin: 0;
+}
+
+.header-line-profile {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, white, transparent);
+  margin: 10px 0;
+}
+
+/* Popular Event Text */
+.popular-event-text-profile {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* Event List Container Styles */
+.events-list-container-profile {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  position: relative;
+  width: 100%; /* Ensure full width */
+  flex-grow: 1; /* Allow to grow and fill remaining space */
+  align-items: center; /* Center items vertically */
+  overflow-y: hidden;
+
+}
+.events-list-container-profile::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.gradient-container-profile::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* Event Item Styles */
+.event-item-profile {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+  width: 200px; /* Fixed width to fit in a single row */
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+/* Adjust image size to fit properly */
+.image-profile {
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.title-profile {
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.detail-container-profile {
+  margin-top: 5px;
+}
+
+.detail-row-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.detail-text-profile {
+  color: black;
+  margin-left: 5px;
+}
+
+
+
+
 
 
 

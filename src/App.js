@@ -11,6 +11,7 @@ import ChooseServiceProv from './serviceprovider';
 import Attendees from './attendees';
 import Inventory from './inventory';
 import Equipment from './equipment';
+import Profile from './profile';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/attendees" element={<><Navbar /><Attendees/></>} />
           <Route path="/inventory" element={<><Navbar /><Inventory/></>} />
           <Route path="/equipment" element={<><Navbar /><Equipment/></>} />
+          <Route path="/profile" element={<><Navbar /><Profile/></>} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>
