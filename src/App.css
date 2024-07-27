@@ -1741,6 +1741,558 @@ body, html, #root {
 }
 
 
+/* EDIT PROFILE */
+.gradient-container-edit {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+  justify-content: center;
+  overflow: hidden; /* Hide scrollbar */
+}
+
+.scroll-view-edit {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.scroll-view-edit::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.container-edit {
+  flex: 1;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px; /* Limit the width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.header-text-edit {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B;
+  text-align: center;
+}
+
+.line-edit {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, white, transparent);
+  margin: 10px 0;
+}
+
+.setting-text-edit {
+  font-size: 20px;
+  color: #FFFFFF;
+  margin: 20px 0;
+}
+
+.content-edit {
+  flex: 1;
+}
+
+.settings-text-edit {
+  font-size: 15px;
+  color: #FFFFFF;
+  margin: 10px 0;
+}
+
+.text-input-edit {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px;
+  height: 40px; /* Reduce the height of the text inputs */
+  color: #000000;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #B0B0B0;
+  width: 100%;
+}
+
+.profile-container-edit {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.profile-image-edit {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.profile-text-container-edit {
+  margin-left: 15px;
+}
+
+.profile-name-edit {
+  font-size: 18px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.profile-email-edit {
+  font-size: 14px;
+  color: #B0B0B0;
+}
+
+.button-container-edit {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.submit-button-edit {
+  background-color: #FFC42B;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 30%;
+  align-items: center;
+}
+
+.buttons-container-edit {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-portfolio-button-edit {
+  background-color: #27272A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 48%; /* Make buttons side by side */
+}
+
+.create-portfolio-text-edit {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* ADD ROLE */
+.gradient-container-addrole {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+  justify-content: center;
+  overflow: hidden; /* Hide scrollbar */
+}
+
+.scroll-view-addrole {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.scroll-view-addrole::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.container-addrole {
+  flex: 1;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px; /* Limit the width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.header-text-addrole {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B;
+  text-align: center;
+}
+
+.line-addrole {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, white, transparent);
+  margin: 10px 0;
+}
+
+.setting-text-addrole {
+  font-size: 20px;
+  color: #FFFFFF;
+  margin: 20px 0;
+}
+
+.content-addrole {
+  flex: 1;
+}
+
+.settings-text-addrole {
+  font-size: 15px;
+  color: #FFFFFF;
+  margin: 10px 0;
+}
+
+.text-input-addrole {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px;
+  height: 40px; /* Adjust as needed */
+  color: #000000;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #B0B0B0;
+  width: 100%;
+}
+
+textarea.text-input-addrole {
+  height: 100px; /* Adjust height for textarea */
+}
+
+.profile-container-addrole {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.profile-image-addrole {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.profile-text-container-addrole {
+  margin-left: 15px;
+}
+
+.profile-name-addrole {
+  font-size: 18px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.profile-email-addrole {
+  font-size: 14px;
+  color: #B0B0B0;
+}
+
+.button-container-addrole {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.submit-button-addrole {
+  background-color: #FFC42B;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 30%;
+  align-items: center;
+}
+
+/* PORTFOLIO */
+
+.gradient-container-portfolio {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+  padding: 20px;
+  overflow: hidden; /* Hide scrollbar */
+}
+
+.portfolio-text-portfolio {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.events-list-container-portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust grid columns */
+  gap: 20px; /* Gap between items */
+  padding-bottom: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.events-list-container-portfolio::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.event-item-portfolio {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-portfolio {
+  width: 100%;
+  height: 120px; /* Adjust height */
+  border-radius: 10px;
+  object-fit: cover; /* Ensure image covers the area without distortion */
+}
+
+.title-portfolio {
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.detail-container-portfolio {
+  margin-top: 10px;
+}
+
+.detail-row-portfolio {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.detail-text-portfolio {
+  color: #2A93D5;
+  margin-left: 5px;
+}
+
+/* SETTINGS */
+.gradient-container-settings {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+  justify-content: center;
+  overflow: hidden; /* Hide scrollbar */
+}
+
+.scroll-view-settings {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.scroll-view-settings::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.container-settings {
+  flex: 1;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px; /* Limit the width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.header-text-settings {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B;
+  text-align: center;
+}
+
+.content-settings {
+  flex: 1;
+}
+
+.settings-text-settings {
+  font-size: 20px;
+  color: #FFFFFF;
+  margin: 20px 0;
+}
+
+.text-input-settings {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px;
+  height: 40px; /* Adjust as needed */
+  color: #000000;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #B0B0B0;
+  width: 100%;
+}
+
+.button-container-settings {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.create-event-button-settings {
+  background-color: #FFC42B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 100%; /* Full width for the button */
+}
+
+.create-event-text-settings {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.submit-button-settings {
+  background-color: #FFC42B;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 30%;
+  align-items: center;
+}
+
+/* EVENT PORFOLIO */
+
+.gradient-container-portfolio {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #2A2600, #000000);
+  color: #fff;
+  padding: 20px;
+}
+
+.container-portfolio {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+}
+
+.header-portfolio {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button-portfolio {
+  background: none;
+  border: none;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.header-text-portfolio {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B;
+  flex: 1;
+  text-align: center;
+}
+
+.cover-photo-container-portfolio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 100px 30px;
+  margin-bottom: 20px;
+  border: 2px dashed white;
+  cursor: pointer;
+}
+
+.cover-photo-icon-portfolio {
+  margin-right: 10px;
+}
+
+.cover-photo-text-portfolio {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.line-portfolio {
+  width: 100%;
+  height: 2px;
+  margin: 20px 0;
+  background: linear-gradient(to right, #FFFFFF00, #FFFFFF, #FFFFFF00);
+}
+
+.label-portfolio, .labels-portfolio {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.labels-portfolio {
+  font-size: 20px;
+}
+
+.text-input-portfolio {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 15px;
+  height: 50px;
+  color: #000000;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #B0B0B0;
+}
+
+.create-portfolio-button-portfolio {
+  background-color: #FFC42B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #FFC42B;
+  cursor: pointer;
+}
+
+.create-portfolio-text-portfolio {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+
+
 
 
 

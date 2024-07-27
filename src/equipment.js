@@ -51,18 +51,12 @@ const Equipment = () => {
   return (
     <div className="equipment-container">
       <header className="header-equipment">
-        <button className="menu-button-equipment">
-          <IoMdAddCircle size={24} color="white" />
-        </button>
         <div className="header-title-equipment">
           <h1 className="header-text-equipment">
             <span className="header-highlight">Equipment</span> Tracker
           </h1>
           <hr className="header-line" />
-        </div>
-        <button className="menu-button-equipment">
-          <IoMdAddCircle size={24} color="white" />
-        </button>
+        </div>      
       </header>
 
       <div className="table-container-equipment">
