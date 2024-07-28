@@ -6,11 +6,11 @@ import { faCalendar, faMapMarker, faHeart, faHeartBroken, faSearch } from '@fort
 
 const eventsData = [
   { id: '1', title: 'Mr. & Mrs. Malik Wedding', image: 'event1.png', date: '2024-07-01', address: 'CDO', buttons: ['Edit', 'Equipment'] },
-  { id: '2', title: 'Elizabeth Birthday', image: 'event2.png', date: '2024-08-12', address: 'CDO', buttons: ['Attendee', 'Feedback', 'Inventory'] },
+  { id: '2', title: 'Elizabeth Birthday', image: 'event2.png', date: '2024-08-12', address: 'CDO', buttons: ['Attendee', 'Inventory'] },
   { id: '3', title: 'Class of 1979 Reunion', image: 'event3.png', date: '2024-09-25', address: 'CDO', buttons: ['Edit', 'Equipment'] },
   { id: '4', title: 'Corporate Party', image: 'event1.png', date: '2024-10-30', address: 'CDO', buttons: ['Edit', 'Equipment'] },
-  { id: '5', title: 'Annual Gala', image: 'event2.png', date: '2024-11-15', address: 'CDO', buttons: ['Attendee', 'Feedback', 'Equipment'] },
-  { id: '6', title: 'New Year Celebration', image: 'event3.png', date: '2024-12-31', address: 'CDO', buttons: ['Attendee', 'Feedback', 'Inventory'] },
+  { id: '5', title: 'Annual Gala', image: 'event2.png', date: '2024-11-15', address: 'CDO', buttons: ['Attendee',  'Equipment'] },
+  { id: '6', title: 'New Year Celebration', image: 'event3.png', date: '2024-12-31', address: 'CDO', buttons: ['Attendee',  'Inventory'] },
   { id: '7', title: 'Music Festival', image: 'event1.png', date: '2024-06-22', address: 'CDO', buttons: ['Attendee'] },
   { id: '8', title: 'Art Exhibition', image: 'event2.png', date: '2024-07-05', address: 'CDO', buttons: ['Attendee', 'Equipment'] },
 ];

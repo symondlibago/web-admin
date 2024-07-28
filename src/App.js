@@ -17,7 +17,11 @@ import AddRole from './addrole';
 import Portfolio from './portfolio';
 import Settings from './settings';
 import EventPortfolio from './eventportfolio';
-
+import Feedback from './feedback';
+import EventsFeedback from './eventsfeedback';
+import Group from './group';
+import GroupAttendees from './groupattendees';
+import Messages from './messages';
 function App() {
   return (
     <Router>
@@ -41,6 +45,11 @@ function App() {
           <Route path="/portfolio" element={<><Navbar /><Portfolio/></>} />
           <Route path="/settings" element={<><Navbar /><Settings/></>} />
           <Route path="/create-event-portfolio" element={<><Navbar /><EventPortfolio/></>} />
+          <Route path="/feedback" element={<><Navbar /><EventsFeedback/></>} />
+          <Route path="/feedback/feedback-events" element={<><Navbar /><Feedback/></>} />
+          <Route path="/groups" element={<><Navbar /><Group/></>} />
+          <Route path="/group-attendees" element={<><Navbar /><GroupAttendees/></>} />
+          <Route path="/messages" element={<><Navbar /><Messages/></>} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>
