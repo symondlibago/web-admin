@@ -26,7 +26,7 @@ const Messages = () => {
       <div className="scrollViewContent-messages">
         {initialMessages.map((message) => (
           <div key={message.id} className="messageContainer-messages">
-            <img src={proPic} alt="Profile" className="profileImage-messages" />
+            <img src={proPic} alt="Profile" className="profileImage-messages" /> 
             <div className="messageContent-messages">
               <p className="senderName-messages">{message.name}</p>
               <p className="messagePreview-messages">{message.message}</p>

@@ -1,52 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css'; // Import your CSS file
 import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 
-let inventoryData = [
-  { item: "Spoon", noOfItems: 20, noOfSortItems: 0, status: "" },
-  { item: "Fork", noOfItems: 40, noOfSortItems: 0, status: "" },
-  { item: "Glass", noOfItems: 16, noOfSortItems: 0, status: "" },
-  { item: "Plates", noOfItems: 50, noOfSortItems: 0, status: "" },
-  { item: "Mug", noOfItems: 35, noOfSortItems: 0, status: "" },
-  { item: "Knife", noOfItems: 45, noOfSortItems: 0, status: "" },
-];
-
-const getStatusStyle = (status) => {
-  switch (status) {
-    case "Complete":
-      return { color: "green" };
-    case "Missing":
-      return { color: "orange" };
-    case "Broken":
-      return { color: "red" };
-    default:
-      return { color: "white" };
-  }
-};
-
 const Equipment = () => {
+  const [inventoryData, setInventoryData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newItem, setNewItem] = useState("");
   const [newItemCount, setNewItemCount] = useState("");
   const [removeMode, setRemoveMode] = useState(false);
 
-  const totalItems = inventoryData.reduce((sum, item) => sum + item.noOfItems, 0);
-  const totalBroken = inventoryData.filter(item => item.status === "Broken").length;
-  const totalMissing = inventoryData.filter(item => item.status === "Missing").length;
+  useEffect(() => {
+    fetchInventory();
+  }, []);
 
-  const handleAddItem = () => {
+  const fetchInventory = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/equipment');
+      console.log(response.data); // Add this line
+      setInventoryData(response.data);
+    } catch (error) {
+      console.error("There was an error fetching the inventory data:", error);
+    }
+  };
+  
+
+  const handleAddItem = async () => {
     if (newItem && newItemCount) {
-      inventoryData.push({ item: newItem, noOfItems: parseInt(newItemCount), noOfSortItems: 0, status: "" });
-      setNewItem("");
-      setNewItemCount("");
-      setModalVisible(false);
+      try {
+        await axios.post('http://localhost:8000/api/equipment', {
+          item: newItem,
+          number_of_items: parseInt(newItemCount),
+          number_of_sort_items: 0,
+          status: "",
+        });
+        fetchInventory();
+        setNewItem("");
+        setNewItemCount("");
+        setModalVisible(false);
+      } catch (error) {
+        console.error("There was an error adding the item:", error);
+      }
     }
   };
 
-  const handleRemoveItem = (index) => {
-    inventoryData.splice(index, 1);
-    setRemoveMode(false); // Exit remove mode after deletion
+  const handleRemoveItem = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/equipment/${id}`);
+      fetchInventory();
+      setRemoveMode(false);
+    } catch (error) {
+      console.error("There was an error removing the item:", error);
+    }
   };
+
+  const totalItems = inventoryData.reduce((sum, item) => sum + item.number_of_items, 0);
+  const totalBroken = inventoryData.filter(item => item.status === "Broken").length;
+  const totalMissing = inventoryData.filter(item => item.status === "Missing").length;
 
   return (
     <div className="equipment-container">
@@ -67,17 +77,17 @@ const Equipment = () => {
             <div className="table-header-cell-equipment">NO. OF SORT ITEMS</div>
             <div className="table-header-cell-equipment">STATUS</div>
           </div>
-          {inventoryData.map((item, index) => (
-            <div key={index} className="table-row-equipment">
+          {inventoryData.map((item) => (
+            <div key={item.event_id} className="table-row-equipment">
               {removeMode && (
-                <button className="remove-button-equipment" onClick={() => handleRemoveItem(index)}>
+                <button className="remove-button-equipment" onClick={() => handleRemoveItem(item.event_id)}>
                   <IoMdRemoveCircle size={24} color="red" />
                 </button>
               )}
               <div className="table-cell-equipment">{item.item}</div>
-              <div className="table-cell-equipment">{item.noOfItems}</div>
-              <div className="table-cell-equipment">{item.noOfSortItems}</div>
-              <div className="table-cell-equipment" style={getStatusStyle(item.status)}>
+              <div className="table-cell-equipment">{item.number_of_items}</div>
+              <div className="table-cell-equipment">{item.number_of_sort_items}</div>
+              <div className="table-cell-equipment" style={{ color: item.status === "Broken" ? 'red' : 'black' }}>
                 {item.status}
               </div>
             </div>
