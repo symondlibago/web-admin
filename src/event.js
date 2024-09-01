@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMapMarker, faHeart, faHeartBroken, faSearch } from '@fortawesome/free-solid-svg-icons';
-
-const eventsData = [
-  { id: '1', title: 'Mr. & Mrs. Malik Wedding', image: 'event1.png', date: '2024-07-01', address: 'CDO', buttons: ['Edit', 'Equipment'] },
-  { id: '2', title: 'Elizabeth Birthday', image: 'event2.png', date: '2024-08-12', address: 'CDO', buttons: ['Attendee', 'Inventory'] },
-  { id: '3', title: 'Class of 1979 Reunion', image: 'event3.png', date: '2024-09-25', address: 'CDO', buttons: ['Edit', 'Equipment'] },
-  { id: '4', title: 'Corporate Party', image: 'event1.png', date: '2024-10-30', address: 'CDO', buttons: ['Edit', 'Equipment'] },
-  { id: '5', title: 'Annual Gala', image: 'event2.png', date: '2024-11-15', address: 'CDO', buttons: ['Attendee',  'Equipment'] },
-  { id: '6', title: 'New Year Celebration', image: 'event3.png', date: '2024-12-31', address: 'CDO', buttons: ['Attendee',  'Inventory'] },
-  { id: '7', title: 'Music Festival', image: 'event1.png', date: '2024-06-22', address: 'CDO', buttons: ['Attendee'] },
-  { id: '8', title: 'Art Exhibition', image: 'event2.png', date: '2024-07-05', address: 'CDO', buttons: ['Attendee', 'Equipment'] },
-];
+import axios from 'axios';
 
 function Events() {
   const [search, setSearch] = useState('');
-  const [filteredEvents, setFilteredEvents] = useState(eventsData);
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const [likedEvents, setLikedEvents] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Fetch events data from the Laravel backend
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/events'); // Replace with your API URL
+        setEvents(response.data);
+        setFilteredEvents(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching events data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const handleSearch = (text) => {
     setSearch(text);
     if (text) {
-      const newData = eventsData.filter((item) => {
-        const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
+      const newData = events.filter((item) => {
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
       setFilteredEvents(newData);
     } else {
-      setFilteredEvents(eventsData);
+      setFilteredEvents(events);
     }
   };
 
@@ -42,49 +51,83 @@ function Events() {
     }));
   };
 
-  const renderEventItem = (item) => (
-    <div key={item.id} className="item-container">
-      <img src={require(`./images/${item.image}`)} alt={item.title} className="image" />
-      <h3 className="title">{item.title}</h3>
-      <div className="detail-container">
-        <div className="detail-row">
-          <FontAwesomeIcon icon={faCalendar} size="lg" color="#2A93D5" />
-          <span className="detail-text">{item.date}</span>
+  const isFutureEvent = (eventDate) => {
+    const today = new Date();
+    const eventDateObj = new Date(eventDate);
+    return eventDateObj > today;
+  };
+
+  const isPastEvent = (eventDate) => {
+    const today = new Date();
+    const eventDateObj = new Date(eventDate);
+    return eventDateObj < today;
+  };
+
+  const renderEventItem = (item) => {
+    // Use a sample image since the actual image path is not provided
+    const sampleImage = item.id % 3 === 0 ? 'event1.png' : (item.id % 2 === 0 ? 'event2.png' : 'event3.png');
+
+    return (
+      <div key={item.id} className="item-container">
+        <img src={require(`./images/${sampleImage}`)} alt={item.name} className="image" />
+        <h3 className="title">{item.name}</h3>
+        <div className="detail-container">
+          <div className="detail-row">
+            <FontAwesomeIcon icon={faCalendar} size="lg" color="#2A93D5" />
+            <span className="detail-text">{item.date}</span>
+          </div>
+          <div className="detail-row">
+            <FontAwesomeIcon icon={faMapMarker} size="lg" color="#2A93D5" />
+            <span className="detail-text">{item.venue}</span>
+          </div>
         </div>
-        <div className="detail-row">
-          <FontAwesomeIcon icon={faMapMarker} size="lg" color="#2A93D5" />
-          <span className="detail-text">{item.address}</span>
+        <button
+          className={`heart-icon ${likedEvents[item.id] ? 'heart-liked' : ''}`}
+          onClick={() => toggleLike(item.id)}
+        >
+          <FontAwesomeIcon icon={likedEvents[item.id] ? faHeart : faHeartBroken} size="lg" />
+        </button>
+        <div className="buttons-container">
+          {isFutureEvent(item.date) && (
+            <>
+              <button
+                className="button"
+                onClick={() => navigate('/edit')}
+              >
+                Edit
+              </button>
+              <button
+                className="button"
+                onClick={() => navigate('/equipment')}
+              >
+                Equipment
+              </button>
+            </>
+          )}
+          {isPastEvent(item.date) && (
+            <>
+              <button
+                className="button"
+                onClick={() => navigate('/inventory')}
+              >
+                Inventory
+              </button>
+              <button
+                className="button"
+                onClick={() => navigate('/attendees')}
+              >
+                Attendees
+              </button>
+            </>
+          )}
         </div>
       </div>
-      <button
-        className={`heart-icon ${likedEvents[item.id] ? 'heart-liked' : ''}`}
-        onClick={() => toggleLike(item.id)}
-      >
-        <FontAwesomeIcon icon={likedEvents[item.id] ? faHeart : faHeartBroken} size="lg" />
-      </button>
-      <div className="buttons-container">
-        {item.buttons.map((button, index) => (
-          <button
-            key={index}
-            className="button"
-            onClick={() => {
-              if (button === 'Equipment') {
-                navigate('/equipment');
-              } else if (button === 'Edit') {
-                navigate('/edit');
-              } else if (button === 'Attendee') {
-                navigate('/attendees');
-              } else if (button === 'Inventory') {
-                navigate('/inventory');
-              }
-            }}
-          >
-            {button}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+    );
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="gradient-container">

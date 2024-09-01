@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom'; // Corrected import
 import { faHeart, faHeartBroken, faPlusCircle, faCashRegister, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
@@ -18,6 +19,7 @@ const allEventsData = [
 const eventTypes = ["Food Catering", "Photography", "Video Editing", "Florists"];
 
 const ChooseServiceProv = () => {
+  const navigate = useNavigate(); // Corrected useNavigate
   const [selectedType, setSelectedType] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [likedEvents, setLikedEvents] = useState({});
@@ -51,6 +53,38 @@ const ChooseServiceProv = () => {
   const handleRemoveEvent = (eventId) => {
     setAddedEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
   };
+
+  const handleFinish = async () => {
+    const eventData = JSON.parse(localStorage.getItem('eventData')) || {};
+    const addedEvents = JSON.parse(localStorage.getItem('addedEvents')) || [];
+
+    try {
+        const response = await fetch('/api/events', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                ...eventData,
+                providers: addedEvents,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok.');
+        }
+
+        const data = await response.json();
+        console.log('Event saved successfully:', data);
+        localStorage.removeItem('eventData');
+        localStorage.removeItem('addedEvents');
+        navigate('/dashboard');
+    } catch (error) {
+        console.error('Error saving event:', error);
+    }
+};
+
+
 
   const filteredEventsData = selectedType
     ? allEventsData.filter(event => event.type === selectedType)
@@ -139,8 +173,8 @@ const ChooseServiceProv = () => {
                     <button className="modal-cancel-button" onClick={() => window.history.back()}>
                       <p className="modal-cancel-button-text">Cancel</p>
                     </button>
-                    <button className="modal-add-button" onClick={() => { /* Your logic for Add to List */ }}>
-                      <p className="modal-add-button-text">Next</p>
+                    <button className="modal-add-button" onClick={handleFinish}>
+                      <p className="modal-add-button-text">Finish</p>
                     </button>
                   </div>
                 </div>
@@ -163,12 +197,8 @@ const ChooseServiceProv = () => {
                   <p className="modal-provider">Provider: {selectedEvent.provider}</p>
                   <p className="modal-price">Price: {selectedEvent.price}</p>
                   <div className="modal-actions">
-                    <button className="modal-cancel-button" onClick={handleCloseModal}>
-                      <p className="modal-cancel-button-text">Cancel</p>
-                    </button>
-                    <button className="modal-add-button" onClick={handleNext}>
-                      <p className="modal-add-button-text">Add to List</p>
-                    </button>
+                    <button className="modal-add-button" onClick={handleNext}>Add</button>
+                    <button className="modal-cancel-button" onClick={handleCloseModal}>Cancel</button>
                   </div>
                 </>
               )}

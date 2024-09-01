@@ -22,6 +22,7 @@ import EventsFeedback from './eventsfeedback';
 import Group from './group';
 import GroupAttendees from './groupattendees';
 import Messages from './messages';
+import Success from './success';
 function App() {
   return (
     <Router>
@@ -50,6 +51,7 @@ function App() {
           <Route path="/groups" element={<><Navbar /><Group/></>} />
           <Route path="/group-attendees" element={<><Navbar /><GroupAttendees/></>} />
           <Route path="/messages" element={<><Navbar /><Messages/></>} />
+          <Route path="/success" element={<><Navbar /><Success/></>} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>

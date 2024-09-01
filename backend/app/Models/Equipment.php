@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Equipment.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,5 +11,3 @@ class Equipment extends Model
 
     protected $fillable = ['item', 'number_of_items', 'number_of_sort_items', 'status'];
 }
-
-

@@ -1,27 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 function Dashboard() {
+  const [monthlyBookings, setMonthlyBookings] = useState([]);
+  const [currentMonth, setCurrentMonth] = useState('');
   const navigate = useNavigate();
 
-  // Mock data for booking reminders
-  const bookingReminders = Array.from({ length: 20 }, () => {
-    const day = Math.floor(Math.random() * 7);
-    const time = Math.floor(Math.random() * 8) + 8; // Time between 8am to 3pm
-    return { day, time };
-  });
+  useEffect(() => {
+    // Fetch event data from the backend
+    axios.get('http://localhost:8000/api/events')
+      .then(response => {
+        const today = new Date();
+        const currentMonthIndex = today.getMonth(); // Get current month (0-based index)
+        
+        const eventDates = response.data
+          .filter(event => new Date(event.date).getMonth() === currentMonthIndex) // Filter events for the current month
+          .map(event => new Date(event.date).getDate()); // Extract days
+        
+        setMonthlyBookings(eventDates);
+      })
+      .catch(error => {
+        console.error('Error fetching events:', error);
+      });
 
-  // Mock data for monthly calendar bookings
-  const monthlyBookings = Array.from({ length: 15 }, () => Math.floor(Math.random() * 28) + 1); // Dates between 1 to 28
+    // Set the current month
+    const today = new Date();
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    setCurrentMonth(`${monthNames[today.getMonth()]} ${today.getFullYear()}`);
+  }, []);
+
+  // Generate calendar days for the current month
+  const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
   return (
     <div className="dashboard-container">
       <div className="left-side">
         <h1 className="calendar-title">Calendar</h1>
         <div className="date-range">
-          <span>12-18</span>
-          <span>July 2024</span>
+          <span>1-{daysInMonth}</span>
+          <span>{currentMonth}</span>
         </div>
         <div className="week-calendar">
           <div className="days-header">
@@ -39,9 +58,7 @@ function Dashboard() {
                 <div className="bookings">
                   {Array.from({ length: 7 }, (_, dayIndex) => (
                     <div key={dayIndex} className="booking">
-                      {bookingReminders.some(reminder => reminder.day === dayIndex && reminder.time === (timeIndex + 8)) && (
-                        <div className="booking-reminder"></div>
-                      )}
+                      {/* Adjust booking reminder logic here if needed */}
                     </div>
                   ))}
                 </div>
@@ -53,11 +70,11 @@ function Dashboard() {
       <div className="right-side">
         <div className="calendar">
           <div className="calendar-header">
-            <span>July 2024</span>
+            <span>{currentMonth}</span>
           </div>
           <div className="calendar-body">
-            {Array.from({ length: 31 }, (_, i) => i + 1).map(day => (
-              <div key={day} className="calendar-day">
+            {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => (
+              <div key={day} className={`calendar-day ${monthlyBookings.includes(day) ? 'has-booking' : ''}`}>
                 <span>{day}</span>
                 {monthlyBookings.includes(day) && <div className="calendar-booking-dot"></div>}
               </div>

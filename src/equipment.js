@@ -17,13 +17,12 @@ const Equipment = () => {
   const fetchInventory = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/equipment');
-      console.log(response.data); // Add this line
+      console.log(response.data); // Debugging line to log fetched data
       setInventoryData(response.data);
     } catch (error) {
       console.error("There was an error fetching the inventory data:", error);
     }
   };
-  
 
   const handleAddItem = async () => {
     if (newItem && newItemCount) {
@@ -45,6 +44,7 @@ const Equipment = () => {
   };
 
   const handleRemoveItem = async (id) => {
+    console.log("Attempting to remove item with id:", id); // Debugging line to log the id
     try {
       await axios.delete(`http://localhost:8000/api/equipment/${id}`);
       fetchInventory();
@@ -78,9 +78,9 @@ const Equipment = () => {
             <div className="table-header-cell-equipment">STATUS</div>
           </div>
           {inventoryData.map((item) => (
-            <div key={item.event_id} className="table-row-equipment">
+            <div key={item.id} className="table-row-equipment">
               {removeMode && (
-                <button className="remove-button-equipment" onClick={() => handleRemoveItem(item.event_id)}>
+                <button className="remove-button-equipment" onClick={() => handleRemoveItem(item.id)}>
                   <IoMdRemoveCircle size={24} color="red" />
                 </button>
               )}
