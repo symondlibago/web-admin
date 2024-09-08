@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faMapMarker, faHeart, faHeartBroken, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 function Events() {
@@ -13,11 +13,10 @@ function Events() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Fetch events data from the Laravel backend
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/events'); // Replace with your API URL
+        const response = await axios.get('http://localhost:8000/api/events');
         setEvents(response.data);
         setFilteredEvents(response.data);
         setLoading(false);
@@ -63,8 +62,11 @@ function Events() {
     return eventDateObj < today;
   };
 
+  const handleEquipmentClick = (eventId) => {
+    navigate('/equipment', { state: { eventId } });
+  };
+
   const renderEventItem = (item) => {
-    // Use a sample image since the actual image path is not provided
     const sampleImage = item.id % 3 === 0 ? 'event1.png' : (item.id % 2 === 0 ? 'event2.png' : 'event3.png');
 
     return (
@@ -85,7 +87,7 @@ function Events() {
           className={`heart-icon ${likedEvents[item.id] ? 'heart-liked' : ''}`}
           onClick={() => toggleLike(item.id)}
         >
-          <FontAwesomeIcon icon={likedEvents[item.id] ? faHeart : faHeartBroken} size="lg" />
+          <FontAwesomeIcon icon={likedEvents[item.id] ? faHeart : faHeart} size="lg" />
         </button>
         <div className="buttons-container">
           {isFutureEvent(item.date) && (
@@ -98,7 +100,7 @@ function Events() {
               </button>
               <button
                 className="button"
-                onClick={() => navigate('/equipment')}
+                onClick={() => handleEquipmentClick(item.id)}
               >
                 Equipment
               </button>

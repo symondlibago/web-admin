@@ -13,25 +13,29 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
-    <>
+    <div className={`navbar-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
       <div className="navbar">
         <div className="burger-icon" onClick={toggleSidebar}>
           <FontAwesomeIcon icon={faBars} size='lg' style={{ marginLeft: '2rem' }} />
         </div>
         <div className="logo">
-          <img src={logo} alt="Logo" className="logo" />
+          <img src={logo} alt="Logo" className="logonavbar" />
         </div>
         <div className="icons">
           <Link to="/messages" className="icon">
-            <FontAwesomeIcon icon={faEnvelope} size='lg' style={{ marginRight: '10px' }} />
+            <FontAwesomeIcon icon={faEnvelope} size='lg' style={{ marginRight: '10px', color: 'black' }} />
           </Link>
           <Link to="/notifications" className="icon">
-            <FontAwesomeIcon icon={faBell} size='lg' style={{ marginRight: '2rem' }} />
+            <FontAwesomeIcon icon={faBell} size='lg' style={{ marginRight: '2rem', color: 'black' }} />
           </Link>
         </div>
       </div>
@@ -40,28 +44,28 @@ const Navbar = () => {
           <img src={logo} alt="Logo" className="sidebar-logo" />
         </div>
         <div className="menu-items">
-          <Link to="/dashboard" className="menu-item">
+          <Link to="/dashboard" className="menu-item" onClick={closeSidebar}>
             <FontAwesomeIcon icon={faHouse} size='lg' style={{ marginRight: '10px' }} />
             <span>Dashboard</span>
           </Link>
-          <Link to="/attendee-tracker" className="menu-item">
+          <Link to="/attendee-tracker" className="menu-item" onClick={closeSidebar}>
             <FontAwesomeIcon icon={faClipboardList} size='lg' style={{ marginRight: '10px' }}/>
             <span>Attendee Tracker</span>
           </Link>
-          <Link to="/inventory-tracker" className="menu-item">
-            <FontAwesomeIcon icon={faBox}size='lg' style={{ marginRight: '10px' }} />
+          <Link to="/inventory-tracker" className="menu-item" onClick={closeSidebar}>
+            <FontAwesomeIcon icon={faBox} size='lg' style={{ marginRight: '10px' }} />
             <span>Inventory Tracker</span>
           </Link>
-          <Link to="/events" className="menu-item">
+          <Link to="/events" className="menu-item" onClick={closeSidebar}>
             <FontAwesomeIcon icon={faClipboardList} size='lg' style={{ marginRight: '10px' }}/>
             <span>Events</span>
           </Link>
-          <Link to="/feedback" className="menu-item">
-            <FontAwesomeIcon icon={faCommentAlt}size='lg' style={{ marginRight: '10px' }} />
+          <Link to="/feedback" className="menu-item" onClick={closeSidebar}>
+            <FontAwesomeIcon icon={faCommentAlt} size='lg' style={{ marginRight: '10px' }} />
             <span>Feedback</span>
           </Link>
-          <Link to="/groups" className="menu-item">
-            <FontAwesomeIcon icon={faUserFriends}size='lg' style={{ marginRight: '10px' }} />
+          <Link to="/groups" className="menu-item" onClick={closeSidebar}>
+            <FontAwesomeIcon icon={faUserFriends} size='lg' style={{ marginRight: '10px' }} />
             <span>Groups</span>
           </Link>
         </div>
@@ -71,16 +75,16 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faChevronDown} className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`} />
           </div>
           <div className={`dropdown-menu ${isDropdownOpen ? 'open' : ''}`}>
-            <Link to="/profile" className="dropdown-item">
-              <FontAwesomeIcon icon={faUserCircle}size='lg' style={{ marginRight: '10px' }} />
+            <Link to="/profile" className="dropdown-item" onClick={closeSidebar}>
+              <FontAwesomeIcon icon={faUserCircle} size='lg' style={{ marginRight: '10px' }} />
               <span>Profile</span>
             </Link>
-            <Link to="/settings" className="dropdown-item">
+            <Link to="/settings" className="dropdown-item" onClick={closeSidebar}>
               <FontAwesomeIcon icon={faCog} size='lg' style={{ marginRight: '10px' }}/>
               <span>Settings</span>
             </Link>
-            <Link to="/logout" className="dropdown-item">
-              <FontAwesomeIcon icon={faSignOutAlt}size='lg' style={{ marginRight: '10px' }} />
+            <Link to="/logout" className="dropdown-item" onClick={closeSidebar}>
+              <FontAwesomeIcon icon={faSignOutAlt} size='lg' style={{ marginRight: '10px' }} />
               <span>Logout</span>
             </Link>
           </div>
@@ -92,7 +96,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -14,7 +14,6 @@ import Equipment from './equipment';
 import Profile from './profile';
 import EditProfile from './editprofile';
 import AddRole from './addrole';
-import Portfolio from './portfolio';
 import Settings from './settings';
 import EventPortfolio from './eventportfolio';
 import Feedback from './feedback';
@@ -23,6 +22,7 @@ import Group from './group';
 import GroupAttendees from './groupattendees';
 import Messages from './messages';
 import Success from './success';
+import PortfolioAdmin from './portfolioadmin';
 function App() {
   return (
     <Router>
@@ -40,10 +40,10 @@ function App() {
           <Route path="/attendees" element={<><Navbar /><Attendees/></>} />
           <Route path="/inventory" element={<><Navbar /><Inventory/></>} />
           <Route path="/equipment" element={<><Navbar /><Equipment/></>} />
+          <Route path="/portfolioadmin" element={<><Navbar /><PortfolioAdmin/></>} />
           <Route path="/profile" element={<><Navbar /><Profile/></>} />
           <Route path="/edit-profile" element={<><Navbar /><EditProfile/></>} />
           <Route path="/add-role" element={<><Navbar /><AddRole/></>} />
-          <Route path="/portfolio" element={<><Navbar /><Portfolio/></>} />
           <Route path="/settings" element={<><Navbar /><Settings/></>} />
           <Route path="/create-event-portfolio" element={<><Navbar /><EventPortfolio/></>} />
           <Route path="/feedback" element={<><Navbar /><EventsFeedback/></>} />

@@ -1,59 +1,75 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import './App.css'; // Import your CSS file
+import './App.css';
 import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 
 const Equipment = () => {
+  const location = useLocation();
   const [inventoryData, setInventoryData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newItem, setNewItem] = useState("");
   const [newItemCount, setNewItemCount] = useState("");
   const [removeMode, setRemoveMode] = useState(false);
+  const [itemsToRemove, setItemsToRemove] = useState([]); // State to track items for removal
+  const eventId = location.state?.eventId; // Get eventId from location state
 
-  useEffect(() => {
-    fetchInventory();
-  }, []);
-
-  const fetchInventory = async () => {
+  // Fetch inventory data
+  const fetchInventory = useCallback(async (eventId) => {
     try {
-      const response = await axios.get('http://localhost:8000/api/equipment');
-      console.log(response.data); // Debugging line to log fetched data
+      const response = await axios.get(`http://localhost:8000/api/equipment?event_id=${eventId}`);
       setInventoryData(response.data);
     } catch (error) {
-      console.error("There was an error fetching the inventory data:", error);
+      console.error("Error fetching inventory data:", error.response?.data || error.message);
     }
-  };
+  }, []);
 
+  useEffect(() => {
+    if (eventId) {
+      fetchInventory(eventId);
+    }
+  }, [eventId, fetchInventory]);
+
+  // Handle adding a new item
   const handleAddItem = async () => {
-    if (newItem && newItemCount) {
+    if (newItem && newItemCount && eventId) {
       try {
         await axios.post('http://localhost:8000/api/equipment', {
           item: newItem,
           number_of_items: parseInt(newItemCount),
           number_of_sort_items: 0,
           status: "",
+          event_id: eventId
         });
-        fetchInventory();
+        fetchInventory(eventId);
         setNewItem("");
         setNewItemCount("");
         setModalVisible(false);
       } catch (error) {
-        console.error("There was an error adding the item:", error);
+        console.error("Error adding the item:", error.response?.data || error.message);
       }
+    } else {
+      console.error("Please provide item name and count.");
     }
   };
 
-  const handleRemoveItem = async (id) => {
-    console.log("Attempting to remove item with id:", id); // Debugging line to log the id
-    try {
-      await axios.delete(`http://localhost:8000/api/equipment/${id}`);
-      fetchInventory();
-      setRemoveMode(false);
-    } catch (error) {
-      console.error("There was an error removing the item:", error);
-    }
+  // Handle marking an item for removal (only hides it in UI)
+  const handleRemoveItem = (equip_id) => {
+    setItemsToRemove((prevItems) => {
+      if (prevItems.includes(equip_id)) {
+        return prevItems.filter(item => item !== equip_id);
+      } else {
+        return [...prevItems, equip_id];
+      }
+    });
   };
 
+  // Toggle remove mode
+  const handleRemoveModeToggle = () => {
+    setRemoveMode(!removeMode);
+  };
+
+  // Calculate totals
   const totalItems = inventoryData.reduce((sum, item) => sum + item.number_of_items, 0);
   const totalBroken = inventoryData.filter(item => item.status === "Broken").length;
   const totalMissing = inventoryData.filter(item => item.status === "Missing").length;
@@ -66,7 +82,7 @@ const Equipment = () => {
             <span className="header-highlight">Equipment</span> Tracker
           </h1>
           <hr className="header-line" />
-        </div>      
+        </div>
       </header>
 
       <div className="table-container-equipment">
@@ -78,27 +94,29 @@ const Equipment = () => {
             <div className="table-header-cell-equipment">STATUS</div>
           </div>
           {inventoryData.map((item) => (
-            <div key={item.id} className="table-row-equipment">
-              {removeMode && (
-                <button className="remove-button-equipment" onClick={() => handleRemoveItem(item.id)}>
-                  <IoMdRemoveCircle size={24} color="red" />
-                </button>
-              )}
-              <div className="table-cell-equipment">{item.item}</div>
-              <div className="table-cell-equipment">{item.number_of_items}</div>
-              <div className="table-cell-equipment">{item.number_of_sort_items}</div>
-              <div className="table-cell-equipment" style={{ color: item.status === "Broken" ? 'red' : 'black' }}>
-                {item.status}
+            !itemsToRemove.includes(item.equip_id) && ( // Check if item is not in the remove list
+              <div key={item.equip_id} className="table-row-equipment">
+                {removeMode && (
+                  <button className="remove-button-equipment" onClick={() => handleRemoveItem(item.equip_id)}>
+                    <IoMdRemoveCircle size={24} color="red" />
+                  </button>
+                )}
+                <div className="table-cell-equipment">{item.item}</div>
+                <div className="table-cell-equipment">{item.number_of_items}</div>
+                <div className="table-cell-equipment">{item.number_of_sort_items}</div>
+                <div className="table-cell-equipment" style={{ color: item.status === "Broken" ? 'red' : 'black' }}>
+                  {item.status}
+                </div>
               </div>
-            </div>
+            )
           ))}
           <button className="add-button-equipment" onClick={() => setModalVisible(true)}>
             <IoMdAddCircle size={24} color="white" />
             <span>Add Item</span>
           </button>
-          <button className="remove-button-equipment" onClick={() => setRemoveMode(!removeMode)}>
+          <button className="remove-button-equipment" onClick={handleRemoveModeToggle}>
             <IoMdRemoveCircle size={24} color="white" />
-            <span>Remove Item</span>
+            <span>{removeMode ? 'Cancel Remove' : 'Remove Item'}</span>
           </button>
         </div>
 

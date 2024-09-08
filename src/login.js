@@ -1,39 +1,46 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
+import { FaUser, FaLock } from "react-icons/fa";
 
-function Login() {
-  const navigate = useNavigate();
+const Login = () => {
+    const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Navigate to the dashboard page
-    navigate('/dashboard');
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission here (e.g., validate user credentials)
+        // For now, we are assuming the login is successful
+        navigate('/dashboard'); // Redirect to the Dashboard component
+    };
 
-  return (
-    <div className="login-container">
-      <div className="blobs">
-        <div className="blob"></div>
-        <div className="blob"></div>
-        <div className="blob"></div>
-        <div className="blob"></div>
-        <div className="blob"></div>
-      </div>
-      <div className="login-content">
-        <h1 className="login-title">Login</h1>
-        <p className="login-subtitle">Please enter Email</p>
-        <input type="email" className="login-input" />
-        <p className="login-subtitle">Please enter Password</p>
-        <input type="password" className="login-input" />
-        <div className="forgot-password">
-          <span>Forgot Password?</span>
-          <span className="recover-link">Recover</span>
+    return (
+        <div className='login-page'>
+            <div className='wrapper'>
+                <form onSubmit={handleSubmit}>
+                    <h1>Login</h1>
+                    <div className="input-box">
+                        <input type="text" placeholder='Username' required />
+                        <FaUser className='icon'/>
+                    </div>
+                    <div className="input-box">
+                        <input type="password" placeholder='Password' required />
+                        <FaLock className='icon' />
+                    </div>
+
+                    <div className="remember-forget">
+                        <label><input type="checkbox" /> Remember me</label>
+                        <a href="#">Forget password?</a>
+                    </div>
+
+                    <button type="submit">Login</button>
+
+                    <div className="register-link">
+                        <p>Don't have an account? <a href="#"> Register</a></p>
+                    </div>
+                </form>
+            </div>
         </div>
-        <button className="login-button" onClick={handleLogin}>Login</button>
-        <p className="register-link">Not a member? <span>Register now</span></p>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Login;

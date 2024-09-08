@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import './App.css'; // Import your CSS file
-import { IoMdCreate, IoMdArrowForward, IoIosArrowForward as IoIosArrowForwardAlt } from 'react-icons/io';
+import './App.css'; // Ensure the CSS file is correctly imported
+import { IoMdCreate, IoMdArrowForward } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
 import profilePic from './images/pro_pic.png'; // Correctly imported profile picture
 
@@ -13,7 +13,43 @@ const eventsData = [
   { id: '6', title: 'New Year Celebration', image: require('./images/event3.png'), date: '2024-12-31', address: 'CDO' },
   { id: '7', title: 'Music Festival', image: require('./images/event1.png'), date: '2024-06-22', address: 'CDO' },
   { id: '8', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-07-05', address: 'CDO' },
+  { id: '9', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-05-05', address: 'CDO' },
 ];
+
+// Utility function to group and sort events by month and year
+const groupAndSortEventsByMonth = (events) => {
+  const groupedEvents = events.reduce((acc, event) => {
+    const eventDate = new Date(event.date);
+    const month = eventDate.toLocaleString('default', { month: 'long' });
+    const year = eventDate.getFullYear();
+    const key = `${month} ${year}`;
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(event);
+
+    return acc;
+  }, {});
+
+  // Sort months and events
+  const sortedKeys = Object.keys(groupedEvents).sort((a, b) => {
+    const [monthA, yearA] = a.split(' ');
+    const [monthB, yearB] = b.split(' ');
+
+    const monthOrder = new Date(Date.parse(monthA + ' 1, 2012')).getMonth();
+    const monthBOrder = new Date(Date.parse(monthB + ' 1, 2012')).getMonth();
+
+    return (yearA - yearB) || (monthOrder - monthBOrder);
+  });
+
+  const sortedGroupedEvents = sortedKeys.reduce((acc, key) => {
+    acc[key] = groupedEvents[key].sort((a, b) => new Date(a.date) - new Date(b.date));
+    return acc;
+  }, {});
+
+  return sortedGroupedEvents;
+};
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -45,6 +81,9 @@ const Profile = () => {
     }
   };
 
+  // Group and sort events by month
+  const groupedEvents = groupAndSortEventsByMonth(eventsData);
+
   return (
     <div className="gradient-container-profile">
       <div className="scroll-view-profile">
@@ -68,11 +107,11 @@ const Profile = () => {
           </div>
           <div className="button-container-profile">
             <button className="edit-button-profile" onClick={() => navigate('/edit-profile')}>
-              <IoMdCreate size={24} color="white" />
+              <IoMdCreate size={24} color="black" />
               <span className="edit-button-text-profile">Edit Profile</span>
             </button>
-            <button className="portfolio-button-profile" onClick={() => navigate('/portfolio')}>
-              <IoMdArrowForward size={24} color="white" />
+            <button className="portfolio-button-profile" onClick={() => navigate('/portfolioadmin')}>
+              <IoMdArrowForward size={24} color="black" />
               <span className="portfolio-button-text-profile">Portfolio</span>
             </button>
           </div>
@@ -83,10 +122,15 @@ const Profile = () => {
 
         {/* Horizontal Scrolling Event List */}
         <div className="events-list-container-profile" ref={eventListRef}>
-          
-          {eventsData.map(renderEventItem)}
-          
+          {Object.keys(groupedEvents).map((month, index) => (
+            <div key={index} className="month-group-profile">
+              <h3 className="month-title-profile">{month}</h3>
+              {groupedEvents[month].map(renderEventItem)}
+            </div>
+          ))}
         </div>
+
+        
       </div>
     </div>
   );
