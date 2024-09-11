@@ -2118,7 +2118,7 @@ body, html, #root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(to bottom, #2A2600, #000000);
+  background: #000000;
   color: #fff;
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
@@ -2344,7 +2344,7 @@ textarea.text-input-addrole {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(to bottom, #2A2600, #000000);
+  background: #000;
   color: #fff;
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
@@ -2451,7 +2451,7 @@ textarea.text-input-addrole {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #2A2600, #000000);
+  background: #000;
   color: #fff;
   padding: 20px;
 }
@@ -3027,11 +3027,12 @@ textarea.text-input-addrole {
 }
 
 /* Container for both sections */
+/* GROUP */
 .container-group {
   display: flex;
   flex-direction: column; /* Adjusted for title and fading line */
   height: 100%;
-  background: linear-gradient(to bottom, #2A2600, #000000); /* Vertical gradient */
+  background: #000; /* Vertical gradient */
   padding: 20px;
   position: relative;
 }
@@ -3160,7 +3161,7 @@ textarea.text-input-addrole {
   flex-direction: column;
   height: 100vh;
   padding: 20px;
-  background: linear-gradient(to bottom, #2A2600, #000000);
+  background: #000;
 }
 
 .headerText-groupattendee {
