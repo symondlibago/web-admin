@@ -37,4 +37,10 @@ class EventController extends Controller
         // Return a response
         return response()->json(['message' => 'Event created successfully', 'event' => $event], 201);
     }
+    public function eventsForDay($date)
+{
+    $events = Event::whereDate('date', $date)->get();
+    return response()->json($events);
+}
+
 }

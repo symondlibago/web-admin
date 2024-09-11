@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/events', [EventController::class, 'index']);
 Route::post('/events', [EventController::class, 'store']);
+Route::get('/api/events/{date}', [EventController::class, 'eventsForDay']);
+
 
 
 Route::get('equipment', [EquipmentController::class, 'index']);

@@ -19,7 +19,7 @@ const Feedback = () => {
   ];
 
   return (
-    <div className="gradient-container-feedback">
+    <div className="gradient-container">
       <div className="container-feedback">
         <h1 className="sentiment-analysis-feedback">Sentiment Analysis</h1>
         <div className="line-feedback" />

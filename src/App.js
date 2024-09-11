@@ -5,7 +5,7 @@ import Login from './login';
 import Dashboard from './dashboard';
 import Navbar from './navbar'; // Import the Navbar component
 import Notification from './notification';
-import Events from './event';
+import Events from './events';
 import CreateEvent from './createevent';
 import ChooseServiceProv from './serviceprovider';
 import Attendees from './attendees';

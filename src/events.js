@@ -132,7 +132,7 @@ function Events() {
   }
 
   return (
-    <div className="gradient-container">
+    <div className="gradient-container-events">
       <div className="container">
         <div className="search-container">
           <FontAwesomeIcon icon={faSearch} size="lg" color="#888" className="search-icon" />

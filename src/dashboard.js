@@ -6,6 +6,8 @@ import './App.css';
 function Dashboard() {
   const [monthlyBookings, setMonthlyBookings] = useState([]);
   const [currentMonth, setCurrentMonth] = useState('');
+  const [hoveredDay, setHoveredDay] = useState(null);
+  const [events, setEvents] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,22 +16,48 @@ function Dashboard() {
       .then(response => {
         const today = new Date();
         const currentMonthIndex = today.getMonth(); // Get current month (0-based index)
-        
+
+        // Filter events for the current month
         const eventDates = response.data
-          .filter(event => new Date(event.date).getMonth() === currentMonthIndex) // Filter events for the current month
-          .map(event => new Date(event.date).getDate()); // Extract days
-        
+          .filter(event => new Date(event.date).getMonth() === currentMonthIndex)
+          .map(event => new Date(event.date).getDate());
+
         setMonthlyBookings(eventDates);
+        setCurrentMonth(`${today.toLocaleString('default', { month: 'long' })} ${today.getFullYear()}`);
       })
       .catch(error => {
         console.error('Error fetching events:', error);
       });
-
-    // Set the current month
-    const today = new Date();
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    setCurrentMonth(`${monthNames[today.getMonth()]} ${today.getFullYear()}`);
   }, []);
+
+  // Fetch events for a specific day
+  const fetchEventsForDay = (day) => {
+    const date = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    axios.get('http://localhost:8000/api/events', {
+      params: {
+        date: date
+      }
+    })
+      .then(response => {
+        // Filter the response data to include only events for the hovered day
+        const filteredEvents = response.data.filter(event => new Date(event.date).getDate() === day);
+        setEvents(filteredEvents);
+      })
+      .catch(error => {
+        console.error('Error fetching events for day:', error);
+        setEvents([]);
+      });
+  };
+
+  const handleMouseEnter = (day) => {
+    setHoveredDay(day);
+    fetchEventsForDay(day);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredDay(null);
+    setEvents([]);
+  };
 
   // Generate calendar days for the current month
   const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
@@ -57,8 +85,13 @@ function Dashboard() {
                 <span>{time}</span>
                 <div className="bookings">
                   {Array.from({ length: 7 }, (_, dayIndex) => (
-                    <div key={dayIndex} className="booking">
-                      {/* Adjust booking reminder logic here if needed */}
+                    <div
+                      key={dayIndex}
+                      className="booking"
+                      onMouseEnter={() => handleMouseEnter(12 + dayIndex)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      {monthlyBookings.includes(12 + dayIndex) && <div className="booking-reminder"></div>}
                     </div>
                   ))}
                 </div>
@@ -74,9 +107,28 @@ function Dashboard() {
           </div>
           <div className="calendar-body">
             {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => (
-              <div key={day} className={`calendar-day ${monthlyBookings.includes(day) ? 'has-booking' : ''}`}>
+              <div
+                key={day}
+                className={`calendar-day ${monthlyBookings.includes(day) ? 'has-booking' : ''}`}
+                onMouseEnter={() => handleMouseEnter(day)}
+                onMouseLeave={handleMouseLeave}
+                style={{ position: 'relative' }}
+              >
                 <span>{day}</span>
                 {monthlyBookings.includes(day) && <div className="calendar-booking-dot"></div>}
+                {hoveredDay === day && (
+                  <div className="event-overlay">
+                    <ul>
+                      {events.length > 0 ? (
+                        events.map(event => (
+                          <li key={event.id}>{event.name}</li>
+                        ))
+                      ) : (
+                        <li>No events</li>
+                      )}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
           </div>
