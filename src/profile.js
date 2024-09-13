@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import './App.css'; // Ensure the CSS file is correctly imported
-import { IoMdCreate, IoMdArrowForward } from 'react-icons/io';
+import { IoMdCreate, IoMdArrowForward, IoMdClose } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
 import profilePic from './images/pro_pic.png'; // Correctly imported profile picture
 
@@ -14,46 +14,57 @@ const eventsData = [
   { id: '7', title: 'Music Festival', image: require('./images/event1.png'), date: '2024-06-22', address: 'CDO' },
   { id: '8', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-07-05', address: 'CDO' },
   { id: '9', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-05-05', address: 'CDO' },
+  { id: '10', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-05-05', address: 'CDO' },
+  { id: '11', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-05-05', address: 'CDO' },
+  { id: '12', title: 'Art Exhibition', image: require('./images/event2.png'), date: '2024-05-05', address: 'CDO' },
+  { id: '13', title: 'Mr. & Mrs. Malik Wedding', image: require('./images/event1.png'), date: '2024-07-01', address: 'CDO' },
+  { id: '14', title: 'Mr. & Mrs. Malik Wedding', image: require('./images/event1.png'), date: '2024-07-01', address: 'CDO' },
+  { id: '15', title: 'Mr. & Mrs. Malik Wedding', image: require('./images/event1.png'), date: '2024-07-01', address: 'CDO' },
+  { id: '16', title: 'Mr. & Mrs. Malik weddings', image: require('./images/event1.png'), date: '2024-07-01', address: 'CDO' },
+  { id: '17', title: 'Mr. & Mrs. Malik weddings', image: require('./images/event1.png'), date: '2024-08-01', address: 'CDO' },
 ];
 
-// Utility function to group and sort events by month and year
-const groupAndSortEventsByMonth = (events) => {
-  const groupedEvents = events.reduce((acc, event) => {
-    const eventDate = new Date(event.date);
-    const month = eventDate.toLocaleString('default', { month: 'long' });
-    const year = eventDate.getFullYear();
-    const key = `${month} ${year}`;
+const packagesData = [
+  { id: '1', packagename: 'Package A', image: require('./images/event1.png'), price: '100,000', pax: '300 pax' },
+  { id: '2', packagename: 'Package B', image: require('./images/event2.png'), price: '100,000', pax: '250 pax' },
+  { id: '3', packagename: 'Package C', image: require('./images/event3.png'), price: '100,000', pax: '150 pax' },
+  { id: '4', packagename: 'Package D', image: require('./images/event1.png'), price: '100,000', pax: '200 pax' },
+  { id: '5', packagename: 'Package E', image: require('./images/event2.png'), price: '100,000', pax: '100 pax' },
+  { id: '6', packagename: 'Package F', image: require('./images/event3.png'), price: '100,000', pax: '50 pax' },
+  { id: '7', packagename: 'Package G', image: require('./images/event1.png'), price: '100,000', pax: '50 pax' },
+  { id: '8', packagename: 'Package H', image: require('./images/event2.png'), price: '100,000', pax: '200 pax' },
+  { id: '9', packagename: 'Package I', image: require('./images/event2.png'), price: '100,000', pax: '500 pax' },
+];
 
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push(event);
-
-    return acc;
-  }, {});
-
-  // Sort months and events
-  const sortedKeys = Object.keys(groupedEvents).sort((a, b) => {
-    const [monthA, yearA] = a.split(' ');
-    const [monthB, yearB] = b.split(' ');
-
-    const monthOrder = new Date(Date.parse(monthA + ' 1, 2012')).getMonth();
-    const monthBOrder = new Date(Date.parse(monthB + ' 1, 2012')).getMonth();
-
-    return (yearA - yearB) || (monthOrder - monthBOrder);
-  });
-
-  const sortedGroupedEvents = sortedKeys.reduce((acc, key) => {
-    acc[key] = groupedEvents[key].sort((a, b) => new Date(a.date) - new Date(b.date));
-    return acc;
-  }, {});
-
-  return sortedGroupedEvents;
+// Helper function to format month name
+const getMonthName = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleString('default', { month: 'long', year: 'numeric' });
 };
 
+// Group events by month
+const groupedEvents = eventsData.reduce((acc, event) => {
+  const month = getMonthName(event.date);
+  if (!acc[month]) {
+    acc[month] = [];
+  }
+  acc[month].push(event);
+  return acc;
+}, {});
+
+// Convert groupedEvents to an array of objects with month labels
+const sortedEventsData = Object.keys(groupedEvents).sort((a, b) => {
+  const dateA = new Date(`01 ${a}`);
+  const dateB = new Date(`01 ${b}`);
+  return dateA - dateB;
+}).map(month => ({
+  month: month,
+  events: groupedEvents[month]
+}));
+
 const Profile = () => {
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const navigate = useNavigate();
-  const eventListRef = useRef(null);
 
   // Function to render each event item
   const renderEventItem = (item) => (
@@ -71,18 +82,35 @@ const Profile = () => {
     </div>
   );
 
-  // Function to handle scrolling
-  const scroll = (direction) => {
-    if (eventListRef.current) {
-      eventListRef.current.scrollBy({
-        left: direction === 'left' ? -300 : 300, // Adjust scroll amount as needed
-        behavior: 'smooth',
-      });
-    }
-  };
+  // Function to render each package item
+  const renderPackageItem = (item) => (
+    <div className="package-item-profile" key={item.id}>
+      <img src={item.image} alt={item.packagename} className="image-profile" />
+      <div className="packagename-profile">{item.packagename}</div>
+      <div className="detail-container-profile">
+        <div className="detail-row-profile">
+          <span className="detail-text-profile">{item.price}</span>
+        </div>
+        <div className="detail-row-profile">
+          <span className="detail-text-profile">{item.pax}</span>
+        </div>
+      </div>
+    </div>
+  );
 
-  // Group and sort events by month
-  const groupedEvents = groupAndSortEventsByMonth(eventsData);
+  const renderEventsForMonth = (month) => (
+    <div className="overlay-profile" onClick={() => setSelectedMonth(null)}>
+      <div className="overlay-content-profile" onClick={(e) => e.stopPropagation()}>
+        <h2 className="overlay-header-profile">Events in month of {month}</h2>
+        <button className="close-button-profile" onClick={() => setSelectedMonth(null)}>
+          <IoMdClose size={24} color="black" />
+        </button>
+        <div className="events-list-container-profile">
+          {groupedEvents[month].map(renderEventItem)}
+        </div>
+      </div>
+    </div>
+  );  
 
   return (
     <div className="gradient-container-profile">
@@ -93,18 +121,9 @@ const Profile = () => {
         {/* Profile Section */}
         <div className="profile-section-profile">
           <img src={profilePic} alt="Profile" className="profile-picture-profile" />
-          <h2 className="name-text-profile">Organizer</h2>
-          <p className="address-text-profile">Service Provider Address</p>
-          <div className="schedule-container-profile">
-            <div className="schedule-item-profile">
-              <span className="schedule-text-profile">Open</span>
-              <span className="schedule-time-profile">6:00 AM</span>
-            </div>
-            <div className="schedule-item-profile">
-              <span className="schedule-text-profile">Close</span>
-              <span className="schedule-time-profile">9:00 PM</span>
-            </div>
-          </div>
+          <h2 className="name-text-profile">Arvil</h2>
+          <p className="address-text-profile">Organizer</p>
+        
           <div className="button-container-profile">
             <button className="edit-button-profile" onClick={() => navigate('/edit-profile')}>
               <IoMdCreate size={24} color="black" />
@@ -120,18 +139,32 @@ const Profile = () => {
         {/* Popular Event Text */}
         <h2 className="popular-event-text-profile">Popular Events</h2>
 
-        {/* Horizontal Scrolling Event List */}
-        <div className="events-list-container-profile" ref={eventListRef}>
-          {Object.keys(groupedEvents).map((month, index) => (
-            <div key={index} className="month-group-profile">
-              <h3 className="month-title-profile">{month}</h3>
-              {groupedEvents[month].map(renderEventItem)}
+        {/* Folder List for Events */}
+        <div className="events-list-container-profile">
+          {sortedEventsData.map(({ month }) => (
+            <div className="month-folder-profile" key={month} onClick={() => setSelectedMonth(month)}>
+              <h3>{month}</h3>
             </div>
           ))}
         </div>
 
-        
+        {/* Packages Section */}
+        <div className="packages-section-profile">
+          <h2>Packages</h2>
+          <div className="events-list-container-profile">
+            <div className="add-package-container">
+              <div className="broken-box-profile">
+                <p className="broken-box-text">Add New Package</p>
+                <button className="add-package-button-profile">Add Package</button>
+              </div>
+            </div>
+            {packagesData.map(renderPackageItem)}
+          </div>
+        </div>
       </div>
+
+      {/* Overlay */}
+      {selectedMonth && renderEventsForMonth(selectedMonth)}
     </div>
   );
 };

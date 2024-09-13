@@ -3,6 +3,69 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
+// Feedback (Dashboard Summary) component
+const DashboardSummary = () => {
+  const feedbackData = {
+    total: 100,
+    positive: 50,
+    neutral: 30,
+    negative: 20,
+  };
+
+  return (
+    <div className="summary-dashboard">
+      <h3>Summary</h3> {/* Added Summary header */}
+      <div className="dashboard-summary-container">
+        <div className="dashboard-summary-box positive-box-dash">
+          <p>Total Feedback</p>
+          <p>{feedbackData.total}</p>
+        </div>
+        <div className="dashboard-summary-box positive-box-dash">
+          <p>Positive</p>
+          <p>{feedbackData.positive}</p>
+        </div>
+        <div className="dashboard-summary-box neutral-box-dash">
+          <p>Neutral</p>
+          <p>{feedbackData.neutral}</p>
+        </div>
+        <div className="dashboard-summary-box negative-box-dash">
+          <p>Negative</p>
+          <p>{feedbackData.negative}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Sample data for packages
+const packagesData = [
+  { id: '1', packagename: 'Package A', image: require('./images/event1.png'), price: '100,000', pax: '300 pax' },
+  { id: '2', packagename: 'Package B', image: require('./images/event2.png'), price: '100,000', pax: '250 pax' },
+  { id: '3', packagename: 'Package C', image: require('./images/event3.png'), price: '100,000', pax: '150 pax' },
+  { id: '4', packagename: 'Package D', image: require('./images/event1.png'), price: '100,000', pax: '200 pax' },
+  { id: '5', packagename: 'Package E', image: require('./images/event2.png'), price: '100,000', pax: '100 pax' },
+  { id: '6', packagename: 'Package F', image: require('./images/event3.png'), price: '100,000', pax: '50 pax' },
+  { id: '7', packagename: 'Package G', image: require('./images/event1.png'), price: '100,000', pax: '50 pax' },
+  { id: '8', packagename: 'Package H', image: require('./images/event2.png'), price: '100,000', pax: '200 pax' },
+  { id: '9', packagename: 'Package I', image: require('./images/event2.png'), price: '100,000', pax: '500 pax' },
+];
+
+// Render function for package items
+const renderPackageItem = (item) => (
+  <div className="package-item-dashboard" key={item.id}>
+    <img src={item.image} alt={item.packagename} className="image-dashboard" />
+    <div className="packagename-dashboard">{item.packagename}</div>
+    <div className="detail-container-dashboard">
+      <div className="detail-row-dashboard">
+        <span className="detail-text-dashboard">{item.price}</span>
+      </div>
+      <div className="detail-row-dashboard">
+        <span className="detail-text-dashboard">{item.pax}</span>
+      </div>
+    </div>
+  </div>
+);
+
 function Dashboard() {
   const [monthlyBookings, setMonthlyBookings] = useState([]);
   const [currentMonth, setCurrentMonth] = useState('');
@@ -30,16 +93,12 @@ function Dashboard() {
       });
   }, []);
 
-  // Fetch events for a specific day
   const fetchEventsForDay = (day) => {
     const date = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     axios.get('http://localhost:8000/api/events', {
-      params: {
-        date: date
-      }
+      params: { date: date }
     })
       .then(response => {
-        // Filter the response data to include only events for the hovered day
         const filteredEvents = response.data.filter(event => new Date(event.date).getDate() === day);
         setEvents(filteredEvents);
       })
@@ -59,82 +118,56 @@ function Dashboard() {
     setEvents([]);
   };
 
-  // Generate calendar days for the current month
   const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
   return (
     <div className="dashboard-container">
-      <div className="left-side">
-        <h1 className="calendar-title">Calendar</h1>
-        <div className="date-range">
-          <span>1-{daysInMonth}</span>
-          <span>{currentMonth}</span>
+      <div className="dashboard-content">
+        <div className="left-side">
+          <DashboardSummary />
         </div>
-        <div className="week-calendar">
-          <div className="days-header">
-            {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
-              <div key={index} className="day">
-                <span>{day}</span>
-                <span className="date">{12 + index}</span>
-              </div>
-            ))}
-          </div>
-          <div className="time-slots">
-            {["8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm"].map((time, timeIndex) => (
-              <div key={timeIndex} className="time-slot">
-                <span>{time}</span>
-                <div className="bookings">
-                  {Array.from({ length: 7 }, (_, dayIndex) => (
-                    <div
-                      key={dayIndex}
-                      className="booking"
-                      onMouseEnter={() => handleMouseEnter(12 + dayIndex)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {monthlyBookings.includes(12 + dayIndex) && <div className="booking-reminder"></div>}
+        <div className="right-side">
+          <div className="calendar">
+            <div className="calendar-header">
+              <span>{currentMonth}</span>
+            </div>
+            <div className="calendar-body">
+              {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => (
+                <div
+                  key={day}
+                  className={`calendar-day ${monthlyBookings.includes(day) ? 'has-booking' : ''}`}
+                  onMouseEnter={() => handleMouseEnter(day)}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ position: 'relative' }}
+                >
+                  <span>{day}</span>
+                  {monthlyBookings.includes(day) && <div className="calendar-booking-dot"></div>}
+                  {hoveredDay === day && (
+                    <div className="event-overlay">
+                      <ul>
+                        {events.length > 0 ? (
+                          events.map(event => (
+                            <li key={event.id}>{event.name}</li>
+                          ))
+                        ) : (
+                          <li>No events</li>
+                        )}
+                      </ul>
                     </div>
-                  ))}
+                  )}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+          <button className="create-event-button" onClick={() => navigate('/create-event')}>Create an Event</button>
+          <button className="events-button" onClick={() => navigate('/events')}>Events</button>
         </div>
       </div>
-      <div className="right-side">
-        <div className="calendar">
-          <div className="calendar-header">
-            <span>{currentMonth}</span>
-          </div>
-          <div className="calendar-body">
-            {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => (
-              <div
-                key={day}
-                className={`calendar-day ${monthlyBookings.includes(day) ? 'has-booking' : ''}`}
-                onMouseEnter={() => handleMouseEnter(day)}
-                onMouseLeave={handleMouseLeave}
-                style={{ position: 'relative' }}
-              >
-                <span>{day}</span>
-                {monthlyBookings.includes(day) && <div className="calendar-booking-dot"></div>}
-                {hoveredDay === day && (
-                  <div className="event-overlay">
-                    <ul>
-                      {events.length > 0 ? (
-                        events.map(event => (
-                          <li key={event.id}>{event.name}</li>
-                        ))
-                      ) : (
-                        <li>No events</li>
-                      )}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+      <div className="packages-section-dashboard">
+        <h2>Packages</h2>
+        <div className="events-list-container-dashboard">
+          {packagesData.map(renderPackageItem)}
         </div>
-        <button className="create-event-button" onClick={() => navigate('/create-event')}>Create an Event</button>
-        <button className="events-button" onClick={() => navigate('/events')}>Events</button>
       </div>
     </div>
   );

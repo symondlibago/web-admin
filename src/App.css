@@ -144,79 +144,77 @@ body, html, #root {
 /* DASHBOARD */
 
 .dashboard-container {
-  background: white; /* Gradient background */
+  background: white;
   height: 100vh;
   display: flex;
-  color: black; /* Default text color for the container */
+  flex-direction: column; /* Stack children vertically */
+  color: black;
+}
+
+.dashboard-content {
+  display: flex; /* Align left-side and right-side side by side */
+  flex: 1; /* Take up remaining space */
 }
 
 .left-side {
   width: 50%;
   padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
 .right-side {
   width: 50%;
   padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
-.calendar-title {
-  color: black; /* Changed text color */
-  font-size: 2rem;
-  font-weight: 600; /* Semi-bold */
-}
-
-.date-range {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-
-.week-calendar {
-  margin-top: 20px;
-}
-
-.days-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.day {
+.summary-dashboard h3 {
+  font-size: 1.5rem;
+  color: black;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.date {
-  color: black; /* Changed text color */
-}
-
-.time-slots {
-  margin-top: 20px;
-}
-
-.time-slot {
+.dashboard-summary-container {
   display: flex;
-  align-items: center;
-  margin: 10px 0;
-}
-
-.bookings {
-  display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
-}
-
-.booking {
-  width: 14%;
-  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 
-.booking-reminder {
-  width: 10px;
-  height: 10px;
-  background-color: #A97E00;
-  border-radius: 50%;
+.dashboard-summary-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  flex: 1;
+  margin: 5px;
+  border: 2px solid white;
+  width: calc(50% - 10px); /* 2 boxes per row */
+}
+
+.dashboard-summary-box p:first-child {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dashboard-summary-box p:last-child {
+  font-size: 20px;
+}
+
+.positive-box-dash {
+  background-color: rgba(0, 255, 0, 0.1);
+  border: 2px solid green;
+}
+
+.neutral-box-dash {
+  background-color: rgba(255, 255, 0, 0.1);
+  border: 2px solid yellow;
+}
+
+.negative-box-dash {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 2px solid red;
 }
 
 .calendar {
@@ -230,7 +228,7 @@ body, html, #root {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 2rem;
-  color: black; /* Changed text color */
+  color: black;
 }
 
 .calendar-body {
@@ -242,13 +240,13 @@ body, html, #root {
 .calendar-day {
   width: 14%;
   text-align: center;
-  margin-bottom: 20px; /* Added margin below the dates */
+  margin-bottom: 20px;
   position: relative;
 }
 
 .calendar-day span {
   display: block;
-  color: black; /* Changed text color */
+  color: black;
 }
 
 .calendar-booking-dot {
@@ -257,20 +255,20 @@ body, html, #root {
   background-color: #A97E00;
   border-radius: 50%;
   position: absolute;
-  bottom: -10px; /* Position dot below the date */
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.create-event-button, .events-button {
+.create-event-button,
+.events-button {
   background-color: #CEB64C;
-  color: white; /* Text color for buttons */
+  color: white;
   padding: 10px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   margin: 10px 0;
-  margin-left: 4rem;
   width: 20%;
 }
 
@@ -281,13 +279,13 @@ body, html, #root {
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  bottom: -60px; /* Position below the date */
+  bottom: -60px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  max-height: 200px; /* Adjust as needed */
-  width: 150px; /* Adjust width as needed */
-  overflow-y: auto; /* Scroll if content overflows */
+  max-height: 200px;
+  width: 150px;
+  overflow-y: auto;
 }
 
 .event-overlay ul {
@@ -299,6 +297,69 @@ body, html, #root {
 .event-overlay li {
   margin-bottom: 5px;
 }
+
+.packages-section-dashboard {
+  width: 100%; /* Ensure it spans the full width */
+  padding: 20px; /* Add padding if needed */
+  background: white; /* Ensure background color matches */
+}
+
+.packages-section-dashboard h2 {
+  font-size: 1.5rem;
+  color: black;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.events-list-container-dashboard {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.package-item-dashboard {
+  background: rgba(255, 255, 255, 0.56);
+  border-radius: 10px;
+  border: #C2B067 1px solid;
+  padding: 10px;
+  margin: 0 10px;
+  text-align: left;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.image-dashboard {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.packagename-dashboard {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFC42B;
+  margin: 10px 0;
+}
+
+.detail-container-dashboard {
+  font-size: 14px;
+}
+
+.detail-row-dashboard {
+  margin-bottom: 5px;
+}
+
+.detail-text-dashboard {
+  color: black;
+}
+
+
+
+
+
 
 
 
@@ -1757,14 +1818,17 @@ body, html, #root {
 /* PROFILE */
 
 /* Gradient Background Container */
+/* General Gradient Container Styles */
+/* General Styles */
+/* General Styles */
 .gradient-container-profile {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to bottom, #fff 50%, #FFC42B 100%); /* Gradient background */
+  background: white;
   height: 100vh;
   width: 100%;
   color: #fff;
-  overflow: auto; /* Allow scrolling if content overflows */
+  overflow: auto;
 }
 
 /* Scroll View Container */
@@ -1773,7 +1837,7 @@ body, html, #root {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
+  align-items: center;
 }
 
 /* Profile Section Styles */
@@ -1785,7 +1849,7 @@ body, html, #root {
   max-width: 400px;
   background-color: transparent;
   text-align: center;
-  margin-bottom: 30px; /* Ensure spacing from the events list */
+  margin-bottom: 30px;
 }
 
 /* Profile Picture Styles */
@@ -1809,27 +1873,7 @@ body, html, #root {
   margin-bottom: 10px;
 }
 
-/* Schedule Container */
-.schedule-container-profile {
-  margin-top: 10px;
-  width: 100%;
-}
-
-.schedule-item-profile {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.schedule-text-profile {
-  color: black;
-}
-
-.schedule-time-profile {
-  color: black;
-}
-
+/* Button Container */
 .button-container-profile {
   display: flex;
   justify-content: space-around;
@@ -1847,7 +1891,7 @@ body, html, #root {
 }
 
 .edit-button-profile {
-  background-color: #CEB64C;
+  background-color: #FFC42B;
 }
 
 .edit-button-text-profile {
@@ -1858,7 +1902,7 @@ body, html, #root {
 }
 
 .portfolio-button-profile {
-  background-color: #CEB64C;
+  background-color: #FFC42B;
 }
 
 .portfolio-button-text-profile {
@@ -1893,19 +1937,163 @@ body, html, #root {
   margin-bottom: 20px;
 }
 
-/* Event List Container Styles */
-.events-list-container-profile {
+/* Folder Styles */
+.month-folder-profile {
+  background: #FFC42B;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 10px;
+  text-align: center;
+  cursor: pointer;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Down Arrow Icon */
+.month-folder-profile::after {
+  content: '▼';
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+/* Packages Section Styles */
+.packages-section-profile {
+  width: 100%;
+  padding: 20px;
+  background: white;
+}
+
+.packages-section-profile h2 {
+  font-size: 1.5rem;
+  color: black;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Packages List Container */
+.packages-list-container-profile {
   display: flex;
   overflow-x: auto;
   padding-bottom: 20px;
-  position: relative;
-  width: 100%;
 }
 
+.packages-list-container-profile::-webkit-scrollbar {
+  display: none;
+}
+
+.packages-list-container-profile {
+  scrollbar-width: none;
+}
+
+/* Package Item Styles */
+.package-item-profile {
+  background: rgba(255, 255, 255, 0.56);
+  border-radius: 10px;
+  border: #C2B067 1px solid;
+  padding: 10px;
+  margin: 0 10px;
+  text-align: left;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+/* Add Package Styles */
+.add-package-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.broken-box-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9f9f9;
+  border: 2px dashed #C2B067;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.broken-box-text {
+  font-size: 18px;
+  color: #C2B067;
+  margin-bottom: 10px;
+}
+
+.add-package-button-profile {
+  background-color: #CEB64C;
+  border: none;
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-package-button-profile:hover {
+  background-color: #B79D3E;
+}
+
+/* Overlay Styles */
+.overlay-profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content-profile {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  overflow-x: auto;
+}
+
+.close-button-profile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Event List Container */
+.events-list-container-profile {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.events-list-container-profile::-webkit-scrollbar {
+  display: none;
+}
+
+.events-list-container-profile {
+  scrollbar-width: none;
+}
+
+/* Event Item Styles */
 .event-item-profile {
   background: rgba(255, 255, 255, 0.56);
   border-radius: 10px;
-  border:#C2B067 1px solid;
+  border: #C2B067 1px solid;
   padding: 10px;
   margin: 0 10px;
   text-align: left;
@@ -1939,17 +2127,20 @@ body, html, #root {
   color: black;
 }
 
-/* Month Group Styles */
-.month-group-profile {
-  margin-bottom: 30px;
+.overlay-header-profile {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC42B; /* Or another color that fits your design */
+  margin-bottom: 20px;
 }
 
-.month-title-profile {
-  font-size: 20px;
-  font-weight: bold;
-  color: #FFC42B;
-  margin-bottom: 10px;
-}
+
+
+
+
+
+
 
 
 
