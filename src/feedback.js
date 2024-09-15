@@ -29,19 +29,19 @@ const Feedback = () => {
         <div className="summary-feedback">
           <h3>Summary</h3>
           <div className="feedback-summary-container-feedback">
-            <div className="feedback-summary-box-feedback positive-box">
+            <div className="feedback-summary-box-feedback positive-box-feed">
               <p>Total Feedback</p>
               <p>{feedbackData.total}</p>
             </div>
-            <div className="feedback-summary-box-feedback positive-box">
+            <div className="feedback-summary-box-feedback positive-box-feed">
               <p>Positive</p>
               <p>{feedbackData.positive}</p>
             </div>
-            <div className="feedback-summary-box-feedback neutral-box">
+            <div className="feedback-summary-box-feedback neutral-box-feed">
               <p>Neutral</p>
               <p>{feedbackData.neutral}</p>
             </div>
-            <div className="feedback-summary-box-feedback negative-box">
+            <div className="feedback-summary-box-feedback negative-box-feed">
               <p>Negative</p>
               <p>{feedbackData.negative}</p>
             </div>

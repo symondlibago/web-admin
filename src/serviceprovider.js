@@ -91,21 +91,21 @@ const ChooseServiceProv = () => {
     : allEventsData;
 
   const renderEventItem = (item) => (
-    <div className="event-item" onClick={() => handleEventClick(item)} key={item.id}>
-      <img src={require(`./images/${item.image}`)} alt={item.title} className="event-image" />
-      <p className="event-title">{item.title}</p>
-      <div className="event-details">
-        <div className="event-detail-row">
+    <div className="event-item-sp" onClick={() => handleEventClick(item)} key={item.id}>
+      <img src={require(`./images/${item.image}`)} alt={item.title} className="event-image-sp" />
+      <p className="event-title-sp">{item.title}</p>
+      <div className="event-details-sp">
+        <div className="event-detail-row-sp">
           <FontAwesomeIcon icon={faPlusCircle} size="sm" color="#2A93D5" />
-          <p className="event-detail-text">{item.provider}</p>
+          <p className="event-detail-text-sp">{item.provider}</p>
         </div>
-        <div className="event-detail-row">
+        <div className="event-detail-row-sp">
           <FontAwesomeIcon icon={faCashRegister} size="sm" color="#2A93D5" />
-          <p className="event-detail-text">{item.price}</p>
+          <p className="event-detail-text-sp">{item.price}</p>
         </div>
       </div>
       <div
-        className={`like-icon ${likedEvents[item.id] ? 'liked' : ''}`}
+        className={`like-icon-sp ${likedEvents[item.id] ? 'liked' : ''}`}
         onClick={(e) => {
           e.stopPropagation();
           toggleLike(item.id);
@@ -121,25 +121,25 @@ const ChooseServiceProv = () => {
   );
 
   return (
-    <div className="gradient-background">
-      <div className="main-container">
+    <div className="gradient-background-sp">
+      <div className="main-container-sp">
         {/* Header section */}
-        <div className="scrollable-content">
-          <div className="content">
+        <div className="scrollable-conten-spt">
+          <div className="content-sp">
             {/* Centered Create Event Text */}
-            <p className="header-title">Service Provider</p>
+            <p className="header-title-sp">Service Provider</p>
             {/* Fading Line */}
-            <div className="separator-line"></div>
+            <div className="separator-line-sp"></div>
             {/* Event Types Section */}
-            <p className="service-type-label">Add Service Provider</p>
-            <div className="horizontal-scroll">
+            <p className="service-type-label-sp">Add Service Provider</p>
+            <div className="horizontal-scroll-sp">
               {eventTypes.map((type, index) => (
                 <button
                   key={index}
-                  className={`event-type-button ${selectedType === type ? 'selected' : ''}`}
+                  className={`event-type-button-sp ${selectedType === type ? 'selected' : ''}`}
                   onClick={() => setSelectedType(type)}
                 >
-                  <p className={`event-type-text ${selectedType === type ? 'selected' : ''}`}>
+                  <p className={`event-type-text-sp ${selectedType === type ? 'selected' : ''}`}>
                     {type}
                   </p>
                 </button>
@@ -147,34 +147,34 @@ const ChooseServiceProv = () => {
             </div>
             
             {/* Scrollable Events List */}
-            <div className="event-list-container">
+            <div className="event-list-container-sp">
               {filteredEventsData.map(event => renderEventItem(event))}
             </div>
             
             {/* Added Events List */}
             {addedEvents.length > 0 && (
-              <div className="added-events-section">
-                <p className="added-events-title">Added Events</p>
-                <div className="added-events-scroll">
+              <div className="added-events-section-sp">
+                <p className="added-events-title-sp">Added Events</p>
+                <div className="added-events-scroll-sp">
                   {addedEvents.map(event => (
-                    <div key={event.id} className="added-event-item">
-                      <p className="added-event-text">{event.title}</p>
-                      <p className="added-event-text">{event.type}</p>
-                      <p className="added-event-text">{event.price}</p>
+                    <div key={event.id} className="added-event-item-sp">
+                      <p className="added-event-text-sp">{event.title}</p>
+                      <p className="added-event-text-sp">{event.type}</p>
+                      <p className="added-event-text-sp">{event.price}</p>
                       <button
-                        className="remove-event-button"
+                        className="remove-event-button-sp"
                         onClick={() => handleRemoveEvent(event.id)}
                       >
                         <FontAwesomeIcon icon={faTrash} size="lg" color="#FF4C4C" />
                       </button>
                     </div>
                   ))}
-                  <div className="footer-buttons">
-                    <button className="modal-cancel-button" onClick={() => window.history.back()}>
-                      <p className="modal-cancel-button-text">Cancel</p>
+                  <div className="footer-buttons-sp">
+                    <button className="modal-cancel-button-sp" onClick={() => window.history.back()}>
+                      <p className="modal-cancel-button-text-sp">Cancel</p>
                     </button>
-                    <button className="modal-add-button" onClick={handleFinish}>
-                      <p className="modal-add-button-text">Finish</p>
+                    <button className="modal-add-button-sp" onClick={handleFinish}>
+                      <p className="modal-add-button-text-sp">Finish</p>
                     </button>
                   </div>
                 </div>
@@ -187,18 +187,18 @@ const ChooseServiceProv = () => {
         <Modal
           open={modalVisible}
           onClose={handleCloseModal}
-          className="modal-overlay"
+          className="modal-overlay-sp"
         >
-          <div className="modal-content-container">
-            <div className="modal-body">
+          <div className="modal-content-container-sp">
+            <div className="modal-body-sp">
               {selectedEvent && (
                 <>
-                  <p className="modal-title">{selectedEvent.title}</p>
-                  <p className="modal-provider">Provider: {selectedEvent.provider}</p>
-                  <p className="modal-price">Price: {selectedEvent.price}</p>
-                  <div className="modal-actions">
-                    <button className="modal-add-button" onClick={handleNext}>Add</button>
-                    <button className="modal-cancel-button" onClick={handleCloseModal}>Cancel</button>
+                  <p className="modal-title-sp">{selectedEvent.title}</p>
+                  <p className="modal-provider-sp">Provider: {selectedEvent.provider}</p>
+                  <p className="modal-price-sp">Price: {selectedEvent.price}</p>
+                  <div className="modal-actions-sp">
+                    <button className="modal-add-button-sp" onClick={handleNext}>Add</button>
+                    <button className="modal-cancel-button-sp" onClick={handleCloseModal}>Cancel</button>
                   </div>
                 </>
               )}

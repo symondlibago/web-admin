@@ -549,7 +549,7 @@ body, html, #root {
 /* NOTIFICATION */
 .notification-container {
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #2A2600, black);
+  background: #FFFFFF; /* White background */
   padding: 20px;
   min-height: 100vh; /* Ensure the container covers the entire viewport height */
   display: flex;
@@ -569,14 +569,14 @@ body, html, #root {
   left: 20px;
   background: none;
   border: none;
-  color: white;
+  color: #000000; /* Black color for back button */
   cursor: pointer;
 }
 
 .header-text {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Retained color for header text */
 }
 
 .tabs-container {
@@ -588,18 +588,18 @@ body, html, #root {
 }
 
 .tab-button {
-  background-color: #1A1A1A;
-  border: 1px solid #FFFFFF;
+  background-color: #FFFFFF; /* White background */
+  border: 1px solid #000000; /* Black border */
   border-radius: 10px;
   padding: 10px 20px;
   margin: 0 5px;
-  color: white;
+  color: #000000; /* Black text */
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .tab-button.active {
-  background-color: #FFC42B;
+  background-color: #FFC42B; /* Retained color for active tab */
   color: #000000;
   border-color: #FFC42B;
 }
@@ -610,13 +610,14 @@ body, html, #root {
 }
 
 .notification-box {
-  background-color: #F0F0F0;
+  background-color: #FFFFFF; /* White background for notification box */
   border-radius: 10px;
   margin: 10px 0;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .left-container {
@@ -629,6 +630,7 @@ body, html, #root {
   height: 50px;
   border-radius: 50%;
   margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .notification-details {
@@ -639,14 +641,14 @@ body, html, #root {
 .notification-name {
   font-size: 16px;
   font-weight: bold;
-  color: #000000;
+  color: #000000; /* Black text color */
 }
 
 .notification-service,
 .notification-joined,
 .days-ago {
   font-size: 14px;
-  color: #6F6F6F;
+  color: #6F6F6F; /* Dark gray text color */
 }
 
 .right-container {
@@ -659,6 +661,7 @@ body, html, #root {
   width: 30px;
   height: 30px;
   border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .buttons-container {
@@ -677,18 +680,19 @@ body, html, #root {
 }
 
 .accept-button {
-  background-color: #4CAF50;
+  background-color: #4CAF50; /* Retained color */
 }
 
 .decline-button {
-  background-color: #F44336;
+  background-color: #F44336; /* Retained color */
 }
+
 
 /* EVENTS */
 
 
 .gradient-container-events {
-  background: black;
+  background: white;
   padding: 20px;
   min-height: 100vh;
   display: flex;
@@ -735,7 +739,8 @@ body, html, #root {
   margin: 20px 0;
   width: 100%;
   max-width: 600px; /* Optional: set a max-width for the search container */
-  box-sizing: border-box;
+  box-sizing: border-box;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3 ); /* Add a subtle shadow */
+  transition: box-shadow 0.3s ease;
 }
 
 .search-icon {
@@ -764,6 +769,8 @@ body, html, #root {
   padding: 10px;
   position: relative;
   box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  transition: box-shadow 0.3s ease;
   width: 100%; /* Ensure item-container takes full width available in the grid */
 }
 
@@ -858,89 +865,88 @@ body, html, #root {
 
 /* CREATE EVENT */
 
-.gradient-container {
-  background: linear-gradient(to bottom, #2A2600, #000000);
+.gradient-container-createevent {
+  background: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.container {
+.container-createevent {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.header {
+.header-createevent {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.menu-button {
+.menu-button-createevent {
   background: none;
   border: none;
   cursor: pointer;
 }
 
-
-.icons-container {
+.icons-container-createevent {
   display: flex;
 }
 
-.icon {
+.icon-createevent {
   margin-left: 15px;
 }
 
-.content {
+.content-createevent {
   flex: 1;
 }
 
-.header-text {
+.header-text-createevent {
   font-size: 24px;
   font-weight: bold;
   color: #FFC42B;
   text-align: center;
 }
 
-.line {
+.line-createevent {
   width: 100%;
   height: 2px;
   background: linear-gradient(to right, transparent, #FFFFFF, transparent);
   margin: 20px 0;
 }
 
-.event-types-text {
+.event-types-text-createevent {
   font-size: 18px;
   font-weight: bold;
   color: #FFFFFF;
   margin-bottom: 15px;
 }
 
-.event-types-container {
+.event-types-container-createevent {
   display: flex;
   overflow-x: auto;
 }
 
-.event-type-button {
+.event-type-button-createevent {
   border: 1px solid #FFC42B;
   border-radius: 10px;
   padding: 10px 15px;
   margin: 0 5px;
   background: transparent;
-  color: #FFFFFF;
+  color: black;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.event-type-button.selected {
+.event-type-button-createevent.selected-createevent {
   background-color: #FFC42B;
-  color: #000000;
+  color: white;
 }
 
-.input-container {
+.input-container-createevent {
   background-color: white;
   border-radius: 10px;
   display: flex;
@@ -948,35 +954,36 @@ body, html, #root {
   margin: 10px 0;
   padding: 0 10px;
   height: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
-.text-input {
+.text-input-createevent {
   flex: 1;
   border: none;
   font-size: 16px;
   color: #000000;
 }
 
-.date-input {
+.date-input-createevent {
   position: relative;
 }
 
-.venue-input {
+.venue-input-createevent {
   position: relative;
 }
 
-.icon-right {
+.icon-right-createevent {
   position: absolute;
   right: 10px;
 }
 
-.button-container {
+.button-container-createevent {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
 }
 
-.cancel-button, .next-button {
+.cancel-button-createevent, .next-button-createevent {
   border: none;
   border-radius: 10px;
   padding: 15px 25px;
@@ -986,255 +993,271 @@ body, html, #root {
   cursor: pointer;
 }
 
-.cancel-button {
+.cancel-button-createevent {
   background-color: #6E6E6E;
 }
 
-.next-button {
-  background-color: #CEB64C;
+.next-button-createevent {
+  background-color: #eeba2b;
 }
+
 
 /* SERVICE PROVIDER */
 
 
 /* General Layout */
-/* General Layout */
-.gradient-background {
-  background: linear-gradient(to bottom, #2A2600, #000000);
+.gradient-background-sp {
+  background: white; /* Changed background to white */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.main-container {
+.main-container-sp {
   padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: white; /* Ensure the main container has a white background */
 }
 
-.header-section {
+.header-section-sp {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
-.menu-button {
+.menu-button-sp {
   padding: 10px;
 }
 
-.logo {
+.logo-sp {
   width: 150px;
   height: auto;
 }
 
-.icon-container {
+.icon-container-sp {
   display: flex;
   gap: 15px;
 }
 
 .icon {
-  color: white;
+  color: black; /* Changed icon color to black */
 }
 
-.scrollable-content {
+.scrollable-content-sp {
   flex: 1;
 }
 
-.header-title {
+.header-title-sp {
   font-size: 24px;
-  color: white;
+  color: black; /* Changed text color to black */
   text-align: center;
   margin-bottom: 10px;
 }
 
-.separator-line {
-  border-top: 1px solid #ffffff;
+.separator-line-sp {
+  border-top: 1px solid black; /* Changed separator color to black */
   margin-bottom: 20px;
 }
 
-.service-type-label {
+.service-type-label-sp {
   font-size: 18px;
-  color: white;
+  color: black; /* Changed text color to black */
   margin-bottom: 10px;
 }
 
-.horizontal-scroll {
+.horizontal-scroll-sp {
   display: flex;
   gap: 10px;
   overflow-x: auto;
   padding: 10px 0;
 }
 
-.event-type-button {
+.event-type-button-sp {
   border: 1px solid #FFC42B;
   border-radius: 10px;
   padding: 10px 15px;
   margin: 0 5px;
   background: transparent;
-  color: #FFFFFF;
+  color: black; /* Changed text color to black */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.event-type-button.selected {
+.event-type-button-sp.selected {
   background-color: #FFC42B;
-  color: #000000;
+  color: black; /* Changed selected button text color to black */
 }
 
-.event-list-container {
+.event-list-container-sp {
   display: flex;
   overflow-x: auto;
   gap: 10px;
   padding: 10px;
 }
 
-.event-item {
-  background-color: #fff;
+.event-item-sp {
+  background-color: white; /* Ensure the event item background is white */
   border-radius: 10px;
   padding: 10px;
   width: 250px;
   margin-right: 10px;
   flex: 0 0 auto;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
-.event-image {
+.event-image-sp {
   width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
 }
 
-.event-title {
+.event-title-sp {
   font-size: 16px;
   font-weight: bold;
+  color: black; /* Changed text color to black */
   margin-top: 5px;
 }
 
-.event-details {
+.event-details-sp {
   margin-top: 5px;
 }
 
-.event-detail-row {
+.event-detail-row-sp {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.event-detail-text {
+.event-detail-text-sp {
   font-size: 14px;
+  color: black; /* Changed text color to black */
 }
 
-.like-icon {
+.like-icon-sp {
   position: absolute;
   top: 10px;
   right: 10px;
 }
 
-.like-icon.liked {
+.like-icon-sp.liked {
   color: #FF0000;
 }
 
-.added-events-section {
+.added-events-section-sp {
   margin-top: 20px;
 }
 
-.added-events-title {
+.added-events-title-sp {
   font-size: 18px;
-  color: white;
+  color: black; /* Changed text color to black */
   margin-bottom: 10px;
 }
 
-.added-events-scroll {
+.added-events-scroll-sp {
   max-height: 200px;
   overflow-y: auto;
 }
 
-.added-event-item {
-  background-color: #fff;
+.added-event-item-sp {
+  background-color: white; /* Ensure the added event item background is white */
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
-.added-event-text {
+.added-event-text-sp {
   font-size: 14px;
+  color: black; /* Changed text color to black */
 }
 
-.remove-event-button {
+.remove-event-button-sp {
   align-self: flex-end;
   background: transparent;
   border: none;
   cursor: pointer;
 }
 
-.footer-buttons {
+.footer-buttons-sp {
   display: flex;
   justify-content: space-between;
 }
 
-.modal-overlay {
+.modal-overlay-sp {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed; /* Ensure it covers the entire screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a semi-transparent background */
+  z-index: 1000; /* Ensure the modal is above other content */
 }
 
-.modal-content-container {
-  background-color: #fff;
+.modal-content-container-sp {
+  background-color: white; /* Changed background color to white */
   border-radius: 10px;
   padding: 20px;
   width: 80%;
-  max-width: 500px;
+  max-width: 500px; /* Adjust as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
-.modal-body {
+.modal-body-sp {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.modal-title {
+.modal-title-sp {
   font-size: 18px;
   font-weight: bold;
+  color: black; /* Changed text color to black */
   margin-bottom: 10px;
 }
 
-.modal-provider,
-.modal-price {
+.modal-provider-sp,
+.modal-price-sp {
   font-size: 16px;
   color: #555;
   margin-bottom: 10px;
 }
 
-.modal-actions {
+.modal-actions-sp {
   display: flex;
   gap: 10px;
 }
 
-.modal-cancel-button,
-.modal-add-button {
+.modal-cancel-button-sp,
+.modal-add-button-sp {
   border: none;
   border-radius: 10px;
   padding: 15px 25px;
-  color: #FFFFFF;
+  color: white; /* Changed button text color to white */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.modal-cancel-button {
+.modal-cancel-button-sp {
   background-color: #6E6E6E;
 }
 
-.modal-add-button {
+.modal-add-button-sp {
   background-color: #CEB64C;
 }
+
 
 /* ATTENDEE */
 
@@ -1244,7 +1267,7 @@ body, html, #root {
   flex-direction: column;
   min-height: 100vh;
   padding: 20px;
-  background: black;
+  background: white; /* Set background to white */
 }
 
 .header-wrapper {
@@ -1254,18 +1277,18 @@ body, html, #root {
 }
 
 .header-title {
-  color: #fff;
+  color: black; /* Set text to black */
   font-size: 36px;
   font-weight: bold;
 }
 
 .title-highlight {
-  color: #ff0;
+  color: #eeba2b; /* Retain highlight color */
 }
 
 .title-divider {
   border: 0;
-  border-top: 1px solid #fff;
+  border-top: 1px solid black; /* Set divider to black */
   margin: 10px 0;
 }
 
@@ -1279,31 +1302,35 @@ body, html, #root {
   display: flex;
   align-items: flex-start;
   flex: 1;
+  /* box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); Add box-shadow */
 }
 
 .event-img {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 180px;
   border-radius: 10px;
   object-fit: cover;
+  margin-left: 1rem;
+  margin-top: 10px;
 }
 
 .event-info {
   flex: 1;
   margin-left: 20px;
   padding: 10px;
-  background: #27272A; /* Adjust to your desired color */
+  background: white; /* Set container background to white */
   border-radius: 5px;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
 .event-name {
-  color: #fff;
+  color: black; /* Set text to black */
   font-size: 24px;
   font-weight: bold;
 }
 
 .event-detail {
-  color: #ccc;
+  color: black; /* Set text to black */
   margin: 5px 0;
 }
 
@@ -1315,16 +1342,17 @@ body, html, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent; /* Transparent background */
+  background-color: transparent; /* Keep transparent background */
   padding: 10px;
   border-radius: 5px;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
 .chart-legend {
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
-  color: #fff;
+  color: black; /* Set text to black */
 }
 
 .legend-item {
@@ -1336,27 +1364,29 @@ body, html, #root {
   justify-content: space-around;
   margin: 10px 0;
   padding: 10px;
-  background: linear-gradient(to bottom, #2A2600, #000000);
+  background: white;
   border-radius: 5px;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
 .filter-btn {
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-  border: none;
-  color: #000;
+  border: 1px solid #eeba2b;
+  color: black; /* Set text to black */
   cursor: pointer;
 }
 
 .filter-active {
-  background-color: #ff0;
+  background-color: #eeba2b; /* Retain active filter color */
 }
 
 .attendees-table-wrapper {
   background-color: transparent;
   padding: 10px;
   border-radius: 5px;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
 .table-header {
@@ -1368,7 +1398,7 @@ body, html, #root {
 }
 
 .header-cell {
-  color: #fff;
+  color: black; /* Set text to black */
   flex: 1;
   text-align: center;
 }
@@ -1382,7 +1412,7 @@ body, html, #root {
 }
 
 .table-cell {
-  color: #fff;
+  color: black; /* Set text to black */
   flex: 1;
   text-align: center;
 }
@@ -1397,7 +1427,7 @@ body, html, #root {
   width: 20px;
   height: 20px;
   border-radius: 50%; /* Circle shape */
-  border: 2px solid #fff; /* Add border for visibility */
+  border: 2px solid black; /* Set border to black */
   cursor: pointer;
   margin: 0 5px; /* Space between dots */
   opacity: 0.5; /* Default opacity for unselected dots */
@@ -1411,8 +1441,8 @@ body, html, #root {
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-  border: none;
-  color: #000;
+  border: 1px solid #eeba2b;
+  color: black; /* Set text to black */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1437,7 +1467,7 @@ body, html, #root {
 }
 
 .overlay-content {
-  background: #333;
+  background: white; /* Set background to white */
   padding: 20px;
   border-radius: 10px;
   width: 400px;
@@ -1446,6 +1476,8 @@ body, html, #root {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #eeba2b;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
 .close-btn {
@@ -1454,7 +1486,7 @@ body, html, #root {
   right: 10px;
   background: transparent;
   border: none;
-  color: #fff;
+  color: black; /* Set text to black */
   font-size: 20px;
   cursor: pointer;
 }
@@ -1466,17 +1498,20 @@ body, html, #root {
   padding: 10px;
   border-radius: 5px;
   border: none;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
+
 }
 
 .insert-btn {
   padding: 10px;
-  background-color: #ff0;
+  background-color: #eeba2b;
   border-radius: 5px;
   border: none;
-  color: #000;
+  color: black; /* Set text to black */
   cursor: pointer;
   width: 40%;
   margin-top: 10px; /* Space between input and button */
+  font-weight: bold;
 }
 
 /* Style for the remove button */
@@ -1509,20 +1544,22 @@ body, html, #root {
   padding: 20px;
   border-radius: 5px;
   text-align: center;
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
 .popup-content h2 {
   margin-top: 0;
+  color: black; /* Set text to black */
 }
 
 .popup-content button {
   padding: 10px;
   margin-right: 1rem;
   margin-left: 1rem;
-  background-color: #ff0;
+  background-color: #eeba2b;
   border-radius: 5px;
   border: none;
-  color: #000;
+  color: black; /* Set text to black */
   cursor: pointer;
   width: 30%;
   margin-top: 10px;
@@ -1532,14 +1569,17 @@ body, html, #root {
 
 
 
+
+/* INVENTORY */
+
 /* INVENTORY */
 
 .inventory-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: black;
-  color: white;
+  background: white; /* Changed to white */
+  color: black; /* Changed to black for general text */
 }
 
 .content-inventory {
@@ -1554,17 +1594,17 @@ body, html, #root {
 .header-text {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Keep the Inventory Tracker text yellow */
 }
 
 .header-highlight {
-  color: #FFC42B;
+  color: #FFC42B; /* Keep the highlighted parts yellow */
 }
 
-.header-line {
+.header-linee {
   border: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  height: 2px; /* Increase height for better visibility */
+  background: linear-gradient(to right, transparent,black, transparent); /* Stronger black fading */
   margin: 10px 0;
 }
 
@@ -1598,6 +1638,11 @@ body, html, #root {
 .table-row-text {
   flex: 1;
   text-align: center;
+  color: black; /* General table text is now black */
+}
+
+.status-text {
+  color: #FFC42B; /* Status text remains yellow */
 }
 
 .summary {
@@ -1611,7 +1656,10 @@ body, html, #root {
 .summary-text {
   font-size: 16px;
   margin: 5px 0;
+  color: black; /* Ensure summary text is black */
 }
+
+
 
 /* EQUIPMENT */
 
@@ -1619,8 +1667,8 @@ body, html, #root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: black;
-  color: #fff;
+  background: white; /* Changed to white */
+  color: black; /* Changed to black for general text */
 }
 
 /* Header Styles */
@@ -1636,7 +1684,7 @@ body, html, #root {
 .menu-button-equipment {
   background: none;
   border: none;
-  color: white;
+  color: black; /* Changed to black */
   cursor: pointer;
 }
 
@@ -1648,21 +1696,19 @@ body, html, #root {
 .header-text-equipment {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Keep the Inventory Tracker text yellow */
   margin: 0;
 }
 
 .header-highlight {
-  color: white;
+  color: #FFC42B; /* Keep the highlighted parts yellow */
   padding: 0 5px;
-  color: #FFC42B;
-
 }
 
 .header-line {
   border: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  background: linear-gradient(to right, transparent, black, transparent); /* Fading from black to transparent */
   margin: 10px 0;
 }
 
@@ -1691,6 +1737,7 @@ body, html, #root {
   flex: 1;
   text-align: center;
   font-weight: bold;
+  color: black; /* Changed to black */
 }
 
 .table-row-equipment {
@@ -1703,6 +1750,7 @@ body, html, #root {
 .table-cell-equipment {
   flex: 1;
   text-align: center;
+  color: black; /* Changed to black */
 }
 
 /* Buttons */
@@ -1712,14 +1760,12 @@ body, html, #root {
   justify-content: center;
   padding: 10px;
   margin-top: 10px;
-  background-color: #61481C;
+  background-color: #eeba2b; /* Changed to #eeba2b */
   border: none;
   border-radius: 5px;
-  color: white;
+  color: black; /* Changed text to black */
   cursor: pointer;
-  
 }
-
 
 .add-button-equipment span, .remove-button-equipment span {
   margin-left: 5px;
@@ -1735,6 +1781,7 @@ body, html, #root {
 .summary-text-equipment {
   font-size: 16px;
   margin: 5px 0;
+  color: black; /* Ensure summary text is black */
 }
 
 /* Modal Styles */
@@ -1744,14 +1791,15 @@ body, html, #root {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.9); /* Changed to a white overlay */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal-content-equipment {
-  background:  #A97E00;
+  background: white;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); /* Added box shadow */
   padding: 20px;
   border-radius: 10px;
   width: 300px;
@@ -1776,6 +1824,7 @@ body, html, #root {
 .modal-input-group-equipment label {
   display: block;
   margin-bottom: 5px;
+  color: black; /* Changed to black */
 }
 
 .modal-input-group-equipment input {
@@ -1783,11 +1832,12 @@ body, html, #root {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Added box shadow */
 }
 
 .modal-button-equipment {
-  background-color: #444;
-  color: white;
+  background-color: #eeba2b; /* Changed to #eeba2b */
+  color: black; /* Changed text to black */
   border: none;
   padding: 10px;
   border-radius: 5px;
@@ -1797,8 +1847,9 @@ body, html, #root {
 .modal-title-equipment {
   text-align: center;
   margin-bottom: 20px;
-  color: #444;
+  color: black; /* Changed to black */
 }
+
 
 
 
@@ -2163,8 +2214,8 @@ body, html, #root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(to bottom, #2A2600, #000000);
-  color: #fff;
+  background: white; /* Changed to white */
+  color: black; /* Changed to black */
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
 }
@@ -2192,20 +2243,20 @@ body, html, #root {
 .header-text-edit {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Keep header text yellow */
   text-align: center;
 }
 
 .line-edit {
   border: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  background: linear-gradient(to right, transparent, black, transparent); /* Changed to black */
   margin: 10px 0;
 }
 
 .setting-text-edit {
   font-size: 20px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   margin: 20px 0;
 }
 
@@ -2215,20 +2266,21 @@ body, html, #root {
 
 .settings-text-edit {
   font-size: 15px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   margin: 10px 0;
 }
 
 .text-input-edit {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* White background */
   border-radius: 10px;
   padding: 10px;
   height: 40px; /* Reduce the height of the text inputs */
-  color: #000000;
+  color: #000000; /* Black text */
   font-size: 16px;
   margin-bottom: 15px;
   border: 1px solid #B0B0B0;
   width: 100%;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); /* Added box shadow */
 }
 
 .profile-container-edit {
@@ -2252,7 +2304,7 @@ body, html, #root {
 
 .profile-name-edit {
   font-size: 18px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   font-weight: bold;
 }
 
@@ -2268,11 +2320,11 @@ body, html, #root {
 }
 
 .submit-button-edit {
-  background-color: #FFC42B;
+  background-color: #FFC42B; /* Yellow background */
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-  color: #FFFFFF;
+  color: black; /* Black text */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -2298,19 +2350,26 @@ body, html, #root {
 }
 
 .create-portfolio-text-edit {
-  color: white;
+  color: white; /* Keep text white */
   font-size: 16px;
   font-weight: bold;
   margin-left: 10px;
 }
 
+
+
+
+
+
+
+/* ADD ROLE */
 /* ADD ROLE */
 .gradient-container-addrole {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #000000;
-  color: #fff;
+  background: white; /* Changed to white */
+  color: black; /* Changed to black */
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
 }
@@ -2338,20 +2397,20 @@ body, html, #root {
 .header-text-addrole {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Keep header text yellow */
   text-align: center;
 }
 
 .line-addrole {
   border: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  background: linear-gradient(to right, transparent, black, transparent); /* Changed to black */
   margin: 10px 0;
 }
 
 .setting-text-addrole {
   font-size: 20px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   margin: 20px 0;
 }
 
@@ -2361,20 +2420,21 @@ body, html, #root {
 
 .settings-text-addrole {
   font-size: 15px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   margin: 10px 0;
 }
 
 .text-input-addrole {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* White background */
   border-radius: 10px;
   padding: 10px;
   height: 40px; /* Adjust as needed */
-  color: #000000;
+  color: #000000; /* Black text */
   font-size: 16px;
   margin-bottom: 15px;
   border: 1px solid #B0B0B0;
   width: 100%;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); /* Added box shadow */
 }
 
 textarea.text-input-addrole {
@@ -2402,7 +2462,7 @@ textarea.text-input-addrole {
 
 .profile-name-addrole {
   font-size: 18px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   font-weight: bold;
 }
 
@@ -2418,17 +2478,18 @@ textarea.text-input-addrole {
 }
 
 .submit-button-addrole {
-  background-color: #FFC42B;
+  background-color: #eeba2b; /* Changed to #eeba2b */
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-  color: #FFFFFF;
+  color: black; /* Black text */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   width: 30%;
   align-items: center;
 }
+
 
 
 
@@ -2531,12 +2592,13 @@ textarea.text-input-addrole {
 
 
 /* SETTINGS */
+/* SETTINGS */
 .gradient-container-settings {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #000;
-  color: #fff;
+  background: white; /* Changed to white */
+  color: black; /* Changed to black */
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
 }
@@ -2564,7 +2626,7 @@ textarea.text-input-addrole {
 .header-text-settings {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Keep header text yellow */
   text-align: center;
 }
 
@@ -2574,20 +2636,21 @@ textarea.text-input-addrole {
 
 .settings-text-settings {
   font-size: 20px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   margin: 20px 0;
 }
 
 .text-input-settings {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* White background */
   border-radius: 10px;
   padding: 10px;
   height: 40px; /* Adjust as needed */
-  color: #000000;
+  color: #000000; /* Black text */
   font-size: 16px;
   margin-bottom: 15px;
   border: 1px solid #B0B0B0;
   width: 100%;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); /* Added box shadow */
 }
 
 .button-container-settings {
@@ -2597,7 +2660,7 @@ textarea.text-input-addrole {
 }
 
 .create-event-button-settings {
-  background-color: #FFC42B;
+  background-color: #eeba2b; /* Changed to #eeba2b */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2609,18 +2672,18 @@ textarea.text-input-addrole {
 }
 
 .create-event-text-settings {
-  color: white;
+  color: black; /* Changed to black */
   font-size: 16px;
   font-weight: bold;
   margin-left: 10px;
 }
 
 .submit-button-settings {
-  background-color: #FFC42B;
+  background-color: #eeba2b; /* Changed to #eeba2b */
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-  color: #FFFFFF;
+  color: black; /* Changed to black */
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -2636,14 +2699,15 @@ textarea.text-input-addrole {
 
 
 
+
 /* EVENT PORFOLIO */
 
 .gradient-container-portfolio {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #000;
-  color: #fff;
+  background: #FFFFFF; /* Background color set to white */
+  color: #000000; /* Text color set to black */
   padding: 20px;
 }
 
@@ -2670,7 +2734,7 @@ textarea.text-input-addrole {
 .header-text-portfolio {
   font-size: 24px;
   font-weight: bold;
-  color: #FFC42B;
+  color: #FFC42B; /* Keep header text color for emphasis */
   flex: 1;
   text-align: center;
 }
@@ -2683,7 +2747,7 @@ textarea.text-input-addrole {
   border-radius: 10px;
   padding: 100px 30px;
   margin-bottom: 20px;
-  border: 2px dashed white;
+  border: 2px dashed #000000; /* Broken lines color changed to black */
   cursor: pointer;
 }
 
@@ -2692,7 +2756,7 @@ textarea.text-input-addrole {
 }
 
 .cover-photo-text-portfolio {
-  color: white;
+  color: #000000; /* Text color set to black */
   font-size: 18px;
   font-weight: bold;
 }
@@ -2701,12 +2765,12 @@ textarea.text-input-addrole {
   width: 100%;
   height: 2px;
   margin: 20px 0;
-  background: linear-gradient(to right, #FFFFFF00, #FFFFFF, #FFFFFF00);
+  background: linear-gradient(to right, #00000000, #000000, #00000000); /* Broken line color changed to black */
 }
 
 .label-portfolio, .labels-portfolio {
   font-size: 14px;
-  color: #FFFFFF;
+  color: #000000; /* Text color set to black */
   margin-bottom: 10px;
 }
 
@@ -2715,42 +2779,44 @@ textarea.text-input-addrole {
 }
 
 .text-input-portfolio {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* Background color set to white */
   border-radius: 10px;
   padding: 15px;
   height: 50px;
-  color: #000000;
+  color: #000000; /* Text color set to black */
   font-size: 16px;
   margin-bottom: 15px;
   border: 1px solid #B0B0B0;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3); /* Added box shadow */
 }
 
 .create-portfolio-button-portfolio {
-  background-color: #FFC42B;
+  background-color: #FFC42B; /* Button background color */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #FFC42B;
+  border: 2px solid #FFC42B; /* Border color matches the button background */
   cursor: pointer;
 }
 
 .create-portfolio-text-portfolio {
-  color: white;
+  color: #000000; /* Text color set to black */
   font-size: 16px;
   font-weight: bold;
   margin-left: 10px;
 }
 
+
 /* FEEDBACK */
 
 .gradient-container {
   display: flex;
-  background: #000;
+  background: #FFFFFF; /* Background color set to white */
   flex-direction: column;
   min-height: 100vh;
-  color: #fff;
+  color: #000000; /* Text color set to black */
   padding: 20px;
 }
 
@@ -2759,6 +2825,7 @@ textarea.text-input-addrole {
   flex-direction: column;
   flex: 1;
   padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
 .sentiment-analysis-feedback {
@@ -2771,7 +2838,7 @@ textarea.text-input-addrole {
 .line-feedback {
   width: 100%;
   height: 2px;
-  background: linear-gradient(to right, #FFFFFF00, #FFFFFF, #FFFFFF00);
+  background: linear-gradient(to right, #00000000, #000000, #00000000); /* Broken line color changed to black */
   margin-bottom: 20px;
 }
 
@@ -2798,13 +2865,14 @@ textarea.text-input-addrole {
 }
 
 .feedback-summary-box-feedback {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
   border-radius: 10px;
   padding: 20px;
   text-align: center;
   flex: 1;
   margin: 5px;
-  border: 2px solid white;
+  border: 2px solid #000000; /* Border color changed to black */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
 .feedback-summary-box-feedback p:first-child {
@@ -2818,239 +2886,108 @@ textarea.text-input-addrole {
 }
 
 .positive-box {
+  background-color: rgba(0, 255, 0, 0.1); /* Slightly transparent green background */
+  border: 2px solid #000000; /* Border color changed to black */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+}
+
+.neutral-box {
+  background-color: rgba(255, 255, 0, 0.1); /* Slightly transparent yellow background */
+  border: 2px solid #000000; /* Border color changed to black */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+}
+
+.negative-box {
+  background-color: rgba(255, 0, 0, 0.1); /* Slightly transparent red background */
+  border: 2px solid #000000; /* Border color changed to black */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+}
+
+.big-box-feedback {
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #000000; /* Border color changed to black */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+}
+
+.big-box-header-feedback {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.big-box-header-left-feedback {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.big-box-header-right-feedback {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.service-providers-table-feedback {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.service-providers-table-feedback th,
+.service-providers-table-feedback td {
+  padding: 10px;
+  text-align: left;
+}
+
+.rating-bar-container-feedback {
+  display: flex;
+  height: 20px;
+  width: 100%;
+  background-color: #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.rating-bar-feedback {
+  height: 100%;
+}
+
+.rating-bar-feedback:hover {
+  filter: brightness(0.8);
+}
+
+.positive {
+  background-color: green;
+}
+
+.neutral {
+  background-color: yellow;
+}
+
+.negative {
+  background-color: red;
+}
+.positive-box-feed {
   background-color: rgba(0, 255, 0, 0.1);
   border: 2px solid green;
 }
 
-.neutral-box {
+.neutral-box-feed {
   background-color: rgba(255, 255, 0, 0.1);
   border: 2px solid yellow;
 }
 
-.negative-box {
+.negative-box-feed {
   background-color: rgba(255, 0, 0, 0.1);
   border: 2px solid red;
 }
 
-.big-box-feedback {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 2px solid white;
-}
-
-.big-box-header-feedback {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.big-box-header-left-feedback {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.big-box-header-right-feedback {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.service-providers-table-feedback {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.service-providers-table-feedback th,
-.service-providers-table-feedback td {
-  padding: 10px;
-  text-align: left;
-}
-
-.rating-bar-container-feedback {
-  display: flex;
-  height: 20px;
-  width: 100%;
-  background-color: #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.rating-bar-feedback {
-  height: 100%;
-}
-
-.rating-bar-feedback:hover {
-  filter: brightness(0.8);
-}
-
-.positive {
-  background-color: green;
-}
-
-.neutral {
-  background-color: yellow;
-}
-
-.negative {
-  background-color: red;
-}
-.gradient-container-feedback {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #2A2600, #000000);
-  color: #fff;
-  padding: 20px;
-}
-
-.container-feedback {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 20px;
-}
-
-.sentiment-analysis-feedback {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.line-feedback {
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, #FFFFFF00, #FFFFFF, #FFFFFF00);
-  margin-bottom: 20px;
-}
-
-.welcome-text-feedback {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.summary-feedback {
-  margin-bottom: 20px;
-}
-
-.summary-feedback h3 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.feedback-summary-container-feedback {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.feedback-summary-box-feedback {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  flex: 1;
-  margin: 5px;
-  border: 2px solid white;
-}
-
-.feedback-summary-box-feedback p:first-child {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.feedback-summary-box-feedback p:last-child {
-  font-size: 20px;
-}
-
-.positive-box {
-  background-color: rgba(0, 255, 0, 0.1);
-  border: 2px solid white;
-}
-
-.neutral-box {
-  background-color: rgba(255, 255, 0, 0.1);
-  border: 2px solid white;
-}
-
-.negative-box {
-  background-color: rgba(255, 0, 0, 0.1);
-  border: 2px solid white;
-}
-
-.big-box-feedback {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 2px solid white;
-}
-
-.big-box-header-feedback {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.big-box-header-left-feedback {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.big-box-header-right-feedback {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.service-providers-table-feedback {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.service-providers-table-feedback th,
-.service-providers-table-feedback td {
-  padding: 10px;
-  text-align: left;
-}
-
-.rating-bar-container-feedback {
-  display: flex;
-  height: 20px;
-  width: 100%;
-  background-color: #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.rating-bar-feedback {
-  height: 100%;
-}
-
-.rating-bar-feedback:hover {
-  filter: brightness(0.8);
-}
-
-.positive {
-  background-color: green;
-}
-
-.neutral {
-  background-color: yellow;
-}
-
-.negative {
-  background-color: red;
-}
 
 /* EVENTS FEEDBACK */
 
 
 .gradient-container-eventfeedback {
-  background: black;
+  background: white;
   padding: 20px;
   min-height: 100vh;
   display: flex;
@@ -3098,6 +3035,7 @@ textarea.text-input-addrole {
   width: 100%;
   max-width: 600px; /* Optional: set a max-width for the search container */
   box-sizing: border-box;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
 .search-icon-eventfeedback {
@@ -3126,6 +3064,7 @@ textarea.text-input-addrole {
   padding: 10px;
   position: relative;
   box-sizing: border-box;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
   width: 100%; /* Ensure item-container takes full width available in the grid */
 }
 
@@ -3223,9 +3162,10 @@ textarea.text-input-addrole {
   display: flex;
   flex-direction: column; /* Adjusted for title and fading line */
   height: 100%;
-  background: #000; /* Vertical gradient */
+  background: white; /* Changed background to white */
   padding: 20px;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
 
 .title-group {
@@ -3239,7 +3179,7 @@ textarea.text-input-addrole {
 .fading-line-group {
   width: 100%;
   height: 2px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  background: linear-gradient(to right, transparent, #000, transparent); /* Changed color to black for contrast */
   margin-bottom: 20px; /* Space between fading line and content */
 }
 
@@ -3271,13 +3211,13 @@ textarea.text-input-addrole {
 .event-item-group {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0; /* Changed from white to a light gray */
+  background-color: #ffffff; /* Changed background to white */
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
   cursor: pointer;
   transition: transform 0.2s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow for depth */
   width: 100%; /* Ensure it spans the full width of its container */
   position: relative; /* For stacking context */
 }
@@ -3301,12 +3241,12 @@ textarea.text-input-addrole {
 .event-title-group {
   font-size: 18px; /* Slightly larger text */
   font-weight: bold;
-  color: #000000;
+  color: #000000; /* Changed text color to black */
 }
 
 .event-date-group {
   font-size: 16px;
-  color: #000000;
+  color: #000000; /* Changed text color to black */
 }
 
 .event-location-group {
@@ -3317,7 +3257,7 @@ textarea.text-input-addrole {
 
 .event-address-group {
   font-size: 16px;
-  color: #000000;
+  color: #000000; /* Changed text color to black */
   margin-left: 5px;
 }
 
@@ -3335,7 +3275,7 @@ textarea.text-input-addrole {
 /* Middle line styles */
 .middle-line-group {
   width: 2px;
-  background: linear-gradient(to bottom, transparent, white, transparent);
+  background: linear-gradient(to bottom, transparent, #000, transparent); /* Changed color to black for contrast */
   margin: 0 10px; /* Space between middle line and sections */
   height: calc(100% - 40px); /* Full height minus padding */
   align-self: center; /* Center the middle line vertically */
@@ -3345,6 +3285,7 @@ textarea.text-input-addrole {
   margin-right: 5px;
 }
 
+
 /* GROUP ATTENDEES */
 
 .container-groupattendee {
@@ -3352,7 +3293,7 @@ textarea.text-input-addrole {
   flex-direction: column;
   height: 100vh;
   padding: 20px;
-  background: #000;
+  background: #FFFFFF; /* Changed background to white */
 }
 
 .headerText-groupattendee {
@@ -3366,14 +3307,14 @@ textarea.text-input-addrole {
 .line-groupattendee {
   width: 100%;
   height: 2px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  background: linear-gradient(to right, transparent, #000000, transparent); /* Changed color to black for contrast */
   margin-bottom: 20px;
 }
 
 .eventTypesText-groupattendee {
   font-size: 18px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #000000; /* Changed text color to black */
   margin-bottom: 15px;
   text-align: center;
 }
@@ -3400,9 +3341,10 @@ textarea.text-input-addrole {
 }
 
 .row-groupattendee {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* Changed background to white */
   cursor: pointer;
   transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
 }
 
 .row-groupattendee:hover {
@@ -3432,9 +3374,9 @@ textarea.text-input-addrole {
 .modalContent-groupattendee {
   width: 400px; /* Adjust width for better fit */
   padding: 20px;
-  background-color: #FFFFFF;
+  background-color: #FFFFFF; /* Changed background to white */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow for depth */
   max-height: 80vh; /* Ensure it fits within the viewport height */
   overflow-y: auto; /* Allow scrolling if content overflows */
   text-align: center;
@@ -3500,20 +3442,23 @@ button:disabled {
   cursor: not-allowed;
 }
 
+
 /* MESSAGES */
 
 .gradientContainer-messages {
   display: flex;
   flex-direction: column;
-  background-color: #2A2600; /* Dark background color */
+  background-color: #FFFFFF; /* White background */
   height: 100vh;
   padding: 20px;
+  color: #000000; /* Black text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
 }
 
 .closeButton-messages {
   background: none;
   border: none;
-  color: white;
+  color: #000000; /* Black color for close button */
   font-size: 32px;
   cursor: pointer;
   align-self: flex-start;
@@ -3528,16 +3473,18 @@ button:disabled {
 .messageContainer-messages {
   display: flex;
   align-items: center;
-  background-color: #4F4F4F; /* Gray background for message rectangles */
+  background-color: #FFFFFF; /* White background for message containers */
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .profileImage-messages {
   width: 50px;
   height: 50px;
   border-radius: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .messageContent-messages {
@@ -3546,12 +3493,12 @@ button:disabled {
 }
 
 .senderName-messages {
-  color: #FFFFFF;
+  color: #000000; /* Black text color */
   font-weight: bold;
 }
 
 .messagePreview-messages {
-  color: #B0B0B0;
+  color: #666666; /* Dark gray text color */
 }
 
 .messageDetails-messages {
@@ -3561,22 +3508,23 @@ button:disabled {
 }
 
 .daysAgo-messages {
-  color: #B0B0B0;
+  color: #666666; /* Dark gray text color */
   margin-bottom: 5px;
 }
 
 .reminderCircle-messages {
-  background-color: #FFC42B;
+  background-color: #FFC42B; /* Yellow background */
   width: 30px;
   height: 30px;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .reminderText-messages {
-  color: #000000;
+  color: #000000; /* Black text color */
   font-weight: bold;
 }
 

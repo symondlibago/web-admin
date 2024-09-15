@@ -35,7 +35,7 @@ const Inventory = () => {
           <h1 className="header-text">
             <span className="header-highlight">Inventory</span> Tracker
           </h1>
-          <hr className="header-line" />
+          <hr className="header-linee" />
         </div>
         <div className="table">
           <div className="table-header">
