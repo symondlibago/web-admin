@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUserCircle, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import proPic from './images/pro_pic.png'; // Ensure the path to the image is correct
+import event1 from './images/event1.png'; // Added image for the event
 
 const Notification = () => {
   const [selectedTab, setSelectedTab] = useState('All');
+  const [selectedEvent, setSelectedEvent] = useState(null); // State for selected event details
 
   const notificationsData = {
     'This Week': [
@@ -27,14 +29,22 @@ const Notification = () => {
     'Booking Request': [
       {
         id: '1',
-        name: 'Jane Doe',
+        name: 'Mr. & Mrs. Malik',
         title: 'Wedding',
+        date: '2024-07-01',
+        address: 'CDO',
+        pax: 100,
+        image: event1,
         daysAgo: '2d Ago',
       },
       {
         id: '2',
         name: 'John Smith',
         title: 'Birthday',
+        date: '2024-08-01',
+        address: 'Manila',
+        pax: 50,
+        image: event1,
         daysAgo: '4d Ago',
       },
     ],
@@ -113,6 +123,9 @@ const Notification = () => {
               <button className="decline-button">
                 <FontAwesomeIcon icon={faTimes} /> Decline
               </button>
+              <button className="view-details-button" onClick={() => setSelectedEvent(notification)}>
+                View Details
+              </button>
             </div>
           </div>
         ));
@@ -183,6 +196,20 @@ const Notification = () => {
       <div className="content-container">
         {renderContent()}
       </div>
+
+      {/* Modal for Viewing Event Details */}
+      {selectedEvent && (
+        <div className="overlay">
+          <div className="modal">
+            <h2>{selectedEvent.name}'s {selectedEvent.title}</h2>
+            <p><strong>Date:</strong> {selectedEvent.date}</p>
+            <p><strong>Address:</strong> {selectedEvent.address}</p>
+            <p><strong>Pax:</strong> {selectedEvent.pax}</p>
+            <img src={selectedEvent.image} alt="Event" className="event-image" />
+            <button className="close-button" onClick={() => setSelectedEvent(null)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

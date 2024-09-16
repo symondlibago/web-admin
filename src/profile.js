@@ -36,13 +36,11 @@ const packagesData = [
   { id: '9', packagename: 'Package I', image: require('./images/event2.png'), price: '100,000', pax: '500 pax' },
 ];
 
-// Helper function to format month name
 const getMonthName = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleString('default', { month: 'long', year: 'numeric' });
 };
 
-// Group events by month
 const groupedEvents = eventsData.reduce((acc, event) => {
   const month = getMonthName(event.date);
   if (!acc[month]) {
@@ -52,7 +50,6 @@ const groupedEvents = eventsData.reduce((acc, event) => {
   return acc;
 }, {});
 
-// Convert groupedEvents to an array of objects with month labels
 const sortedEventsData = Object.keys(groupedEvents).sort((a, b) => {
   const dateA = new Date(`01 ${a}`);
   const dateB = new Date(`01 ${b}`);
@@ -66,7 +63,31 @@ const Profile = () => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const navigate = useNavigate();
 
-  // Function to render each event item
+  // Scroll handlers
+  const scrollLeft = () => {
+    const container = document.querySelector('.packages-list-container-profile');
+    container.scrollBy({ left: -200, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    const container = document.querySelector('.packages-list-container-profile');
+    container.scrollBy({ left: 200, behavior: 'smooth' });
+  };
+
+  const scrollLeftSide = () => {
+    const container = document.querySelector('.events-list-container-profile');
+    if (container) {
+      container.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRightSide = () => {
+    const container = document.querySelector('.events-list-container-profile');
+    if (container) {
+      container.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+
   const renderEventItem = (item) => (
     <div className="event-item-profile" key={item.id}>
       <img src={item.image} alt={item.title} className="image-profile" />
@@ -82,7 +103,6 @@ const Profile = () => {
     </div>
   );
 
-  // Function to render each package item
   const renderPackageItem = (item) => (
     <div className="package-item-profile" key={item.id}>
       <img src={item.image} alt={item.packagename} className="image-profile" />
@@ -105,12 +125,17 @@ const Profile = () => {
         <button className="close-button-profile" onClick={() => setSelectedMonth(null)}>
           <IoMdClose size={24} color="black" />
         </button>
-        <div className="events-list-container-profile">
-          {groupedEvents[month].map(renderEventItem)}
+        <div className="scroll-buttons-container-profile">
+        <button className="scroll-button-profile left" onClick={scrollLeftSide}>←</button>
+          <div className="events-list-container-profile">
+            {groupedEvents[month].map(renderEventItem)}
+          </div>
+          <button className="scroll-button-profile right" onClick={scrollRightSide}>→</button>
+
         </div>
       </div>
     </div>
-  );  
+  );
 
   return (
     <div className="gradient-container-profile">
@@ -118,12 +143,11 @@ const Profile = () => {
         <h1 className="header-text-profile">Profile</h1>
         <hr className="header-line-profile" />
 
-        {/* Profile Section */}
         <div className="profile-section-profile">
           <img src={profilePic} alt="Profile" className="profile-picture-profile" />
           <h2 className="name-text-profile">Arvil</h2>
           <p className="address-text-profile">Organizer</p>
-        
+
           <div className="button-container-profile">
             <button className="edit-button-profile" onClick={() => navigate('/edit-profile')}>
               <IoMdCreate size={24} color="black" />
@@ -136,10 +160,8 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Popular Event Text */}
         <h2 className="popular-event-text-profile">Popular Events</h2>
 
-        {/* Folder List for Events */}
         <div className="events-list-container-profile">
           {sortedEventsData.map(({ month }) => (
             <div className="month-folder-profile" key={month} onClick={() => setSelectedMonth(month)}>
@@ -148,22 +170,24 @@ const Profile = () => {
           ))}
         </div>
 
-        {/* Packages Section */}
         <div className="packages-section-profile">
           <h2>Packages</h2>
-          <div className="events-list-container-profile">
-            <div className="add-package-container">
-              <div className="broken-box-profile">
-                <p className="broken-box-text">Add New Package</p>
-                <button className="add-package-button-profile">Add Package</button>
+          <div className="scroll-buttons-container">
+            <button className="scroll-button left" onClick={scrollLeft}>←</button>
+            <div className="packages-list-container-profile">
+              <div className="add-package-container">
+                <div className="broken-box-profile">
+                  <p className="broken-box-text">Add New Package</p>
+                  <button className="add-package-button-profile">Add Package</button>
+                </div>
               </div>
+              {packagesData.map(renderPackageItem)}
             </div>
-            {packagesData.map(renderPackageItem)}
+            <button className="scroll-button right" onClick={scrollRight}>→</button>
           </div>
         </div>
       </div>
 
-      {/* Overlay */}
       {selectedMonth && renderEventsForMonth(selectedMonth)}
     </div>
   );

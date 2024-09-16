@@ -262,7 +262,7 @@ body, html, #root {
 
 .create-event-button,
 .events-button {
-  background-color: #CEB64C;
+  background-color: #FFC42B;
   color: white;
   padding: 10px;
   border: none;
@@ -270,6 +270,7 @@ body, html, #root {
   cursor: pointer;
   margin: 10px 0;
   width: 20%;
+  margin-left: 9rem;
 }
 
 .event-overlay {
@@ -686,6 +687,58 @@ body, html, #root {
 .decline-button {
   background-color: #F44336; /* Retained color */
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.close-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.event-image {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.view-details-button {
+  margin-left: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
 
 
 /* EVENTS */
@@ -1280,6 +1333,7 @@ body, html, #root {
   color: black; /* Set text to black */
   font-size: 36px;
   font-weight: bold;
+  text-align: center;
 }
 
 .title-highlight {
@@ -1288,7 +1342,8 @@ body, html, #root {
 
 .title-divider {
   border: 0;
-  border-top: 1px solid black; /* Set divider to black */
+  background: linear-gradient(to right, transparent,black, transparent); /* Stronger black fading */
+  height: 1px;
   margin: 10px 0;
 }
 
@@ -1594,6 +1649,7 @@ body, html, #root {
 .header-text {
   font-size: 24px;
   font-weight: bold;
+  text-align: center;
   color: #FFC42B; /* Keep the Inventory Tracker text yellow */
 }
 
@@ -1603,7 +1659,7 @@ body, html, #root {
 
 .header-linee {
   border: 0;
-  height: 2px; /* Increase height for better visibility */
+  height: 1px; /* Increase height for better visibility */
   background: linear-gradient(to right, transparent,black, transparent); /* Stronger black fading */
   margin: 10px 0;
 }
@@ -1868,17 +1924,13 @@ body, html, #root {
 
 /* PROFILE */
 
-/* Gradient Background Container */
-/* General Gradient Container Styles */
-/* General Styles */
-/* General Styles */
 .gradient-container-profile {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: #ffffff; /* Changed to a subtle white background */
   height: 100vh;
   width: 100%;
-  color: #fff;
+  color: #000; /* Changed text color to black for better contrast */
   overflow: auto;
 }
 
@@ -1894,34 +1946,35 @@ body, html, #root {
 /* Profile Section Styles */
 .profile-section-profile {
   border: 2px solid #C2B067;
-  border-radius: 10px;
+  border-radius: 12px; /* Slightly increased border-radius */
   padding: 20px;
   width: 80%;
   max-width: 400px;
-  background-color: transparent;
+  background-color: #f9f9f9; /* Added background color for contrast */
   text-align: center;
   margin-bottom: 30px;
 }
 
 /* Profile Picture Styles */
 .profile-picture-profile {
-  width: 100px;
-  height: 100px;
+  width: 120px; /* Slightly increased width */
+  height: 120px; /* Slightly increased height */
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Increased margin for spacing */
 }
 
+/* Text Styles */
 .name-text-profile {
-  font-size: 24px;
+  font-size: 26px; /* Increased font size */
   font-weight: bold;
-  color: black;
-  margin-bottom: 5px;
+  color: #333; /* Changed to a darker color for better readability */
+  margin-bottom: 8px;
 }
 
 .address-text-profile {
-  font-size: 16px;
-  color: black;
-  margin-bottom: 10px;
+  font-size: 18px; /* Increased font size */
+  color: #666; /* Lighter gray for address text */
+  margin-bottom: 12px; /* Increased margin for spacing */
 }
 
 /* Button Container */
@@ -1932,13 +1985,15 @@ body, html, #root {
   margin-top: 20px;
 }
 
+/* Button Styles */
 .edit-button-profile, .portfolio-button-profile {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 12px 24px; /* Increased padding for a better touch target */
+  border-radius: 25px; /* More rounded corners */
   cursor: pointer;
+  border: none; /* Removed border for a cleaner look */
 }
 
 .edit-button-profile {
@@ -1946,9 +2001,9 @@ body, html, #root {
 }
 
 .edit-button-text-profile {
-  color: black;
+  color: #000;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px; /* Increased font size */
   margin-left: 10px;
 }
 
@@ -1959,13 +2014,13 @@ body, html, #root {
 .portfolio-button-text-profile {
   color: #000;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px; /* Increased font size */
   margin-left: 10px;
 }
 
 /* Header Text and Line Styles */
 .header-text-profile {
-  font-size: 24px;
+  font-size: 28px; /* Increased font size for prominence */
   font-weight: bold;
   color: #FFC42B;
   text-align: center;
@@ -1974,16 +2029,16 @@ body, html, #root {
 
 .header-line-profile {
   border: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, white, transparent);
+  height: 2px; /* Increased height for more visibility */
+  background: linear-gradient(to right, transparent, #FFC42B, transparent); /* Adjusted gradient color */
   margin: 10px 0;
 }
 
 /* Popular Event Text */
 .popular-event-text-profile {
-  font-size: 24px;
+  font-size: 26px; /* Increased font size */
   font-weight: bold;
-  color: black;
+  color: #000; /* Changed to black for better contrast */
   margin-top: 30px;
   margin-bottom: 20px;
 }
@@ -1991,12 +2046,12 @@ body, html, #root {
 /* Folder Styles */
 .month-folder-profile {
   background: #FFC42B;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 12px; /* Adjusted border radius */
+  padding: 12px; /* Increased padding */
   margin: 0 10px;
   text-align: center;
   cursor: pointer;
-  color: black;
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2005,7 +2060,7 @@ body, html, #root {
 /* Down Arrow Icon */
 .month-folder-profile::after {
   content: '▼';
-  font-size: 18px;
+  font-size: 20px; /* Increased font size */
   margin-left: 10px;
 }
 
@@ -2013,14 +2068,40 @@ body, html, #root {
 .packages-section-profile {
   width: 100%;
   padding: 20px;
-  background: white;
+  background: #ffffff; /* Changed to white for consistency */
+  position: relative; /* To position arrows inside */
 }
 
-.packages-section-profile h2 {
-  font-size: 1.5rem;
+/* Arrows Container */
+.scroll-buttons-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Scroll Button Styles */
+.scroll-button {
+  background-color: #FFC42B;
+  border: none;
+  border-radius: 50%;
   color: black;
-  text-align: center;
-  margin-bottom: 10px;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Left Arrow */
+.scroll-button.left {
+  left: 0;
+}
+
+/* Right Arrow */
+.scroll-button.right {
+  right: 0;
 }
 
 /* Packages List Container */
@@ -2028,8 +2109,12 @@ body, html, #root {
   display: flex;
   overflow-x: auto;
   padding-bottom: 20px;
+  padding-left: 40px; /* Space for left arrow */
+  padding-right: 40px; /* Space for right arrow */
+  scroll-behavior: smooth; /* Ensures smooth scrolling */
 }
 
+/* Hide Scrollbars */
 .packages-list-container-profile::-webkit-scrollbar {
   display: none;
 }
@@ -2040,13 +2125,13 @@ body, html, #root {
 
 /* Package Item Styles */
 .package-item-profile {
-  background: rgba(255, 255, 255, 0.56);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8); /* Adjusted opacity for better visibility */
+  border-radius: 12px; /* Adjusted border radius */
   border: #C2B067 1px solid;
-  padding: 10px;
-  margin: 0 10px;
+  padding: 12px; /* Increased padding */
+  margin: 0 12px; /* Increased margin */
   text-align: left;
-  width: 200px;
+  width: 220px; /* Increased width */
   flex-shrink: 0;
 }
 
@@ -2063,7 +2148,7 @@ body, html, #root {
   align-items: center;
   background: #f9f9f9;
   border: 2px dashed #C2B067;
-  border-radius: 10px;
+  border-radius: 12px; /* Adjusted border radius */
   padding: 20px;
   width: 100%;
   max-width: 400px;
@@ -2071,7 +2156,7 @@ body, html, #root {
 }
 
 .broken-box-text {
-  font-size: 18px;
+  font-size: 20px; /* Increased font size */
   color: #C2B067;
   margin-bottom: 10px;
 }
@@ -2079,11 +2164,11 @@ body, html, #root {
 .add-package-button-profile {
   background-color: #CEB64C;
   border: none;
-  border-radius: 20px;
-  color: black;
+  border-radius: 25px; /* More rounded corners */
+  color: #000;
   font-weight: bold;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 12px 24px; /* Increased padding */
   cursor: pointer;
   margin-top: 10px;
 }
@@ -2107,10 +2192,10 @@ body, html, #root {
 }
 
 .overlay-content-profile {
-  background: white;
-  border-radius: 10px;
+  background: #ffffff;
+  border-radius: 12px; /* Adjusted border radius */
   padding: 20px;
-  width: 80%;
+  width: 90%;
   max-width: 800px;
   position: relative;
   overflow-x: auto;
@@ -2142,68 +2227,80 @@ body, html, #root {
 
 /* Event Item Styles */
 .event-item-profile {
-  background: rgba(255, 255, 255, 0.56);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8); /* Adjusted opacity */
+  border-radius: 12px; /* Adjusted border radius */
   border: #C2B067 1px solid;
-  padding: 10px;
-  margin: 0 10px;
+  padding: 12px; /* Increased padding */
+  margin: 0 12px; /* Increased margin */
   text-align: left;
-  width: 200px;
+  width: 220px; /* Increased width */
   flex-shrink: 0;
 }
 
 .image-profile {
   width: 100%;
-  height: 100px;
+  height: 120px; /* Increased height */
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 8px; /* Adjusted border radius */
 }
 
 .title-profile {
-  font-size: 16px;
+  font-size: 18px; /* Increased font size */
   font-weight: bold;
   color: #FFC42B;
-  margin: 10px 0;
+  margin: 12px 0; /* Increased margin */
 }
 
 .detail-container-profile {
-  font-size: 14px;
+  font-size: 16px; /* Increased font size */
 }
 
 .detail-row-profile {
-  margin-bottom: 5px;
+  margin-bottom: 6px; /* Increased margin for spacing */
 }
 
 .detail-text-profile {
-  color: black;
+  color: #000; /* Changed color to black */
 }
 
 .overlay-header-profile {
   text-align: center;
-  font-size: 24px;
+  font-size: 28px; /* Increased font size */
   font-weight: bold;
-  color: #FFC42B; /* Or another color that fits your design */
+  color: #FFC42B;
   margin-bottom: 20px;
 }
+/* Scroll Buttons Container */
+.scroll-buttons-container-profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
+/* Scroll Button Styles */
+.scroll-button-profile {
+  background-color: #FFC42B;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
+/* Left Arrow */
+.scroll-button-profile.left {
+  left: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Right Arrow */
+.scroll-button-profile.right {
+  right: 0;
+}
 
 
 
@@ -2490,15 +2587,6 @@ textarea.text-input-addrole {
   align-items: center;
 }
 
-
-
-
-
-
-
-
-
-
 /* PORTFOLIO */
 
 /* Updated CSS with new class names */
@@ -2691,17 +2779,7 @@ textarea.text-input-addrole {
   align-items: center;
 }
 
-
-
-
-
-
-
-
-
-
 /* EVENT PORFOLIO */
-
 .gradient-container-portfolio {
   display: flex;
   flex-direction: column;
