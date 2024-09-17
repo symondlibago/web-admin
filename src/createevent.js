@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
-import axios from 'axios'; // Import axios for making HTTP requests
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
-const eventTypes = ["Wedding", "Birthday", "Reunion", "Debut"];
+const eventTypes = ["Wedding", "Birthday", "Reunion", "Debut", "Others"];
 
 const CreateEvent = () => {
     const navigate = useNavigate();
     const [selectedType, setSelectedType] = useState('');
+    const [customEventType, setCustomEventType] = useState('');
     const [eventName, setEventName] = useState('');
     const [eventDescription, setEventDescription] = useState('');
     const [eventDate, setEventDate] = useState('');
@@ -17,21 +18,21 @@ const CreateEvent = () => {
     const [venue, setVenue] = useState('');
     const [packageType, setPackageType] = useState('');
     const [pax, setPax] = useState('');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const handleCancel = () => {
-        console.log('Cancel button pressed');
-        navigate(-1); // Navigate back to the previous page
+        navigate(-1);
     };
 
     const handleNext = async () => {
-        console.log('Next button pressed');
+        const eventType = selectedType === 'Others' ? customEventType : selectedType;
 
         const eventData = {
-            type: selectedType,
+            type: eventType,
             name: eventName,
             description: eventDescription,
             date: eventDate,
-            pax: parseInt(pax, 10), // Ensure pax is an integer
+            pax: parseInt(pax, 10),
             invitation_message: invitationMessage,
             people_to_invite: peopleToInvite,
             venue: venue,
@@ -39,11 +40,8 @@ const CreateEvent = () => {
         };
 
         try {
-            // Send a POST request to your backend
             const response = await axios.post('http://localhost:8000/api/events', eventData);
-
             if (response.status === 201) {
-                // Navigate to the next page if the request was successful
                 navigate('/choose-service-provider');
             } else {
                 console.error('Failed to create event:', response.statusText);
@@ -53,6 +51,15 @@ const CreateEvent = () => {
         }
     };
 
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
+    };
+
+    const handleSelectEventType = (type) => {
+        setSelectedType(type);
+        setDropdownOpen(false);
+    };
+
     return (
         <div className="gradient-container-createevent">
             <div className="container-createevent">
@@ -60,17 +67,38 @@ const CreateEvent = () => {
                     <h1 className="header-text-createevent">Create Event</h1>
                     <div className="line-createevent"></div>
                     <h2 className="event-types-text-createevent">Choose Event Type</h2>
-                    <div className="event-types-container-createevent">
-                        {eventTypes.map((type, index) => (
-                            <button
-                                key={index}
-                                className={`event-type-button-createevent ${selectedType === type ? 'selected-createevent' : ''}`}
-                                onClick={() => setSelectedType(type)}
-                            >
-                                {type}
-                            </button>
-                        ))}
+                    
+                    {/* Custom Dropdown Button */}
+                    <div className="dropdown-container-createevent">
+                        <div className="dropdown-button-createevent" onClick={toggleDropdown}>
+                            {selectedType || "Select Event Type"}
+                            <FaChevronDown />
+                        </div>
+
+                        {/* Dropdown Menu */}
+                        <div className={`dropdown-menu-createevent ${dropdownOpen ? 'show' : ''}`}>
+                            {eventTypes.map((type, index) => (
+                                <button key={index} onClick={() => handleSelectEventType(type)}>
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
                     </div>
+
+                    {/* Custom Event Type Input Field (Visible if "Others" is selected) */}
+                    {selectedType === 'Others' && (
+                        <div className="input-container-createevent custom-event-type-container">
+                            <input
+                                type="text"
+                                className="text-input-createevent"
+                                placeholder="Enter Custom Event Type"
+                                value={customEventType}
+                                onChange={(e) => setCustomEventType(e.target.value)}
+                            />
+                        </div>
+                    )}
+
+                    {/* Existing fields for event details */}
                     <div className="input-container-createevent">
                         <input
                             type="text"
@@ -80,6 +108,7 @@ const CreateEvent = () => {
                             onChange={(e) => setEventName(e.target.value)}
                         />
                     </div>
+
                     <div className="input-container-createevent">
                         <input
                             type="text"

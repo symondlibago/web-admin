@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faMapMarker, faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faHeart, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 function Events() {
@@ -11,6 +11,7 @@ function Events() {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [likedEvents, setLikedEvents] = useState({});
   const [loading, setLoading] = useState(true);
+  const [sortOption, setSortOption] = useState('All'); // New state for sorting option
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +29,36 @@ function Events() {
 
     fetchEvents();
   }, []);
+
+  // Function to handle sorting/filtering events
+  const filterEventsByDate = (option) => {
+    setSortOption(option);
+
+    if (option === 'This Week') {
+      const filtered = events.filter((event) => {
+        const eventDate = new Date(event.date);
+        const today = new Date();
+        const weekEnd = new Date();
+        weekEnd.setDate(today.getDate() + 7);
+        return eventDate >= today && eventDate <= weekEnd;
+      });
+      setFilteredEvents(filtered);
+    } else if (option === 'Next Week') {
+      const filtered = events.filter((event) => {
+        const eventDate = new Date(event.date);
+        const today = new Date();
+        const nextWeekStart = new Date();
+        nextWeekStart.setDate(today.getDate() + 7);
+        const nextWeekEnd = new Date();
+        nextWeekEnd.setDate(today.getDate() + 14);
+        return eventDate >= nextWeekStart && eventDate <= nextWeekEnd;
+      });
+      setFilteredEvents(filtered);
+    } else {
+      // "All" option
+      setFilteredEvents(events);
+    }
+  };
 
   const handleSearch = (text) => {
     setSearch(text);
@@ -143,6 +174,16 @@ function Events() {
             onChange={(e) => handleSearch(e.target.value)}
             value={search}
           />
+          <div className="dropdown-container">
+            <button className="dropdown-btn">
+              Sort by: {sortOption} <FontAwesomeIcon icon={faChevronDown} />
+            </button>
+            <div className="dropdown-content">
+              <div onClick={() => filterEventsByDate('All')}>All</div>
+              <div onClick={() => filterEventsByDate('This Week')}>This Week</div>
+              <div onClick={() => filterEventsByDate('Next Week')}>Next Week</div>
+            </div>
+          </div>
         </div>
         <div className="event-list">
           {filteredEvents.map(renderEventItem)}

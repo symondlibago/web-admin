@@ -74,19 +74,6 @@ const Profile = () => {
     container.scrollBy({ left: 200, behavior: 'smooth' });
   };
 
-  const scrollLeftSide = () => {
-    const container = document.querySelector('.events-list-container-profile');
-    if (container) {
-      container.scrollBy({ left: -200, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRightSide = () => {
-    const container = document.querySelector('.events-list-container-profile');
-    if (container) {
-      container.scrollBy({ left: 200, behavior: 'smooth' });
-    }
-  };
 
   const renderEventItem = (item) => (
     <div className="event-item-profile" key={item.id}>
@@ -125,14 +112,10 @@ const Profile = () => {
         <button className="close-button-profile" onClick={() => setSelectedMonth(null)}>
           <IoMdClose size={24} color="black" />
         </button>
-        <div className="scroll-buttons-container-profile">
-        <button className="scroll-button-profile left" onClick={scrollLeftSide}>←</button>
           <div className="events-list-container-profile">
             {groupedEvents[month].map(renderEventItem)}
           </div>
-          <button className="scroll-button-profile right" onClick={scrollRightSide}>→</button>
 
-        </div>
       </div>
     </div>
   );
