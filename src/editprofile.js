@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
-import { IoMdCreate } from 'react-icons/io';
+import { IoMdCreate,IoMdAdd } from 'react-icons/io';
 import profilePic from './images/pro_pic.png';
 
 const EditProfile = () => {
@@ -74,6 +74,12 @@ const EditProfile = () => {
             <div className="button-container-edit">
               <button className="submit-button-edit" onClick={handleSubmit}>
                 Save
+              </button>
+            </div>
+            <div className="button-container-edit">
+              <button className="create-event-button-edit" onClick={() => navigate('/create-event-portfolio')}>
+                <IoMdAdd size={24} color="white" />
+                <span className="create-event-text-edit">Create New Event Portfolio</span>
               </button>
             </div>
             <div className="buttons-container-edit">

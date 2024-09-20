@@ -1,32 +1,61 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Use react-router-dom for navigation
-import './App.css'; // Import the CSS file for styles
-
-import proPic from './images/pro_pic.png'; // Updated path for image
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './App.css';
+import proPic from './images/pro_pic.png';
 
 const initialMessages = [
-  { id: '1', name: 'John Doe', message: 'Looking forward to the event!', daysAgo: '1d', unreadCount: 2 },
-  { id: '2', name: 'Jane Smith', message: 'Can I get more details?', daysAgo: '3d', unreadCount: 1 },
-  { id: '3', name: 'Emily Johnson', message: 'Excited to attend!', daysAgo: '5d', unreadCount: 0 },
-  // Add more message data as needed
+  { id: '1', name: 'John Doe', message: 'Looking forward to the event!', daysAgo: '1d', unreadCount: 2, replies: [] },
+  { id: '2', name: 'Jane Smith', message: 'Can I get more details?', daysAgo: '3d', unreadCount: 1, replies: [] },
+  { id: '3', name: 'Emily Johnson', message: 'Excited to attend!', daysAgo: '5d', unreadCount: 0, replies: [] },
 ];
 
 const Messages = () => {
-  const navigate = useNavigate(); // Use react-router-dom for navigation
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reply, setReply] = useState('');
+  const [messages, setMessages] = useState(initialMessages);
+  const [selectedMessage, setSelectedMessage] = useState(null);
 
   const handleBack = () => {
-    navigate(-1); // Navigate back
+    navigate(-1);
+  };
+
+  const handleReplyClick = (message) => {
+    setSelectedMessage(message);
+    setIsModalOpen(true);
+  };
+
+  const handleSendMessage = () => {
+    if (reply.trim() === '') return; // Prevent empty replies
+
+    const updatedMessages = messages.map((msg) => {
+      if (msg.id === selectedMessage.id) {
+        const newReplies = [...msg.replies, reply];
+        return {
+          ...msg,
+          replies: newReplies, // Add reply to the selected message
+        };
+      }
+      return msg;
+    });
+
+    setMessages(updatedMessages);
+    setReply(''); // Clear the input
+
+    // Update selectedMessage to show the latest reply immediately
+    const newSelectedMessage = updatedMessages.find(msg => msg.id === selectedMessage.id);
+    setSelectedMessage(newSelectedMessage);
   };
 
   return (
     <div className="gradientContainer-messages">
       <button onClick={handleBack} className="closeButton-messages">
-        &#x2715; {/* Close icon */}
+        &#x2715;
       </button>
       <div className="scrollViewContent-messages">
-        {initialMessages.map((message) => (
-          <div key={message.id} className="messageContainer-messages">
-            <img src={proPic} alt="Profile" className="profileImage-messages" /> 
+        {messages.map((message) => (
+          <div key={message.id} className="messageContainer-messages" onClick={() => handleReplyClick(message)}>
+            <img src={proPic} alt="Profile" className="profileImage-messages" />
             <div className="messageContent-messages">
               <p className="senderName-messages">{message.name}</p>
               <p className="messagePreview-messages">{message.message}</p>
@@ -42,6 +71,32 @@ const Messages = () => {
           </div>
         ))}
       </div>
+
+      {isModalOpen && selectedMessage && (
+        <div className="modal-messages">
+          <div className="modalContent-messages">
+            <h3>Reply to {selectedMessage.name}</h3>
+            <p><strong>Message:</strong> {selectedMessage.message}</p>
+            <p className="messageTime-messages">{selectedMessage.daysAgo}</p>
+            
+            {/* Display all replies */}
+            <div className="repliesContainer-messages">
+              {selectedMessage.replies.map((reply, index) => (
+                <p key={index} className="replyMessage-messages">{reply}</p>
+              ))}
+            </div>
+            
+            <textarea
+              className="replyInput-messages"
+              value={reply}
+              onChange={(e) => setReply(e.target.value)}
+              placeholder="Type your message here..."
+            />
+            <button className="sendButton-messages" onClick={handleSendMessage}>Send Message</button>
+            <button className="closeButton-modal" onClick={() => setIsModalOpen(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

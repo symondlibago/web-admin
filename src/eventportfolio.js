@@ -20,7 +20,7 @@ const EventPortfolio = () => {
     <div className="gradient-container-portfolio">
       <div className="container-portfolio">
         <div className="header-portfolio">
-          <button onClick={() => navigate('/settings')} className="back-button-portfolio">
+          <button onClick={() => navigate('/edit-profile')} className="back-button-portfolio">
             <IoArrowBack size={32} color="#FFC42B" />
           </button>
           <h1 className="header-text-portfolio">Service Details</h1>

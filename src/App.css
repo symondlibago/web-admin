@@ -287,6 +287,8 @@ body, html, #root {
   max-height: 200px;
   width: 150px;
   overflow-y: auto;
+  cursor: pointer;
+
 }
 
 .event-overlay ul {
@@ -356,6 +358,49 @@ body, html, #root {
 .detail-text-dashboard {
   color: black;
 }
+
+.details-overlay-dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.overlay-content-dashboard {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1010; /* Ensure content is above the background */
+}
+
+.overlay-background-dashboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Blurry background */
+  z-index: 1005;
+}
+
+.close-button-dashboard {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+}
+
 
 
 
@@ -1737,6 +1782,27 @@ body, html, #root {
 
 /* INVENTORY */
 
+.status-dots-inventory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-dot-inventory {
+  width: 1.5rem; /* Smaller size */
+  height: 1.5rem; /* Smaller size */
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: border 0.3s;
+}
+
+.status-label-inventory {
+  margin-left: 10px;
+  font-size: 14px;
+  color: black; /* Adjust the color as needed */
+}
+
 .inventory-container {
   display: flex;
   flex-direction: column;
@@ -1754,62 +1820,58 @@ body, html, #root {
   margin-top: 10px;
 }
 
-.header-text {
+.header-text-inventory {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
   color: #FFC42B; /* Keep the Inventory Tracker text yellow */
 }
 
-.header-highlight {
+.header-highlight-inventory {
   color: #FFC42B; /* Keep the highlighted parts yellow */
 }
 
-.header-linee {
+.header-line-inventory {
   border: 0;
   height: 1px; /* Increase height for better visibility */
-  background: linear-gradient(to right, transparent,black, transparent); /* Stronger black fading */
+  background: linear-gradient(to right, transparent, black, transparent); /* Stronger black fading */
   margin: 10px 0;
 }
 
-.table {
+.table-inventory {
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
   background: transparent;
 }
 
-.table-header {
+.table-header-inventory {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
   background-color: transparent;
 }
 
-.table-header-text {
+.table-header-text-inventory {
   flex: 1;
   text-align: center;
   font-weight: bold;
 }
 
-.table-row {
+.table-row-inventory {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid transparent; /* Ensure no visible lines */
 }
 
-.table-row-text {
+.table-row-text-inventory {
   flex: 1;
   text-align: center;
   color: black; /* General table text is now black */
 }
 
-.status-text {
-  color: #FFC42B; /* Status text remains yellow */
-}
-
-.summary {
+.summary-inventory {
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
@@ -1817,7 +1879,7 @@ body, html, #root {
   text-align: center;
 }
 
-.summary-text {
+.summary-text-inventory {
   font-size: 16px;
   margin: 5px 0;
   color: black; /* Ensure summary text is black */
@@ -2531,6 +2593,26 @@ body, html, #root {
 }
 
 
+.create-event-button-edit {
+  background-color: #eeba2b; /* Changed to #eeba2b */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 75%; /* Full width for the button */
+}
+
+.create-event-text-edit {
+  color: black; /* Changed to black */
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+
 
 
 
@@ -2758,103 +2840,101 @@ textarea.text-input-addrole {
 
 /* SETTINGS */
 /* SETTINGS */
-.gradient-container-settings {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: white; /* Changed to white */
-  color: black; /* Changed to black */
-  justify-content: center;
-  overflow: hidden; /* Hide scrollbar */
-}
-
-.scroll-view-settings {
-  flex-grow: 1;
+.settings-container {
   padding: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
 }
 
-.scroll-view-settings::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
-}
-
-.container-settings {
-  flex: 1;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px; /* Limit the width of the container */
-  margin: 0 auto; /* Center the container horizontally */
-}
-
-.header-text-settings {
-  font-size: 24px;
+.settings-header {
+  margin-bottom: 20px;
+  font-size: 28px;
   font-weight: bold;
-  color: #FFC42B; /* Keep header text yellow */
   text-align: center;
 }
 
-.content-settings {
-  flex: 1;
+.settings-item {
+  margin-bottom: 25px;
 }
 
-.settings-text-settings {
-  font-size: 20px;
-  color: black; /* Changed to black */
-  margin: 20px 0;
+.settings-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 16px; /* Increased font size */
 }
 
-.text-input-settings {
-  background-color: #FFFFFF; /* White background */
-  border-radius: 10px;
-  padding: 10px;
-  height: 40px; /* Adjust as needed */
-  color: #000000; /* Black text */
-  font-size: 16px;
-  margin-bottom: 15px;
-  border: 1px solid #B0B0B0;
-  width: 100%;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); /* Added box shadow */
+.settings-description {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #666;
 }
 
-.button-container-settings {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-.create-event-button-settings {
-  background-color: #eeba2b; /* Changed to #eeba2b */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.custom-select {
+  position: relative;
+  width: 20%;
   cursor: pointer;
-  width: 100%; /* Full width for the button */
 }
 
-.create-event-text-settings {
-  color: black; /* Changed to black */
-  font-size: 16px;
-  font-weight: bold;
-  margin-left: 10px;
+.custom-select-input {
+  padding: 12px; /* Increased padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px; /* Increased font size */
+  background: white;
 }
 
-.submit-button-settings {
-  background-color: #eeba2b; /* Changed to #eeba2b */
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.custom-select-option {
   padding: 10px;
-  text-align: center;
-  border-radius: 10px;
-  color: black; /* Changed to black */
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 30%;
-  align-items: center;
+  font-size: 16px; /* Increased font size */
 }
+
+.custom-select-option:hover {
+  background-color: #eeba2b; /* Background color on hover */
+  color: white; /* Text color on hover */
+}
+
+.settings-checkbox {
+  margin-top: 8px;
+}
+
+.settings-save-button {
+  width: 50%;
+  padding: 12px 20px; /* Increased padding for better size */
+  background-color: #eeba2b; /* Background color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px; /* Increased font size */
+}
+
+.settings-save-button:hover {
+  background-color: #d69a2b; /* Darker hover color */
+  color: white; /* White text on hover */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 20px; /* Optional: Add space above the button */
+}
+
+
 
 /* EVENT PORFOLIO */
 .gradient-container-portfolio {
@@ -3603,11 +3683,12 @@ button:disabled {
 .gradientContainer-messages {
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF; /* White background */
+  background-color: #FFFFFF; 
   height: 100vh;
   padding: 20px;
-  color: #000000; /* Black text color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
+  color: #000000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: filter 0.3s ease;
 }
 
 .closeButton-messages {
@@ -3682,6 +3763,72 @@ button:disabled {
   color: #000000; /* Black text color */
   font-weight: bold;
 }
+
+.modal-messages {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure modal is above other content */
+}
+
+.modalContent-messages {
+  background-color: #ffffff; /* White background for the modal */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  width: 400px; /* Set width for the modal */
+}
+
+.replyInput-messages {
+  width: 95%;
+  height: 100px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none; /* Prevent resizing */
+}
+
+.sendButton-messages {
+  background-color: #eeba2b;
+  color: white; /* White text */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.closeButton-modal {
+  background-color: #eeba2b;
+  border-radius: 5px;
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 2rem;
+}
+
+.repliesContainer-messages {
+  margin-top: 10px;
+  max-height: 100px; /* Limit height for overflow */
+  overflow-y: auto; /* Scroll if too many replies */
+}
+
+.replyMessage-messages {
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
 
 
 

@@ -14,7 +14,7 @@ const DashboardSummary = () => {
 
   return (
     <div className="summary-dashboard">
-      <h3>Summary</h3> {/* Added Summary header */}
+      <h3>Summary</h3>
       <div className="dashboard-summary-container">
         <div className="dashboard-summary-box positive-box-dash">
           <p>Total Feedback</p>
@@ -37,7 +37,6 @@ const DashboardSummary = () => {
   );
 };
 
-// Sample data for packages
 const packagesData = [
   { id: '1', packagename: 'Package A', image: require('./images/event1.png'), price: '100,000', pax: '300 pax' },
   { id: '2', packagename: 'Package B', image: require('./images/event2.png'), price: '100,000', pax: '250 pax' },
@@ -71,16 +70,15 @@ function Dashboard() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [hoveredDay, setHoveredDay] = useState(null);
   const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null); // To hold selected event details
+  const [showDetailsOverlay, setShowDetailsOverlay] = useState(false); // To control the event details overlay
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch event data from the backend
     axios.get('http://localhost:8000/api/events')
       .then(response => {
         const today = new Date();
-        const currentMonthIndex = today.getMonth(); // Get current month (0-based index)
-
-        // Filter events for the current month
+        const currentMonthIndex = today.getMonth();
         const eventDates = response.data
           .filter(event => new Date(event.date).getMonth() === currentMonthIndex)
           .map(event => new Date(event.date).getDate());
@@ -118,6 +116,16 @@ function Dashboard() {
     setEvents([]);
   };
 
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+    setShowDetailsOverlay(true);
+  };
+
+  const handleCloseOverlay = () => {
+    setShowDetailsOverlay(false);
+    setSelectedEvent(null);
+  };
+
   const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
   return (
@@ -147,7 +155,7 @@ function Dashboard() {
                       <ul>
                         {events.length > 0 ? (
                           events.map(event => (
-                            <li key={event.id}>{event.name}</li>
+                            <li key={event.id} onClick={() => handleEventClick(event)}>{event.name}</li>
                           ))
                         ) : (
                           <li>No events</li>
@@ -169,6 +177,21 @@ function Dashboard() {
           {packagesData.map(renderPackageItem)}
         </div>
       </div>
+
+      {/* Event Details Overlay */}
+      {showDetailsOverlay && (
+        <div className="details-overlay-dashboard">
+          <div className="overlay-content-dashboard">
+            <h3>{selectedEvent.name}</h3>
+            <p>{selectedEvent.description}</p>
+            <p>Date: {new Date(selectedEvent.date).toLocaleDateString()}</p>
+            <p>Pax: {selectedEvent.pax}</p>
+            <p>Venue: {selectedEvent.venue}</p>
+            <button className="close-button-dashboard" onClick={handleCloseOverlay}>X</button>
+          </div>
+          <div className="overlay-background-dashboard"></div>
+        </div>
+      )}
     </div>
   );
 }
