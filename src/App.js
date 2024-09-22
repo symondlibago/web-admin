@@ -23,6 +23,7 @@ import GroupAttendees from './groupattendees';
 import Messages from './messages';
 import Success from './success';
 import PortfolioAdmin from './portfolioadmin';
+import Schedule from './schedule';
 function App() {
   return (
     <Router>
@@ -52,6 +53,7 @@ function App() {
           <Route path="/group-attendees" element={<><Navbar /><GroupAttendees/></>} />
           <Route path="/messages" element={<><Navbar /><Messages/></>} />
           <Route path="/success" element={<><Navbar /><Success/></>} />
+          <Route path="/schedule" element={<><Navbar /><Schedule/></>} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>

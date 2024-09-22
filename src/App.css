@@ -147,25 +147,25 @@ body, html, #root {
   background: white;
   height: 100vh;
   display: flex;
-  flex-direction: column; /* Stack children vertically */
+  flex-direction: column;
   color: black;
 }
 
 .dashboard-content {
-  display: flex; /* Align left-side and right-side side by side */
-  flex: 1; /* Take up remaining space */
+  display: flex;
+  flex: 1;
 }
 
 .left-side {
   width: 50%;
   padding: 20px;
-  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  box-sizing: border-box;
 }
 
 .right-side {
   width: 50%;
   padding: 20px;
-  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  box-sizing: border-box;
 }
 
 .summary-dashboard h3 {
@@ -189,7 +189,7 @@ body, html, #root {
   flex: 1;
   margin: 5px;
   border: 2px solid white;
-  width: calc(50% - 10px); /* 2 boxes per row */
+  width: calc(50% - 10px);
 }
 
 .dashboard-summary-box p:first-child {
@@ -288,7 +288,6 @@ body, html, #root {
   width: 150px;
   overflow-y: auto;
   cursor: pointer;
-
 }
 
 .event-overlay ul {
@@ -302,9 +301,9 @@ body, html, #root {
 }
 
 .packages-section-dashboard {
-  width: 100%; /* Ensure it spans the full width */
-  padding: 20px; /* Add padding if needed */
-  background: white; /* Ensure background color matches */
+  width: 100%;
+  padding: 20px;
+  background: white;
 }
 
 .packages-section-dashboard h2 {
@@ -377,8 +376,62 @@ body, html, #root {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1010; /* Ensure content is above the background */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 20px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.event-details-dashboard, .schedule-section-dashboard {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.event-details-dashboard {
+  flex: 1;
+}
+
+.schedule-section-dashboard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-content-dashboard {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr; /* Initially single column */
+  gap: 10px;
+}
+
+.schedule-item-dashboard {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.timeline-dashboard {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #FFC42B;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #FFB200;
 }
 
 .overlay-background-dashboard {
@@ -387,19 +440,63 @@ body, html, #root {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Blurry background */
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1005;
 }
 
-.close-button-dashboard {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.event-details {
+  flex: 1;
+  padding-right: 20px;
 }
+
+.schedule-section {
+  flex: 1;
+  border-left: 2px solid #ddd;
+  padding-left: 20px;
+}
+
+h3, h4 {
+  margin: 10px 0;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #FFC42B;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #FFB200;
+}
+
+.overlay-background-dashboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1005;
+}
+
+
 
 
 
@@ -797,7 +894,7 @@ body, html, #root {
   flex-direction: row;
 }
 
-.container {
+.container-events {
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -807,28 +904,7 @@ body, html, #root {
   width: 100%; /* Ensure the container takes full width up to max-width */
 }
 
-.menu-button {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-.logo {
-  width: 120px;
-  height: 40px;
-}
-
-.icons-container {
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  margin-left: 15px;
-}
-
-.search-container {
+.search-container-events {
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -841,24 +917,24 @@ body, html, #root {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.search-icon {
+.search-icon-events {
   margin-right: 10px;
 }
 
-.search-box {
+.search-box-events {
   flex: 1;
   height: 40px;
   border: none;
   outline: none;
 }
 
-.dropdown-container {
+.dropdown-container-events {
   position: relative;
   display: inline-block;
   margin-left: 15px;
 }
 
-.dropdown-btn {
+.dropdown-btn-events {
   background-color: #fff;
   color: #000;
   padding: 10px;
@@ -869,7 +945,7 @@ body, html, #root {
   align-items: center;
 }
 
-.dropdown-content {
+.dropdown-content-events {
   display: none;
   position: absolute;
   background-color: #fff;
@@ -877,14 +953,13 @@ body, html, #root {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 5px;
-
 }
 
-.dropdown-container:hover .dropdown-content {
+.dropdown-container-events:hover .dropdown-content-events {
   display: block;
 }
 
-.dropdown-content div {
+.dropdown-content-events div {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -893,14 +968,13 @@ body, html, #root {
   cursor: pointer;
 }
 
-.dropdown-content div:hover {
+.dropdown-content-events div:hover {
   background-color: #FFC42B;
   border-radius: 5px;
   color: #fff;
 }
 
-
-.event-list {
+.event-list-events {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 items per row */
   gap: 20px; /* Space between items */
@@ -909,7 +983,7 @@ body, html, #root {
   max-width: 1600px; /* Optional: set a max-width for the grid container */
 }
 
-.item-container {
+.item-container-events {
   background-color: #fff;
   border-radius: 10px;
   padding: 10px;
@@ -920,39 +994,39 @@ body, html, #root {
   width: 100%; /* Ensure item-container takes full width available in the grid */
 }
 
-.image {
+.image-events {
   width: 100%;
   height: 150px;
   border-radius: 10px;
   object-fit: cover;
 }
 
-.title {
+.title-events {
   margin-top: 10px;
   font-size: 16px;
   color: #000;
   text-align: center;
 }
 
-.detail-container {
+.detail-container-events {
   margin-top: 5px;
   text-align: center;
 }
 
-.detail-row {
+.detail-row-events {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 2px 0;
 }
 
-.detail-text {
+.detail-text-events {
   font-size: 14px;
   color: #555;
   margin-left: 5px;
 }
 
-.heart-icon {
+.heart-icon-events {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -967,18 +1041,18 @@ body, html, #root {
   cursor: pointer;
 }
 
-.heart-liked {
+.heart-liked-events {
   background-color: #FF0000;
 }
 
-.buttons-container {
+.buttons-container-events {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 10px;
 }
 
-.button {
+.button-events {
   background-color: #FFC42B;
   border-radius: 5px;
   padding: 5px 10px;
@@ -991,22 +1065,62 @@ body, html, #root {
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-  .event-list {
+  .event-list-events {
     grid-template-columns: repeat(3, 1fr); /* 3 items per row */
   }
 }
 
 @media (max-width: 900px) {
-  .event-list {
+  .event-list-events {
     grid-template-columns: repeat(2, 1fr); /* 2 items per row */
   }
 }
 
 @media (max-width: 600px) {
-  .event-list {
+  .event-list-events {
     grid-template-columns: 1fr; /* 1 item per row */
   }
 }
+
+.dots-container-events {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu-overlay-events {
+  position: absolute;
+  bottom: 70px; /* Adjust based on your design */
+  right: 20px;
+  background-color: #EEBA2B;
+  border-radius: 5px;
+  z-index: 10; /* Ensure it's on top */
+  padding: 10px;
+}
+
+.menu-item-events {
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.menu-item-events:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
+}
+
+.menu-item-events svg {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+
+
+
 
 
 /* CREATE EVENT */
@@ -3828,6 +3942,455 @@ button:disabled {
   border-radius: 5px;
   margin-bottom: 5px;
 }
+
+
+/* SCHEDULE */
+
+.schedule-container {
+  padding: 20px;
+}
+
+.schedule-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.schedule-layout {
+  display: flex;
+}
+
+.calendar-schedule {
+  width: 50%;
+  margin-right: 20px; /* Space between calendar and details */
+}
+
+.days-header-schedule {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 10px;
+}
+
+.dates-schedule {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.date-schedule {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.selected-schedule {
+  background-color: #eeba2b;
+  border-radius: 50%; /* Circle effect when selected */
+}
+
+.event-dot-schedule {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: red; /* Color of the dot */
+  border-radius: 50%;
+}
+
+.details-schedule {
+  width: 50%; /* Adjust width as needed */
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.event-container-schedule {
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: #F9EDC6;
+}
+
+.overlay-schedule {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content-schedule {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 600px; /* Adjust as needed */
+  width: 100%; /* Full width */
+}
+
+.overlay-header-schedule {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.event-time-schedule {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.time-circle-schedule {
+  width: 20px;
+  height: 20px;
+  background-color: yellow; /* Circle color */
+  border-radius: 50%;
+  border: 2px solid #000; /* Circle border */
+  margin-right: 10px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.vertical-line-schedule {
+  width: 2px;
+  height: 20px; /* Adjust height as needed */
+  background-color: #000; /* Color of the vertical line */
+  margin-left: 6rem; /* Space between circle and line */
+  margin-top: -5px; /* Adjust as needed to position under the circle */
+}
+
+.timeline-entry-schedule {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.timeline-entry-schedule .time-circle-schedule {
+  margin-right: 10px;
+}
+.timeline-table-schedule {
+  width: 100%; /* Full width of the overlay */
+  border-collapse: collapse; /* Remove space between cells */
+}
+
+.timeline-row-schedule {
+  height: 60px; /* Height for each row */
+}
+
+.timeline-row-schedule td {
+  padding: 10px;
+  vertical-align: middle; /* Center align content vertically */
+}
+
+.time-circle-schedule {
+  width: 20px;
+  height: 20px;
+  background-color: yellow; /* Circle color */
+  border-radius: 50%; /* Circle border */
+  border: 2px solid #000; /* Circle border */
+  margin: 0 auto; /* Center the circle */
+  top: 24px;
+  position: relative; /* Relative positioning for the vertical line */
+  
+}.vertical-line {
+  width: 2px;
+  height: 40px; /* Height of the vertical line */
+  background-color: yellow; /* Circle color */
+  background-color: #000; /* Color of the vertical line */
+  margin: 0 auto; /* Center the circle */
+  transform: translateX(-50%); /* Adjust to center it */
+  position: relative; /* Relative positioning for the vertical line */
+  top:24px ;
+
+}
+
+.vertical-line-schedule {
+  width: 2px;
+  height: 40px; /* Height of the vertical line */
+  background-color: #000; /* Color of the vertical line */
+  position: absolute;
+}
+
+.add-icon-schedule {
+  cursor: pointer;
+  font-size: 24px; /* Adjust size as needed */
+  color: gray; /* Change color as needed */
+  position: absolute;
+  right: 50px;
+  background-color: white;
+  border-radius: 50%;
+}
+.details-button {
+  cursor: pointer;
+  font-size: 15px; /* Adjust size as needed */
+  color: #eeba2b; /* Change color as needed */
+}
+
+.overlay-content-sched {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Set a fixed width for the overlay */
+}
+
+.event-type-input-sched {
+  width: 75%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+
+
+.date-field-sched {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.date-input-sched {
+  width: 80%;
+  flex: 1;
+  padding: 8px 32px 8px 10px; /* Padding to accommodate the calendar icon */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.calendar-icon-sched {
+  position: absolute;
+  right: 10px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.time-input-sched {
+  width: 100%;
+  width: 75%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.overlay-body-sched {
+  display: flex;
+  justify-content: space-between; /* Space between left and right sides */
+  margin-top: 10px; /* Add some space below the header */
+}
+
+.left-side-sched {
+  width: 50%; /* Adjust the width as needed */
+}
+
+.right-side-sched {
+  width: 50%; /* Adjust the width as needed */
+  padding-left: 20px; /* Space between the two sections */
+}
+
+.overlay-sched {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.overlay-content-sched {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 50%; /* Set a fixed width for the overlay */
+  max-width: 90%; /* Responsive width */
+}
+.overlay-header-sched {
+  position: relative; /* Make the header relative for the X button positioning */
+}
+
+.close-button-sched {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.custom-dropdown-sched {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 10; /* Make sure it appears above other elements */
+}
+
+.custom-dropdown-sched ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-item-sched {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown-item-sched:hover {
+  background-color:#eeba2b;
+  color: white;
+}
+
+/* Ensure the calendar icon is visible and clickable */
+.calendar-icon-sched {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Add styles for the date input */
+.date-field-sched {
+  display: flex;
+  align-items: center;
+}
+
+.time-frame-table-sched {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.time-frame-table-sched th,
+.time-frame-table-sched td {
+  border: none; /* Hide borders */
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.button-container-sched {
+  margin-top: 20px;
+}
+
+.add-event-button-sched,
+.delete-event-button-sched,
+.save-button-sched {
+  margin-right: 10px;
+  padding: 10px 15px;
+  background-color: #eeba2b; /* Change to your preferred color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-event-button-sched:hover,
+.delete-event-button-sched:hover,
+.save-button-sched:hover {
+  background-color: #eeba2b; /* Darker shade on hover */
+}
+.new-overlay {
+  position: fixed; /* Change to fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+.new-overlay-content {
+  background: white; /* Background for the content */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 20%;
+  align-items: center;
+}
+
+
+.overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+.time-inputs, .event-name-input, .description-textarea {
+  display: flex;
+  align-items: center;
+}
+.event-name-input, .description-textarea {
+  width: 78%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.save-button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -70,8 +70,8 @@ function Dashboard() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [hoveredDay, setHoveredDay] = useState(null);
   const [events, setEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null); // To hold selected event details
-  const [showDetailsOverlay, setShowDetailsOverlay] = useState(false); // To control the event details overlay
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showDetailsOverlay, setShowDetailsOverlay] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -128,6 +128,20 @@ function Dashboard() {
 
   const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
 
+  const schedules = [
+    {
+      time: "09:00 AM",
+      description: "Team Meeting",
+      timeline: [
+        { time: "09:00 AM", description: "Event Start" },
+        { time: "09:15 AM", description: "Introduction to the team" },
+        { time: "09:30 AM", description: "Updates from each member" },
+        { time: "10:00 AM", description: "Discussion on blockers" },
+        { time: "10:30 AM", description: "Wrap up and next steps" },
+      ],
+    },
+  ];
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
@@ -179,19 +193,41 @@ function Dashboard() {
       </div>
 
       {/* Event Details Overlay */}
-      {showDetailsOverlay && (
-        <div className="details-overlay-dashboard">
-          <div className="overlay-content-dashboard">
-            <h3>{selectedEvent.name}</h3>
-            <p>{selectedEvent.description}</p>
-            <p>Date: {new Date(selectedEvent.date).toLocaleDateString()}</p>
-            <p>Pax: {selectedEvent.pax}</p>
-            <p>Venue: {selectedEvent.venue}</p>
-            <button className="close-button-dashboard" onClick={handleCloseOverlay}>X</button>
-          </div>
-          <div className="overlay-background-dashboard"></div>
+      {showDetailsOverlay && selectedEvent && (
+  <div className="details-overlay-dashboard">
+    <div className="overlay-content-dashboard">
+      <div className="event-details-dashboard">
+        <h3>{selectedEvent.name}</h3>
+        <p>Date: {new Date(selectedEvent.date).toLocaleDateString()}</p>
+        <p>Pax: {selectedEvent.pax}</p>
+        <p>Venue: {selectedEvent.venue}</p>
+    <button onClick={handleCloseOverlay}>Image ni diri</button>
+
+      </div>
+      <div className="schedule-section-dashboard">
+        <h4>Time Frame</h4>
+        <div className="schedule-content-dashboard">
+          {schedules.map((schedule, index) => (
+            <div key={index} className="schedule-item-dashboard">
+              <strong>{schedule.time}:</strong> {schedule.description}
+              <ul className="timeline-dashboard">
+                {schedule.timeline.map((item, idx) => (
+                  <li key={idx}>{item.time} - {item.description}</li>
+                ))}
+              </ul>
+            </div>
+            
+          ))}
+    <button onClick={handleCloseOverlay}>Add Time Frame</button>
+
+    <button onClick={handleCloseOverlay}>Close</button>
+
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

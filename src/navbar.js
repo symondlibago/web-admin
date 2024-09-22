@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faEnvelope, faBell, faTachometerAlt, faUserFriends, faClipboardList, faBox, faCommentAlt, faUserCircle, faCog, faSignOutAlt, faChevronDown, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faEnvelope, faBell, faTachometerAlt, faUserFriends, faClipboardList, faCommentAlt, faUserCircle, faCog, faSignOutAlt, faChevronDown, faHouse, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import './App.css'; // Make sure this path is correct
 import logo from './images/logo.png'; // Make sure this path is correct
 
@@ -48,16 +48,12 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faHouse} size='lg' style={{ marginRight: '10px' }} />
             <span>Dashboard</span>
           </Link>
-          <Link to="/attendee-tracker" className="menu-item" onClick={closeSidebar}>
-            <FontAwesomeIcon icon={faClipboardList} size='lg' style={{ marginRight: '10px' }}/>
-            <span>Attendee Tracker</span>
-          </Link>
-          <Link to="/inventory-tracker" className="menu-item" onClick={closeSidebar}>
-            <FontAwesomeIcon icon={faBox} size='lg' style={{ marginRight: '10px' }} />
-            <span>Inventory Tracker</span>
+          <Link to="/schedule" className="menu-item" onClick={closeSidebar}>
+            <FontAwesomeIcon icon={faCalendarAlt} size='lg' style={{ marginRight: '10px' }} />
+            <span>Schedule</span>
           </Link>
           <Link to="/events" className="menu-item" onClick={closeSidebar}>
-            <FontAwesomeIcon icon={faClipboardList} size='lg' style={{ marginRight: '10px' }}/>
+            <FontAwesomeIcon icon={faClipboardList} size='lg' style={{ marginRight: '10px' }} />
             <span>Events</span>
           </Link>
           <Link to="/feedback" className="menu-item" onClick={closeSidebar}>
