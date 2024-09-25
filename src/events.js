@@ -135,10 +135,10 @@ function Events() {
             <div className="menu-item-events" onClick={() => handleEquipmentClick(item.id)}>
               <FontAwesomeIcon icon={faBox} /> Equipment
             </div>
-            <div className="menu-item-events">
+            <div className="menu-item-events" onClick={() => navigate('/feedback/feedback-events')}>
               <FontAwesomeIcon icon={faCommentDots} /> Feedback
             </div>
-            <div className="menu-item-events">
+            <div className="menu-item-events" onClick={() => navigate('/group-attendees')}>
               <FontAwesomeIcon icon={faUserFriends} /> Guest
             </div>
           </div>

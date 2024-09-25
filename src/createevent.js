@@ -11,12 +11,12 @@ const CreateEvent = () => {
     const [selectedType, setSelectedType] = useState('');
     const [customEventType, setCustomEventType] = useState('');
     const [eventName, setEventName] = useState('');
-    const [eventDescription, setEventDescription] = useState('');
+    // const [eventDescription, setEventDescription] = useState('');
     const [eventDate, setEventDate] = useState('');
-    const [invitationMessage, setInvitationMessage] = useState('');
-    const [peopleToInvite, setPeopleToInvite] = useState('');
+    // const [invitationMessage, setInvitationMessage] = useState('');
+    // const [peopleToInvite, setPeopleToInvite] = useState('');
     const [venue, setVenue] = useState('');
-    const [packageType, setPackageType] = useState('');
+    // const [packageType, setPackageType] = useState('');
     const [pax, setPax] = useState('');
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -30,19 +30,19 @@ const CreateEvent = () => {
         const eventData = {
             type: eventType,
             name: eventName,
-            description: eventDescription,
+            // description: eventDescription,
             date: eventDate,
             pax: parseInt(pax, 10),
-            invitation_message: invitationMessage,
-            people_to_invite: peopleToInvite,
+            // invitation_message: invitationMessage,
+            // people_to_invite: peopleToInvite,
             venue: venue,
-            package_type: packageType,
+            // package_type: packageType,
         };
 
         try {
             const response = await axios.post('http://localhost:8000/api/events', eventData);
             if (response.status === 201) {
-                navigate('/choose-service-provider');
+                navigate('/choose-package');
             } else {
                 console.error('Failed to create event:', response.statusText);
             }
@@ -109,7 +109,7 @@ const CreateEvent = () => {
                         />
                     </div>
 
-                    <div className="input-container-createevent">
+                    {/* <div className="input-container-createevent">
                         <input
                             type="text"
                             className="text-input-createevent"
@@ -117,7 +117,7 @@ const CreateEvent = () => {
                             value={eventDescription}
                             onChange={(e) => setEventDescription(e.target.value)}
                         />
-                    </div>
+                    </div> */}
                     <div className="input-container-createevent date-input-createevent">
                         <input
                             type="date"
@@ -136,7 +136,7 @@ const CreateEvent = () => {
                             onChange={(e) => setPax(e.target.value)}
                         />
                     </div>
-                    <div className="input-container-createevent">
+                    {/* <div className="input-container-createevent">
                         <input
                             type="text"
                             className="text-input-createevent"
@@ -144,8 +144,8 @@ const CreateEvent = () => {
                             value={invitationMessage}
                             onChange={(e) => setInvitationMessage(e.target.value)}
                         />
-                    </div>
-                    <div className="input-container-createevent">
+                    </div> */}
+                    {/* <div className="input-container-createevent">
                         <input
                             type="text"
                             className="text-input-createevent"
@@ -153,8 +153,8 @@ const CreateEvent = () => {
                             value={peopleToInvite}
                             onChange={(e) => setPeopleToInvite(e.target.value)}
                         />
-                    </div>
-                    <div className="input-container-createevent venue-input-createevent">
+                    </div> */}
+                    {/* <div className="input-container-createevent venue-input-createevent">
                         <input
                             type="text"
                             className="text-input-createevent"
@@ -163,7 +163,7 @@ const CreateEvent = () => {
                             onChange={(e) => setPackageType(e.target.value)}
                         />
                         <FaChevronDown size={24} color="#B0B0B0" className="icon-right-createevent" />
-                    </div>
+                    </div> */}
                     <div className="input-container-createevent venue-input-createevent">
                         <input
                             type="text"

@@ -24,6 +24,9 @@ import Messages from './messages';
 import Success from './success';
 import PortfolioAdmin from './portfolioadmin';
 import Schedule from './schedule';
+import ChoosePackage from './choosepackage';
+import GuestPage from './addguest';
+import About from './about';
 function App() {
   return (
     <Router>
@@ -54,6 +57,9 @@ function App() {
           <Route path="/messages" element={<><Navbar /><Messages/></>} />
           <Route path="/success" element={<><Navbar /><Success/></>} />
           <Route path="/schedule" element={<><Navbar /><Schedule/></>} />
+          <Route path="/choose-package" element={<><Navbar /><ChoosePackage/></>} />
+          <Route path="/add-guest" element={<><Navbar /><GuestPage/></>} />
+          <Route path="/about" element={<><Navbar /><About/></>} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>

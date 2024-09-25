@@ -174,10 +174,10 @@ const ChooseServiceProv = () => {
                       <p className="modal-cancel-button-text-sp">Cancel</p>
                     </button>
                     <button className="modal-add-button-sp" onClick={handleFinish}>
-                      <p className="modal-add-button-text-sp">Finish</p>
+                      <p className="modal-add-button-text-sp" onClick={()=> navigate('/add-guest')}>Finish</p>
                     </button>
                   </div>
-                </div>
+                </div>  
               </div>
             )}
           </div>

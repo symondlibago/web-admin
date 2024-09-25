@@ -4,17 +4,41 @@ import './App.css';
 import proPic from './images/pro_pic.png';
 
 const initialMessages = [
-  { id: '1', name: 'John Doe', message: 'Looking forward to the event!', daysAgo: '1d', unreadCount: 2, replies: [] },
-  { id: '2', name: 'Jane Smith', message: 'Can I get more details?', daysAgo: '3d', unreadCount: 1, replies: [] },
-  { id: '3', name: 'Emily Johnson', message: 'Excited to attend!', daysAgo: '5d', unreadCount: 0, replies: [] },
+  {
+    id: '1',
+    name: 'John Doe',
+    message: 'Looking forward to the event!',
+    timeSent: '12:30 PM',
+    daysAgo: '1d',
+    unreadCount: 2,
+    replies: [],
+  },
+  {
+    id: '2',
+    name: 'Jane Smith',
+    message: 'Can I get more details?',
+    timeSent: '10:15 AM',
+    daysAgo: '3d',
+    unreadCount: 1,
+    replies: [],
+  },
+  {
+    id: '3',
+    name: 'Emily Johnson',
+    message: 'Excited to attend!',
+    timeSent: '09:45 AM',
+    daysAgo: '5d',
+    unreadCount: 0,
+    replies: [],
+  },
 ];
 
 const Messages = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [reply, setReply] = useState('');
   const [messages, setMessages] = useState(initialMessages);
   const [selectedMessage, setSelectedMessage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleBack = () => {
     navigate(-1);
@@ -42,9 +66,23 @@ const Messages = () => {
     setMessages(updatedMessages);
     setReply(''); // Clear the input
 
-    // Update selectedMessage to show the latest reply immediately
-    const newSelectedMessage = updatedMessages.find(msg => msg.id === selectedMessage.id);
-    setSelectedMessage(newSelectedMessage);
+    // Automatically display your sent message below the sender's message
+    const newReply = {
+      message: reply,
+      timeSent: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // Current time
+    };
+
+    const updatedMessageWithReply = {
+      ...selectedMessage,
+      replies: [...selectedMessage.replies, newReply],
+    };
+
+    setSelectedMessage(updatedMessageWithReply); // Update selected message with the new reply
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMessage(null);
   };
 
   return (
@@ -73,30 +111,43 @@ const Messages = () => {
       </div>
 
       {isModalOpen && selectedMessage && (
-        <div className="modal-messages">
-          <div className="modalContent-messages">
-            <h3>Reply to {selectedMessage.name}</h3>
-            <p><strong>Message:</strong> {selectedMessage.message}</p>
-            <p className="messageTime-messages">{selectedMessage.daysAgo}</p>
-            
-            {/* Display all replies */}
-            <div className="repliesContainer-messages">
-              {selectedMessage.replies.map((reply, index) => (
-                <p key={index} className="replyMessage-messages">{reply}</p>
-              ))}
-            </div>
-            
-            <textarea
-              className="replyInput-messages"
-              value={reply}
-              onChange={(e) => setReply(e.target.value)}
-              placeholder="Type your message here..."
-            />
-            <button className="sendButton-messages" onClick={handleSendMessage}>Send Message</button>
-            <button className="closeButton-modal" onClick={() => setIsModalOpen(false)}>Close</button>
-          </div>
+  <div className="modal-messages">
+    <div className="modalContent-messages">
+      <button onClick={handleCloseModal} className="closeModalButton-messages">X</button>
+      
+      <div className="modalHeader-messages">
+        <img src={proPic} alt="Profile" className="modalProfileImage-messages" />
+        <p className="modalSenderName-messages">{selectedMessage.name}</p>
+      </div>
+      <div className="separator-messages" />
+      <div className="modalHeader-messages">
+      <p className="modalTimeSent-messages">{selectedMessage.timeSent}</p>
+      </div>
+      <div className="messageDisplayContainer-messages">
+        <div className="messageDisplay-messages">
+          <p className="messageText-messages">{selectedMessage.message}</p>
         </div>
-      )}
+        {selectedMessage.replies.map((replyObj, index) => (
+          <div key={index} className="replyDisplay-messages">
+            <p className="replyText-messages">{replyObj.message}</p>
+            <p className="replyTime-messages">{replyObj.timeSent}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="replyContainer-messages">
+        <textarea
+          className="replyInput-messages"
+          value={reply}
+          onChange={(e) => setReply(e.target.value)}
+          placeholder="Type your reply here..."
+        />
+        <button className="sendButton-messages" onClick={handleSendMessage}>Send</button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

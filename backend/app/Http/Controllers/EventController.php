@@ -21,13 +21,9 @@ class EventController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
             'date' => 'required|date',
             'pax' => 'required|integer',
-            'invitation_message' => 'required|string',
-            'people_to_invite' => 'required|string',
             'venue' => 'required|string',
-            'package_type' => 'required|string',
             'providers' => 'array'
         ]);
 

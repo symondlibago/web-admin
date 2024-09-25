@@ -193,7 +193,8 @@ function Dashboard() {
       </div>
 
       {/* Event Details Overlay */}
-      {showDetailsOverlay && selectedEvent && (
+    {/* Event Details Overlay */}
+{showDetailsOverlay && selectedEvent && (
   <div className="details-overlay-dashboard">
     <div className="overlay-content-dashboard">
       <div className="event-details-dashboard">
@@ -201,32 +202,15 @@ function Dashboard() {
         <p>Date: {new Date(selectedEvent.date).toLocaleDateString()}</p>
         <p>Pax: {selectedEvent.pax}</p>
         <p>Venue: {selectedEvent.venue}</p>
-    <button onClick={handleCloseOverlay}>Image ni diri</button>
-
+        <button className='close-button-dashboard' onClick={handleCloseOverlay}>Close</button>
       </div>
-      <div className="schedule-section-dashboard">
-        <h4>Time Frame</h4>
-        <div className="schedule-content-dashboard">
-          {schedules.map((schedule, index) => (
-            <div key={index} className="schedule-item-dashboard">
-              <strong>{schedule.time}:</strong> {schedule.description}
-              <ul className="timeline-dashboard">
-                {schedule.timeline.map((item, idx) => (
-                  <li key={idx}>{item.time} - {item.description}</li>
-                ))}
-              </ul>
-            </div>
-            
-          ))}
-    <button onClick={handleCloseOverlay}>Add Time Frame</button>
-
-    <button onClick={handleCloseOverlay}>Close</button>
-
-        </div>
+      <div className="image-section-dashboard">
+        <img src={require('./images/details.png')} alt="Event Details" style={{ width: '100%', borderRadius: '10px' }} />
       </div>
     </div>
   </div>
 )}
+
 
     </div>
   );

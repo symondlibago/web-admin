@@ -430,8 +430,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #FFB200;
+.close-button-dashboard:hover {
+  background-color: #eeba2b;
 }
 
 .overlay-background-dashboard {
@@ -443,6 +443,26 @@ button:hover {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1005;
 }
+
+
+.image-section-dashboard {
+  flex: 1; /* Use available space */
+  display: flex;
+  align-items: center; /* Center image vertically */
+  justify-content: center; /* Center image horizontally */
+}
+.close-button-dashboard {
+  margin-top: auto; /* Push it to the bottom */
+  background-color: #eeba2b;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 30%; /* Full width */
+}
+
+
 
 
 
@@ -3803,6 +3823,7 @@ button:disabled {
   color: #000000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: filter 0.3s ease;
+  overflow: hidden; /* Prevents horizontal scroll */
 }
 
 .closeButton-messages {
@@ -3817,7 +3838,15 @@ button:disabled {
 
 .scrollViewContent-messages {
   overflow-y: auto;
-  flex: 1;
+  max-height: calc(100vh - 60px); /* Adjust to ensure enough space for header */
+  scrollbar-width: none;
+}
+
+.scrollViewContent-messages::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+.messageDisplayContainer-messages::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
 
 .messageContainer-messages {
@@ -3852,9 +3881,9 @@ button:disabled {
 }
 
 .messageDetails-messages {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  text-align: center; /* Center align time */
+  flex-direction: column; /* Stack vertically */
+  align-items: center; /* Center horizontally */
 }
 
 .daysAgo-messages {
@@ -3886,7 +3915,7 @@ button:disabled {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Dark background */
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
   z-index: 1000; /* Ensure modal is above other content */
 }
@@ -3896,52 +3925,128 @@ button:disabled {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-  width: 400px; /* Set width for the modal */
+  width: 400px; /* Fixed width for the modal */
+  height: 600px; /* Increased height for the modal */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Stretch to fill the available space */
+  overflow-y: hidden; /* Prevent vertical scroll for modal content */
+}
+
+.modalProfileImage-messages {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-bottom: 10px; /* Space below the profile picture */
+  align-items: center;
+}
+
+.modalSenderName-messages {
+  font-weight: bold;
+  margin-bottom: 5px; /* Space below the name */
+}
+
+.separator-messages {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); /* Fading line */
+  margin: 5px 0; /* Space above and below the line */
+}
+
+.modalTimeSent-messages {
+  font-size: 0.9em; /* Smaller font size for time */
+  color: #666; /* Gray color for the time */
+  margin-bottom: 10px; /* Space below the time */
+}
+
+.messageDisplayContainer-messages {
+  flex: 1; /* Allow message display to grow */
+  display: flex;
+  flex-direction: column; /* Stack messages vertically */
+  align-items: flex-start; /* Align sender's message to the left */
+  overflow-y: auto; /* Allow scrolling for messages if they exceed height */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.messageDisplay-messages {
+  width: 100%; /* Full width for message display */
+  max-width: 75%; /* Limit width to 75% of the container */
+  background-color: #f0f0f0; /* Light gray background for sender's message */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Space below sender's message */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+  overflow-wrap: break-word; /* Ensure overflow handling */
+}
+
+.replyDisplay-messages {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Align user's reply to the right */
+}
+
+.replyText-messages {
+  background-color: #eeba2b; /* Different background color for replies */
+  color: white; /* White text for replies */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px; /* Space above replies */
+  max-width: 75%; /* Limit width to 75% of the container */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+  overflow-wrap: break-word; /* Ensure overflow handling */
+}
+
+.replyContainer-messages {
+  display: flex;
+  flex-direction: column; /* Stack textarea and button vertically */
+  margin-top: 10px; /* Space above reply container */
+  width: 100%; /* Full width for reply container */
+  align-items: center;
+
 }
 
 .replyInput-messages {
   width: 95%;
-  height: 100px;
-  margin: 10px 0;
+  height: 50px; /* Fixed height for the input */
+  margin-bottom: 10px; /* Space below input */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none; /* Prevent resizing */
 }
 
+.replyTime-messages {
+  font-size: 0.8em; /* Smaller font size for reply time */
+  color: #999; /* Light gray color for reply time */
+  margin-top: 5px; /* Space above the time */
+}
+
+
 .sendButton-messages {
-  background-color: #eeba2b;
+  background-color: #eeba2b; /* Send button color */
   color: white; /* White text */
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  width: 30%;
 }
 
-
-.closeButton-modal {
-  background-color: #eeba2b;
-  border-radius: 5px;
-  padding: 10px 15px;
+.closeModalButton-messages {
+  align-self: flex-end; /* Align close button to the top right */
+  background: transparent;
   border: none;
-  color: white;
+  font-size: 1.5em;
   cursor: pointer;
-  margin-top: 10px;
-  margin-left: 2rem;
 }
 
-.repliesContainer-messages {
-  margin-top: 10px;
-  max-height: 100px; /* Limit height for overflow */
-  overflow-y: auto; /* Scroll if too many replies */
+.modalHeader-messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items */
+  margin-bottom: 10px; /* Space below header */
 }
 
-.replyMessage-messages {
-  background-color: #f0f0f0; /* Light gray background */
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
 
 
 /* SCHEDULE */
@@ -4373,6 +4478,384 @@ button:disabled {
   border: none;
   cursor: pointer;
   font-size: 18px;
+}
+
+
+/* CHOOSE PACKAGE */
+
+/* Container for the page */
+.container-choosepackage {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header-choosepackage {
+  color: black;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Customize button */
+.customize-btn-choosepackage {
+  display: inline-block;
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  border-radius: 2rem;
+}
+
+.customize-btn-choosepackage:hover {
+cursor: pointer;
+background-color: #eeba2b;
+}
+
+/* Row for package images */
+.packages-row-choosepackage {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Individual package container */
+.package-choosepackage {
+  text-align: center;
+  width: 22%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  margin: 10px;
+}
+
+.image-choosepackage {
+  width: 100%;
+  height: auto;
+  max-width: 200px; /* Restrict image size */
+  margin-bottom: 10px;
+}
+
+.choose-btn-choosepackage {
+  display: inline-block;
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 45%;
+  border-radius: 2rem;
+}
+
+.choose-btn-choosepackage:hover {
+  background-color: #EEBA2B;
+  cursor: pointer;
+}
+
+/* Next Button */
+.next-btn-choosepackage {
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  border-radius: 2rem;
+}
+
+.next-btn-choosepackage:hover {
+  background-color: #EEBA2B;
+  cursor: pointer;
+}
+
+/* Overlay for showing enlarged image */
+.overlay-choosepackage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content-choosepackage {
+  background: linear-gradient(to bottom, #EEBA2B, white);
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  border-radius: 10px;
+  width: 50%; /* Scale down overlay width */
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+.overlay-header-choosepackage {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.close-btn-choosepackage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.overlay-image-choosepackage {
+  width: auto;
+  max-width: 500px; /* Limit the size of the image in the overlay */
+  height: 30rem;
+  max-width: 100%; /* Fit within overlay width */
+  max-height: 400px; /* Max height to avoid being too large */
+  object-fit: contain;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.confirm-btn-choosepackage {
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  display: block; /* Ensure it is a block element below the image */
+  margin: 0 auto;
+}
+
+.confirm-btn-choosepackage:hover {
+  background-color: #EEBA2B;
+}
+
+
+/* GUEST PAGE */
+/* Overall container */
+.guestpage-guestpage {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.header-guestpage {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Container for left and right sections */
+.guest-container-guestpage {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Left Section Styles */
+.left-section-guestpage {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Input styles */
+.label-guestpage {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.input-guestpage {
+  border: none;
+  border-bottom: 2px solid #EEBA2B; /* Custom line color */
+  padding: 10px;
+  width: 50%; /* Adjust width for shorter line */
+  font-size: 1rem;
+  outline: none; /* Remove outline on focus */
+}
+
+.input-guestpage::placeholder {
+  color: #888; /* Placeholder color */
+}
+
+.input-guestpage:focus {
+  border-bottom: 2px solid #EEBA2B; /* Maintain custom line color on focus */
+}
+
+/* Add Guest button */
+.add-guest-btn-guestpage {
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 20px auto; /* Center button */
+  display: block; /* Ensure it's a block-level element */
+}
+
+.add-guest-btn-guestpage:hover {
+  background-color: #EEBA2B;
+}
+
+/* Right Section Styles */
+.right-section-guestpage {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Guest Table Styles */
+.guest-table-guestpage {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Header Styles */
+.guest-table-guestpage th {
+  background-color: #EEBA2B; /* Custom header background */
+  color: white; /* White text */
+  padding: 10px;
+}
+
+/* Row Styles */
+.guest-table-guestpage tr {
+  background-color: transparent; /* Default row background */
+}
+
+.guest-table-guestpage td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color: black; /* Default text color for table cells */
+}
+
+/* Remove Guest Button */
+.remove-guest-btn-guestpage {
+  background-color: #dc3545; /* Red for remove */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.remove-guest-btn-guestpage:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Book Event Button */
+.book-event-btn-guestpage {
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.book-event-btn-guestpage:hover {
+  background-color: #EEBA2B;
+}
+
+.modal-overlay-guestpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content-guestpage {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.close-modal-btn-guestpage {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  border: none;
+  background: transparent;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.popup-image-guestpage {
+  width: 100%; /* Adjust width as needed */
+  max-width: 400px; /* Max width for the image */
+  margin: 10px 0; /* Spacing around the image */
+}
+
+.modal-text-guestpage {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* ABOUT */
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the header */
+  padding: 20px;
+  height: 100vh; /* Full height */
+  background-color: white; /* Light background */
+}
+
+.about-header {
+  font-size: 2.5rem; /* Header font size */
+  margin-bottom: 20px; /* Space below the header */
+  color: #eeba2b;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Full width */
+  max-width: 1200px; /* Max width to maintain readability */
+}
+
+.about-left, .about-right {
+  width: 50%; /* Each side takes up almost half of the width */
+  background-color: white; /* White background for the content */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside each section */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Light shadow for depth */
+  align-items: center;
+
+}
+
+.about-left {
+  margin-right: 20px; /* Space between sections */
+}
+
+.about-subheader {
+  font-size: 1.5rem; /* Subheader font size */
+  margin-bottom: 10px; /* Space below subheader */
+  text-align: center; /* Center the subheader */
+  color:#eeba2b;
+}
+
+p {
+  color: #333; /* Darker text for readability */
 }
 
 

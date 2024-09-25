@@ -9,7 +9,7 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'date', 'pax', 'invitation_message', 'people_to_invite', 'venue', 'package_type'];
+    protected $fillable = ['name', 'date', 'pax', 'venue'];
 
     // Relationship: An event can have many equipment items
     public function equipment()
