@@ -873,8 +873,8 @@ button:hover {
 .close-button {
   margin-top: 10px;
   padding: 8px 12px;
-  background-color: #ff6347;
-  color: white;
+  background-color: #eeba2b;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -2704,7 +2704,6 @@ button:hover {
 
 .buttons-container-edit {
   display: flex;
-  justify-content: space-between;
 }
 
 .create-portfolio-button-edit {
@@ -4836,9 +4835,7 @@ background-color: #eeba2b;
 .about-left, .about-right {
   width: 50%; /* Each side takes up almost half of the width */
   background-color: white; /* White background for the content */
-  border-radius: 10px; /* Rounded corners */
   padding: 20px; /* Padding inside each section */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Light shadow for depth */
   align-items: center;
 
 }

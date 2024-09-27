@@ -82,20 +82,14 @@ const EditProfile = () => {
                 <span className="create-event-text-edit">Create New Event Portfolio</span>
               </button>
             </div>
-            <div className="buttons-container-edit">
-              <button
-                className="create-portfolio-button-edit"
-                onClick={() => handleRoleNavigation('Customer')}
-              >
-                <IoMdCreate size={24} color="white" />
-                <span className="create-portfolio-text-edit">Add Customer Account</span>
-              </button>
-              <button
-                className="create-portfolio-button-edit"
-                onClick={() => handleRoleNavigation('Service Provider')}
-              >
-                <IoMdCreate size={24} color="white" />
-                <span className="create-portfolio-text-edit">Add Service Provider Account</span>
+
+
+
+
+            <div className="button-container-edit">
+              <button className="create-event-button-edit" onClick={() => handleRoleNavigation('Service Provider')}>
+                <IoMdAdd size={24} color="white" />
+                <span className="create-event-text-edit">Add Service Provider Account</span>
               </button>
             </div>
           </div>

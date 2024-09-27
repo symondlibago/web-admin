@@ -3,7 +3,7 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import proPic from './images/pro_pic.png'; // Ensure the path to the image is correct
-import event1 from './images/event1.png'; // Added image for the event
+import event1 from './images/details.png'; // Added image for the event
 
 const Notification = () => {
   const [selectedTab, setSelectedTab] = useState('All');
