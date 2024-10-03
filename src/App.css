@@ -232,9 +232,14 @@ body, html, #root {
 }
 
 .calendar-body {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day-name {
+  margin-bottom: 10px;
+  color: #eeba2b;
 }
 
 .calendar-day {
@@ -461,6 +466,48 @@ button {
   cursor: pointer;
   width: 30%; /* Full width */
 }
+
+.details-overlay-dashboard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content-dashboard-overlay {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+  
+}
+
+.close-button-dashboard-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.image-dashboard-overlay {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
 
 
 
@@ -1840,7 +1887,6 @@ button:hover {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 
 }
 
@@ -1853,6 +1899,11 @@ button:hover {
   cursor: pointer;
   width: 40%;
   margin-top: 10px; /* Space between input and button */
+  font-weight: bold;
+}
+
+.status-selection {
+  cursor: pointer;
   font-weight: bold;
 }
 
@@ -1869,7 +1920,7 @@ button:hover {
 }
 
 /* Style for the confirmation popup */
-.remove-popup {
+.remove-popup-attendee {
   position: fixed;
   top: 0;
   left: 0;
@@ -1881,20 +1932,20 @@ button:hover {
   align-items: center;
 }
 
-.popup-content {
-  background: #605f5f;
+.popup-content-attendee {
+  background: white;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3); /* Add box-shadow */
 }
 
-.popup-content h2 {
+.popup-content-attendee h2 {
   margin-top: 0;
   color: black; /* Set text to black */
 }
 
-.popup-content button {
+.popup-content-attendee button {
   padding: 10px;
   margin-right: 1rem;
   margin-left: 1rem;
@@ -1905,6 +1956,38 @@ button:hover {
   cursor: pointer;
   width: 30%;
   margin-top: 10px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.pagination-controls button {
+  margin: 0 10px;
+  padding: 8px 16px;
+  background-color: #eeba2b;
+  border: none;
+  border-radius: 5px;
+  color: black; /* Set text to black */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-controls button:not(:disabled):hover {
+  background-color: #EEBA2B;
+}
+
+.page-number {
+  font-weight: bold;
+  font-size: 16px;
 }
 
 
@@ -2458,15 +2541,27 @@ button:hover {
   max-width: 400px;
   text-align: center;
 }
+.broken-box-profile-events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9f9f9;
+  border: 2px dashed #C2B067;
+  border-radius: 12px; /* Adjusted border radius */
+  padding: 20px;
+  width: 100%;
+  max-width: 100px;
+  text-align: center;
+}
 
 .broken-box-text {
   font-size: 20px; /* Increased font size */
-  color: #C2B067;
+  color: #eeba2b;
   margin-bottom: 10px;
 }
 
 .add-package-button-profile {
-  background-color: #CEB64C;
+  background-color: #eeba2b;
   border: none;
   border-radius: 25px; /* More rounded corners */
   color: #000;
@@ -4061,12 +4156,14 @@ button:disabled {
 }
 
 .schedule-layout {
-  display: flex;
+  display: flex; /* Aligns children (calendar and details) horizontally */
+  justify-content: space-between;
 }
 
 .calendar-schedule {
   width: 50%;
   margin-right: 20px; /* Space between calendar and details */
+  flex: 1; /* Allows the calendar to take up available space */
 }
 
 .days-header-schedule {
@@ -4479,6 +4576,15 @@ button:disabled {
   font-size: 18px;
 }
 
+.add-schedule-button { 
+    margin-left: 20px; /* Optional: Add some space between the header and button */
+}
+.schedule-header-container {
+  display: flex;
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center; /* Center items vertically */
+}
+
 
 /* CHOOSE PACKAGE */
 
@@ -4780,12 +4886,13 @@ background-color: #eeba2b;
 }
 
 .modal-content-guestpage {
-  background: white;
+  background: linear-gradient(to bottom, #eeba2b, white);
   border-radius: 8px;
   padding: 20px;
   text-align: center;
   position: relative;
 }
+
 
 .close-modal-btn-guestpage {
   position: absolute;
@@ -4796,6 +4903,7 @@ background-color: #eeba2b;
   font-size: 3rem;
   cursor: pointer;
 }
+
 
 .popup-image-guestpage {
   width: 100%; /* Adjust width as needed */
@@ -4854,6 +4962,121 @@ background-color: #eeba2b;
 p {
   color: #333; /* Darker text for readability */
 }
+
+/* ADD SCHEDULE */
+.addschedule-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex; /* Center all content */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+.addschedule-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #eeba2b;
+  font-size: 2rem;
+} 
+
+.form-group-addschedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure full width */
+}
+
+.input-addschedule,
+.datepicker-addschedule { /* Ensure consistent styling */
+  border: 1px solid #C2B067;
+  background-color: rgba(194, 176, 103, 0.17);
+  color: black;
+  padding: 10px;
+  margin: 10px 0;
+  width: 400px;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  font-family: Arial, sans-serif; /* Change to your desired font family */
+  font-size: 16px; /* Set font size */
+  font-weight: normal; /* Set font weight */
+}
+.dropdown-button-addschedule {
+  border: 1px solid #C2B067;
+  background-color: rgba(194, 176, 103, 0.17);
+  color: black;
+  padding: 10px 15px 10px 10px; /* Add right padding to create space for the icon */
+  margin: 10px 0;
+  width: 100%; /* Ensure full width */
+  display: flex; /* Use flexbox for alignment */
+  justify-content: space-between; /* Space between text and icon */
+  align-items: center; /* Center the items vertically */
+  box-sizing: border-box; /* Include padding and border in width */
+  font-family: Arial, sans-serif; /* Change to your desired font family */
+  font-size: 16px; /* Set font size */
+  font-weight: normal; /* Set font weight */
+  cursor: pointer;
+}
+
+.dropdown-button-addschedule svg {
+  margin-left: 10px; /* Add margin for spacing between text and icon */
+}
+
+.dropdown-container-addschedule {
+  position: relative;
+  width: 400px; /* Ensure the dropdown container has the same width */
+}
+
+.dropdown-menu-addschedule {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #FFC42B;
+  border-radius: 10px;
+  margin-top: 5px;
+  z-index: 1000;
+  width: 100%; /* Match dropdown width to button */
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.dropdown-menu-addschedule.show {
+  display: block;
+}
+
+.dropdown-menu-addschedule button {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  text-align: left;
+  font-family: Arial, sans-serif; /* Ensure dropdown items have consistent font */
+  font-size: 16px; /* Set font size */
+}
+
+.dropdown-menu-addschedule button:hover {
+  background-color: #eeba2b;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: white;
+}
+
+.save-button-addschedule {
+  background-color: #eeba2b; /* Button background color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block; /* Block to allow margin auto */
+  margin: 20px auto; /* Center the button */
+}
+
+.save-button-addschedule:hover {
+  background-color: #eeba2b;
+}
+
+
+
+
 
 
 

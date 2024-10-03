@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import moment from "moment";
 import './App.css'; // Ensure this path is correct
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,9 +21,10 @@ const Schedule = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
+  const navigate = useNavigate();
 
   const schedules = {
-    "2024-09-21": [
+    "2024-10-21": [
       {
         time: "09:00 AM",
         title: "Team Meeting",
@@ -49,12 +51,12 @@ const Schedule = () => {
       },
     ],
   };
+
   const [temporaryEvents, setTemporaryEvents] = useState([]); // Initialize temporary events state
   const openOverlay = (event) => {
     setSelectedEvent(event);
     setOverlayVisible(true);
   };
-  
 
   const closeOverlay = () => {
     setOverlayVisible(false);
@@ -121,8 +123,16 @@ const Schedule = () => {
 
   return (
     <div className="schedule-container">
-      <h2 className="schedule-header">Schedule</h2>
-      <div className="schedule-layout">
+              <div className="schedule-header-container">
+          <h2 className="schedule-header">Schedule 
+          <button className="add-schedule-button" onClick={() => navigate('/add-schedule')}>
+            <FontAwesomeIcon icon={faPlus} /> Add Schedule
+          </button></h2>
+        </div>
+        <div className="current-month-schedule" style={{ fontSize: '2em', margin: '20px 0' }}>
+          {moment().format("MMMM YYYY")}
+        </div>
+<div className="schedule-layout">
         <div className="calendar-schedule">
           <div className="days-header-schedule">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
@@ -151,10 +161,10 @@ const Schedule = () => {
                   onClick={openPlusOverlay} 
                 />
                 <p className="event-time-schedule">{event.time}</p>
-      <h4 className="event-title-schedule">{event.title}</h4>
-      <p className="event-description-schedule">{event.description}</p>
-      <div className="details-button" onClick={() => openOverlay(event)}>View Details</div> {/* Make sure event has a timeline */}
-    </div>
+                <h4 className="event-title-schedule">{event.title}</h4>
+                <p className="event-description-schedule">{event.description}</p>
+                <div className="details-button" onClick={() => openOverlay(event)}>View Details</div>
+              </div>
             ))
           ) : (
             <p>No events for this date.</p>
@@ -205,7 +215,7 @@ const Schedule = () => {
                     onChange={(e) => setEventType(e.target.value)}
                     placeholder="Enter Event Type (e.g., Wedding)"
                     className="event-type-input-sched"
-                    onClick={() => setShowEventTypes(true)} // Show event types dropdown
+                    onClick={() => setShowEventTypes(true)}
                   />
                   {showEventTypes && (
                     <div className="custom-dropdown-sched">
@@ -215,7 +225,7 @@ const Schedule = () => {
                             key={type} 
                             onClick={() => {
                               setEventType(type);
-                              setShowEventTypes(false); // Close dropdown after selection
+                              setShowEventTypes(false);
                             }}
                             className="dropdown-item-sched"
                           >
@@ -235,7 +245,7 @@ const Schedule = () => {
                       placeholder="Select Date"
                       readOnly
                       className="date-input-sched"
-                      onClick={() => setShowDatePicker(true)} // Show date picker
+                      onClick={() => setShowDatePicker(true)}
                     />
                     <FontAwesomeIcon icon={faCalendar} className="calendar-icon-sched" onClick={() => setShowDatePicker(true)} />
                   </div>
@@ -244,9 +254,9 @@ const Schedule = () => {
                       selected={eventDate}
                       onChange={(date) => {
                         setEventDate(date);
-                        setShowDatePicker(false); // Close date picker after selection
+                        setShowDatePicker(false);
                       }}
-                      inline // Display inline or as a popover
+                      inline
                     />
                   )}
                 </div>
@@ -270,85 +280,83 @@ const Schedule = () => {
                 </div>
               </div>
               <div className="right-side-sched">
-          <h4>Time Frame</h4>
-          <table className="time-frame-table-sched" style={{ borderCollapse: 'collapse' }}>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Event</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Sample rows, replace with your dynamic data */}
-              <tr>
-                <td>09:00 AM</td>
-                <td>Event Start</td>
-                <td>Discussion begins</td>
-              </tr>
-              <tr>
-                <td>10:00 AM</td>
-                <td>Wrap Up</td>
-                <td>Conclude discussions</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="button-container-sched">
-  <button className="add-event-button-sched" onClick={openEventDetailsOverlay}>Add Event</button>
-  <button className="delete-event-button-sched">Delete Event</button>
-  <button className="save-button-sched">Save</button>
-</div>
+                <h4>Time Frame</h4>
+                <table className="time-frame-table-sched" style={{ borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Event</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>09:00 AM</td>
+                      <td>Event Start</td>
+                      <td>Discussion begins</td>
+                    </tr>
+                    <tr>
+                      <td>10:00 AM</td>
+                      <td>Wrap Up</td>
+                      <td>Conclude discussions</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="button-container-sched">
+                  <button className="add-event-button-sched" onClick={openEventDetailsOverlay}>Add Event</button>
+                  <button className="delete-event-button-sched">Delete Event</button>
+                  <button className="save-button-sched">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
 
-{eventDetailsOverlayVisible && (
-  <div className="new-overlay">
-    <div className="new-overlay-content">
-      <button onClick={closeEventDetailsOverlay} className="close-button-newoverlay">X</button>
+      {eventDetailsOverlayVisible && (
+        <div className="new-overlay">
+          <div className="new-overlay-content">
+            <button onClick={closeEventDetailsOverlay} className="close-button-newoverlay">X</button>
 
-      <div className="overlay-header">
-        <h4>Event Details</h4>
-      </div>
-      <div className="form-group">
-        <label>Time:</label>
-        <div className="time-inputs">
-          <input 
-            type="time" 
-            value={startTime} 
-            onChange={(e) => setStartTime(e.target.value)} 
-            className="time-input-sched"
-          />
+            <div className="overlay-header">
+              <h4>Event Details</h4>
+            </div>
+            <div className="form-group">
+              <label>Time:</label>
+              <div className="time-inputs">
+                <input 
+                  type="time" 
+                  value={startTime} 
+                  onChange={(e) => setStartTime(e.target.value)} 
+                  className="time-input-sched"
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label>Event Name:</label>
+              <input 
+                type="text" 
+                value={eventName} 
+                onChange={(e) => setEventName(e.target.value)} 
+                placeholder="Enter event name"
+                className="event-name-input"
+              />
+            </div>
+            <div className="form-group">
+              <label>Description:</label>
+              <textarea 
+                value={eventDescription} 
+                onChange={(e) => setEventDescription(e.target.value)} 
+                placeholder="Enter event description"
+                className="description-textarea"
+              />
+            </div>
+            <div className="button-container">
+              <button onClick={handleSaveEventDetails} className="save-button">Save</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="form-group">
-        <label>Event Name:</label>
-        <input 
-          type="text" 
-          value={eventName} 
-          onChange={(e) => setEventName(e.target.value)} 
-          placeholder="Enter event name"
-          className="event-name-input"
-        />
-      </div>
-      <div className="form-group">
-        <label>Description:</label>
-        <textarea 
-          value={eventDescription} 
-          onChange={(e) => setEventDescription(e.target.value)} 
-          placeholder="Enter event description"
-          className="description-textarea"
-        />
-      </div>
-      <div className="button-container">
-        <button onClick={handleSaveEventDetails} className="save-button">Save</button>
-      </div>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 };

@@ -11,68 +11,99 @@ const Equipment = () => {
   const [newItem, setNewItem] = useState("");
   const [newItemCount, setNewItemCount] = useState("");
   const [removeMode, setRemoveMode] = useState(false);
-  const [itemsToRemove, setItemsToRemove] = useState([]); // State to track items for removal
-  const eventId = location.state?.eventId; // Get eventId from location state
+  const [itemsToRemove, setItemsToRemove] = useState([]);
+  const eventId = location.state?.eventId;
 
-  // Fetch inventory data
-  const fetchInventory = useCallback(async (eventId) => {
+  const fetchInventory = useCallback(async () => {
+    if (!eventId) {
+      console.error("Event ID is not defined.");
+      return;
+    }
+
     try {
       const response = await axios.get(`http://localhost:8000/api/equipment?event_id=${eventId}`);
       setInventoryData(response.data);
     } catch (error) {
       console.error("Error fetching inventory data:", error.response?.data || error.message);
     }
-  }, []);
+  }, [eventId]);
 
   useEffect(() => {
-    if (eventId) {
-      fetchInventory(eventId);
-    }
-  }, [eventId, fetchInventory]);
+    fetchInventory();
+  }, [fetchInventory]);
 
-  // Handle adding a new item
   const handleAddItem = async () => {
-    if (newItem && newItemCount && eventId) {
+    if (newItem.trim() && newItemCount > 0 && eventId) {
       try {
         await axios.post('http://localhost:8000/api/equipment', {
-          item: newItem,
+          item: newItem.trim(),
           number_of_items: parseInt(newItemCount),
           number_of_sort_items: 0,
           status: "",
           event_id: eventId
         });
-        fetchInventory(eventId);
-        setNewItem("");
-        setNewItemCount("");
-        setModalVisible(false);
+        fetchInventory();
+        resetNewItemInputs();
       } catch (error) {
         console.error("Error adding the item:", error.response?.data || error.message);
       }
     } else {
-      console.error("Please provide item name and count.");
+      console.error("Please provide a valid item name and count.");
     }
   };
 
-  // Handle marking an item for removal (only hides it in UI)
+  const resetNewItemInputs = () => {
+    setNewItem("");
+    setNewItemCount("");
+    setModalVisible(false);
+  };
+
   const handleRemoveItem = (equip_id) => {
-    setItemsToRemove((prevItems) => {
-      if (prevItems.includes(equip_id)) {
-        return prevItems.filter(item => item !== equip_id);
-      } else {
-        return [...prevItems, equip_id];
-      }
-    });
+    setItemsToRemove(prevItems => 
+      prevItems.includes(equip_id) 
+        ? prevItems.filter(item => item !== equip_id) 
+        : [...prevItems, equip_id]
+    );
   };
 
-  // Toggle remove mode
   const handleRemoveModeToggle = () => {
-    setRemoveMode(!removeMode);
+    setRemoveMode(prev => !prev);
   };
 
-  // Calculate totals
   const totalItems = inventoryData.reduce((sum, item) => sum + item.number_of_items, 0);
   const totalBroken = inventoryData.filter(item => item.status === "Broken").length;
   const totalMissing = inventoryData.filter(item => item.status === "Missing").length;
+
+  const handleIncrementSortItem = async (equip_id, currentSortItems) => {
+    if (!equip_id) return;
+
+    const updatedSortItems = currentSortItems + 1; // Increment by 1
+    
+    await updateSortItemsInDB(equip_id, updatedSortItems); // Send update to backend
+};
+
+
+const handleDecrementSortItem = async (equip_id, currentSortItems) => {
+  if (!equip_id) return;
+
+  const updatedSortItems = Math.max(0, currentSortItems - 1); // Decrement by 1 but no lower than 0
+  
+  await updateSortItemsInDB(equip_id, updatedSortItems); // Send update to backend
+};
+
+
+const updateSortItemsInDB = async (equip_id, number_of_sort_items) => {
+  try {
+      await axios.put(`http://localhost:8000/api/equipment/${equip_id}`, {
+          number_of_sort_items, // The updated value
+          event_id: eventId
+      });
+      fetchInventory(); // Refresh the inventory after the update
+  } catch (error) {
+      console.error("Error updating sort items:", error.response?.data || error.message);
+  }
+};
+
 
   return (
     <div className="equipment-container">
@@ -94,16 +125,30 @@ const Equipment = () => {
             <div className="table-header-cell-equipment">STATUS</div>
           </div>
           {inventoryData.map((item) => (
-            !itemsToRemove.includes(item.equip_id) && ( // Check if item is not in the remove list
+            !itemsToRemove.includes(item.equip_id) && (
               <div key={item.equip_id} className="table-row-equipment">
                 {removeMode && (
-                  <button className="remove-button-equipment" onClick={() => handleRemoveItem(item.equip_id)}>
+                  <button 
+                    className="remove-button-equipment" 
+                    onClick={() => handleRemoveItem(item.equip_id)}>
                     <IoMdRemoveCircle size={24} color="red" />
                   </button>
                 )}
                 <div className="table-cell-equipment">{item.item}</div>
                 <div className="table-cell-equipment">{item.number_of_items}</div>
-                <div className="table-cell-equipment">{item.number_of_sort_items}</div>
+                <div className="table-cell-equipment">
+                  <button 
+                    className="sort-button" 
+                    onClick={() => handleDecrementSortItem(item.equip_id, item.number_of_sort_items)}>
+                    <IoMdRemoveCircle size={24} color="black" />
+                  </button>
+                  {item.number_of_sort_items}
+                  <button 
+                    className="sort-button" 
+                    onClick={() => handleIncrementSortItem(item.equip_id, item.number_of_sort_items)}>
+                    <IoMdAddCircle size={24} color="black" />
+                  </button>
+                </div>
                 <div className="table-cell-equipment" style={{ color: item.status === "Broken" ? 'red' : 'black' }}>
                   {item.status}
                 </div>
@@ -148,6 +193,7 @@ const Equipment = () => {
                 value={newItemCount}
                 onChange={(e) => setNewItemCount(e.target.value)}
                 placeholder="Enter number of items"
+                min="1"
               />
             </div>
             <button className="modal-button-equipment" onClick={handleAddItem}>Add Item</button>

@@ -4,11 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import proPic from './images/pro_pic.png'; // Ensure the path to the image is correct
 import event1 from './images/details.png'; // Added image for the event
+import Modal from '@mui/material/Modal'; // Import Modal from Material UI
+
+
+
+
 
 const Notification = () => {
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const [modalVisibleDecline, setModalVisibleDecline] = useState(false); // State for modal visibility
   const [selectedTab, setSelectedTab] = useState('All');
   const [selectedEvent, setSelectedEvent] = useState(null); // State for selected event details
 
+
+  const handleAccept = () => {
+    setModalVisible(true); // Show the overlay when booking an event
+  };
+  const handleDecline = () => {
+    setModalVisibleDecline(true); // Show the overlay when booking an event
+  };
+  
+  const handleCloseModal = () => {
+    setModalVisible(false); // Close the overlay
+  };
+  const handleCloseModalDecline = () => {
+    setModalVisibleDecline(false); // Close the overlay
+  };
   const notificationsData = {
     'This Week': [
       {
@@ -117,10 +138,10 @@ const Notification = () => {
               </div>
             </div>
             <div className="buttons-container">
-              <button className="accept-button">
+              <button className="accept-button" onClick={handleAccept}>
                 <FontAwesomeIcon icon={faCheck} /> Accept
               </button>
-              <button className="decline-button">
+              <button className="decline-button" onClick={handleDecline}>
                 <FontAwesomeIcon icon={faTimes} /> Decline
               </button>
               <button className="view-details-button" onClick={() => setSelectedEvent(notification)}>
@@ -210,6 +231,31 @@ const Notification = () => {
           </div>
         </div>
       )}
+
+      <Modal
+        open={modalVisible}
+        onClose={handleCloseModal}
+        className="modal-overlay-guestpage"
+      >
+        <div className="modal-content-guestpage">
+          <button className="close-modal-btn-guestpage" onClick={handleCloseModal}>
+            &times; {/* X Button */}
+          </button>
+          <img src={require('./images/popup-accept.png')} alt="Popup" className="popup-image-guestpage" />
+        </div>
+      </Modal>
+      <Modal
+        open={modalVisibleDecline}
+        onClose={handleCloseModalDecline}
+        className="modal-overlay-guestpage"
+      >
+        <div className="modal-content-guestpage">
+          <button className="close-modal-btn-guestpage" onClick={handleCloseModalDecline}>
+            &times; {/* X Button */}
+          </button>
+          <img src={require('./images/popup-delete.png')} alt="Popup" className="popup-image-guestpage" />
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -50,8 +50,8 @@ const packagesData = [
 ];
 
 // Render function for package items
-const renderPackageItem = (item) => (
-  <div className="package-item-dashboard" key={item.id}>
+const renderPackageItem = (item, handlePackageClick) => (
+  <div className="package-item-dashboard" key={item.id} onClick={() => handlePackageClick(item)}>
     <img src={item.image} alt={item.packagename} className="image-dashboard" />
     <div className="packagename-dashboard">{item.packagename}</div>
     <div className="detail-container-dashboard">
@@ -72,35 +72,39 @@ function Dashboard() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showDetailsOverlay, setShowDetailsOverlay] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [showPackageOverlay, setShowPackageOverlay] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/events')
-      .then(response => {
+    axios
+      .get('http://localhost:8000/api/events')
+      .then((response) => {
         const today = new Date();
         const currentMonthIndex = today.getMonth();
         const eventDates = response.data
-          .filter(event => new Date(event.date).getMonth() === currentMonthIndex)
-          .map(event => new Date(event.date).getDate());
+          .filter((event) => new Date(event.date).getMonth() === currentMonthIndex)
+          .map((event) => new Date(event.date).getDate());
 
         setMonthlyBookings(eventDates);
         setCurrentMonth(`${today.toLocaleString('default', { month: 'long' })} ${today.getFullYear()}`);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching events:', error);
       });
   }, []);
 
   const fetchEventsForDay = (day) => {
     const date = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    axios.get('http://localhost:8000/api/events', {
-      params: { date: date }
-    })
-      .then(response => {
-        const filteredEvents = response.data.filter(event => new Date(event.date).getDate() === day);
+    axios
+      .get('http://localhost:8000/api/events', {
+        params: { date: date },
+      })
+      .then((response) => {
+        const filteredEvents = response.data.filter((event) => new Date(event.date).getDate() === day);
         setEvents(filteredEvents);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching events for day:', error);
         setEvents([]);
       });
@@ -126,21 +130,18 @@ function Dashboard() {
     setSelectedEvent(null);
   };
 
-  const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+  const handlePackageClick = (item) => {
+    setSelectedPackage(item);
+    setShowPackageOverlay(true);
+  };
 
-  const schedules = [
-    {
-      time: "09:00 AM",
-      description: "Team Meeting",
-      timeline: [
-        { time: "09:00 AM", description: "Event Start" },
-        { time: "09:15 AM", description: "Introduction to the team" },
-        { time: "09:30 AM", description: "Updates from each member" },
-        { time: "10:00 AM", description: "Discussion on blockers" },
-        { time: "10:30 AM", description: "Wrap up and next steps" },
-      ],
-    },
-  ];
+  const handleClosePackageOverlay = () => {
+    setShowPackageOverlay(false);
+    setSelectedPackage(null);
+  };
+
+  const daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
+  const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   return (
     <div className="dashboard-container">
@@ -154,7 +155,12 @@ function Dashboard() {
               <span>{currentMonth}</span>
             </div>
             <div className="calendar-body">
-              {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => (
+              {daysOfWeek.map((day, index) => (
+                <div key={index} className="calendar-day-name">
+                  {day}
+                </div>
+              ))}
+              {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => (
                 <div
                   key={day}
                   className={`calendar-day ${monthlyBookings.includes(day) ? 'has-booking' : ''}`}
@@ -168,8 +174,10 @@ function Dashboard() {
                     <div className="event-overlay">
                       <ul>
                         {events.length > 0 ? (
-                          events.map(event => (
-                            <li key={event.id} onClick={() => handleEventClick(event)}>{event.name}</li>
+                          events.map((event) => (
+                            <li key={event.id} onClick={() => handleEventClick(event)}>
+                              {event.name}
+                            </li>
                           ))
                         ) : (
                           <li>No events</li>
@@ -181,37 +189,66 @@ function Dashboard() {
               ))}
             </div>
           </div>
-          <button className="create-event-button" onClick={() => navigate('/create-event')}>Create an Event</button>
-          <button className="events-button" onClick={() => navigate('/events')}>Events</button>
+          <button className="create-event-button" onClick={() => navigate('/create-event')}>
+            Create an Event
+          </button>
+          <button className="events-button" onClick={() => navigate('/events')}>
+            Events
+          </button>
         </div>
       </div>
       <div className="packages-section-dashboard">
         <h2>Packages</h2>
         <div className="events-list-container-dashboard">
-          {packagesData.map(renderPackageItem)}
+          {packagesData.map((item) => renderPackageItem(item, handlePackageClick))}
         </div>
       </div>
 
       {/* Event Details Overlay */}
-    {/* Event Details Overlay */}
-{showDetailsOverlay && selectedEvent && (
-  <div className="details-overlay-dashboard">
-    <div className="overlay-content-dashboard">
-      <div className="event-details-dashboard">
-        <h3>{selectedEvent.name}</h3>
-        <p>Date: {new Date(selectedEvent.date).toLocaleDateString()}</p>
-        <p>Pax: {selectedEvent.pax}</p>
-        <p>Venue: {selectedEvent.venue}</p>
-        <button className='close-button-dashboard' onClick={handleCloseOverlay}>Close</button>
-      </div>
-      <div className="image-section-dashboard">
-        <img src={require('./images/details.png')} alt="Event Details" style={{ width: '100%', borderRadius: '10px' }} />
-      </div>
-    </div>
-  </div>
-)}
+      {showDetailsOverlay && selectedEvent && (
+        <div className="details-overlay-dashboard">
+          <div className="overlay-content-dashboard">
+            <div className="event-details-dashboard">
+              <h3>{selectedEvent.name}</h3>
+              <p>Date: {new Date(selectedEvent.date).toLocaleDateString()}</p>
+              <p>Pax: {selectedEvent.pax}</p>
+              <p>Venue: {selectedEvent.venue}</p>
+              <button className="close-button-dashboard" onClick={handleCloseOverlay}>
+                Close
+              </button>
+            </div>
+            <div className="image-section-dashboard">
+              <img src={require('./images/details.png')} alt="Event Details" style={{ width: '100%', borderRadius: '10px' }} />
+            </div>
+          </div>
+        </div>
+      )}
 
-
+      {/* Package Overlay */}
+      {showPackageOverlay && selectedPackage && (
+        <div className="details-overlay-dashboard-overlay">
+          <div className="overlay-content-dashboard-overlay">
+            <button className="close-button-dashboard-overlay" onClick={handleClosePackageOverlay}>
+              X
+            </button>
+            <img src={selectedPackage.image} alt={selectedPackage.packagename} className="image-dashboard-overlay" />
+            <h3>{selectedPackage.packagename}</h3>
+            <p>Price: {selectedPackage.price}</p>
+            <p>
+              Description: This package offers a comprehensive solution for your event needs. With top-notch services and amenities, Package{' '}
+              {selectedPackage.packagename} ensures a memorable experience for all your guests.
+            </p>
+            <h4>Inclusions:</h4>
+            <ul>
+              <li>Seating arrangement for {selectedPackage.pax}</li>
+              <li>Premium catering services</li>
+              <li>Professional event coordination</li>
+              <li>State-of-the-art sound system</li>
+              <li>Elegant stage and lighting setup</li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

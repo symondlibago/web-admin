@@ -145,7 +145,12 @@ const Profile = () => {
 
         <h2 className="popular-event-text-profile">Popular Events</h2>
 
+        
+
         <div className="events-list-container-profile">
+        <div className="broken-box-profile-events">
+                  <button className="add-package-button-profile" onClick={() => navigate('/create-event')}>Add Event</button>
+                </div> 
           {sortedEventsData.map(({ month }) => (
             <div className="month-folder-profile" key={month} onClick={() => setSelectedMonth(month)}>
               <h3>{month}</h3>
@@ -161,7 +166,7 @@ const Profile = () => {
               <div className="add-package-container">
                 <div className="broken-box-profile">
                   <p className="broken-box-text">Add New Package</p>
-                  <button className="add-package-button-profile">Add Package</button>
+                  <button className="add-package-button-profile" onClick={() => navigate('/create-event-portfolio')}>Add Package</button>
                 </div>
               </div>
               {packagesData.map(renderPackageItem)}

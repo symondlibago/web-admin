@@ -23,7 +23,7 @@ const EventPortfolio = () => {
           <button onClick={() => navigate('/edit-profile')} className="back-button-portfolio">
             <IoArrowBack size={32} color="#FFC42B" />
           </button>
-          <h1 className="header-text-portfolio">Service Details</h1>
+          <h1 className="header-text-portfolio">Package Details</h1>
         </div>
 
         <button className="cover-photo-container-portfolio" onClick={handleAddCoverPhoto}>

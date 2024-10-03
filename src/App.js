@@ -27,6 +27,7 @@ import Schedule from './schedule';
 import ChoosePackage from './choosepackage';
 import GuestPage from './addguest';
 import About from './about';
+import AddSched from './addsched';
 function App() {
   return (
     <Router>
@@ -60,6 +61,7 @@ function App() {
           <Route path="/choose-package" element={<><Navbar /><ChoosePackage/></>} />
           <Route path="/add-guest" element={<><Navbar /><GuestPage/></>} />
           <Route path="/about" element={<><Navbar /><About/></>} />
+          <Route path="/add-schedule" element={<><Navbar /><AddSched/></>} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>

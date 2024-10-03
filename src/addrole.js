@@ -9,7 +9,6 @@ const AddRole = () => {
 
   // State variables for form fields
   const [name, setName] = useState('');
-  const [locationValue, setLocationValue] = useState('');
   const [role, setRole] = useState('');
   const [serviceOffer, setServiceOffer] = useState('');
 
@@ -51,14 +50,6 @@ const AddRole = () => {
               placeholder="Enter Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-            />
-            <p className="settings-text-addrole">Location</p>
-            <input
-              type="text"
-              className="text-input-addrole"
-              placeholder="Enter Location"
-              value={locationValue}
-              onChange={(e) => setLocationValue(e.target.value)}
             />
             <p className="settings-text-addrole">Role</p>
             <input
