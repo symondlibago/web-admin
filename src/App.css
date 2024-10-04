@@ -1383,6 +1383,208 @@ button:hover {
 }
 
 
+/* Full-page overlay for venue selection and details */
+/* Overlay for the venue selection */
+.overlay-createevent {
+  position: fixed;
+  top: 0; /* 15% from top to center it */
+  left: 0; /* 15% from left to center it */
+  width:100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure overlay appears on top */
+  border-radius: 12px; /* Rounded corners for overlay */
+}
+
+/* Venue selection container */
+.venue-selection-container-createevent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between venue items */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%; /* Full width inside the overlay */
+  height: 100%; /* Full height inside the overlay */
+  overflow-y: auto; /* Enable scrolling if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+.venue-selection-container-createevent::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+/* Hide scrollbar for Firefox */
+.venue-selection-container-createevent {
+  scrollbar-width: none; /* Hides the scrollbar in Firefox */
+}
+
+/* Venue item */
+.venue-item-createevent {
+  width: 250px; /* Increase the width of each item */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Venue box with image and button */
+.venue-box-createevent {
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced box shadow */
+  border-radius: 10px 0px 10px 0px;
+  width: 250px; /* Same width as the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #eeba2b;
+  height: 350px; /* Fixed height for equal size */
+  overflow: hidden; /* Prevent overflow */
+  
+}
+
+/* Venue image */
+.venue-image-createevent {
+  width: 110%; /* Adjust size */
+  height: 170px; /* Adjust size */
+  object-fit: cover;
+  border-radius: 8px;
+  border-radius: 10px 0px 10px 0px;
+  margin-bottom: 10px;
+}
+
+/* Choose button */
+.venue-choose-button-createevent {
+  background-color: #EEBA2B;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Push button to the bottom */
+}
+
+
+
+
+.venue-choose-button-createevent:hover {
+  background-color: #eeba2b;
+}
+
+.close-button1-createevent {
+  position: absolute;
+  top: 10px; /* Position it slightly away from the top */
+  right: 10px; /* Position it slightly away from the right */
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px; /* Adjust size as needed */
+  cursor: pointer;
+}
+
+
+/* Venue details container */
+.venue-details-container-createevent {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex; /* Use Flexbox */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
+  width: 90%; /* Width of the overlay */
+  max-width: 600px; /* Maximum width to avoid stretching on larger screens */
+  height: 600px; /* Fixed height */
+  overflow: hidden; /* Prevents overflow */
+  border-radius: 10px 0px 10px 0px;
+  border:3px solid #eeba2b;
+}
+
+/* Venue details image */
+.venue-details-image-createevent {
+  width: 95%;
+  height: 300px;
+  object-fit: cover;
+  padding-bottom: 30px;
+  border-radius: 10px 0px 10px 0px;
+
+}
+
+/* Styling for venue name, address, and description */
+.venue-name-createevent,
+.venue-address-createevent,
+.venue-description-createevent {
+  margin: 10px 0;
+  text-align: center; /* Center text */
+}
+
+.venue-name-createevent {
+  font-weight: bold;
+  color: #eeba2b;
+}
+
+/* Close button for venue details */
+.close-button-createevent {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.venue-details-image-createevent {
+  width: 95%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.venue-name-createevent, .venue-address-createevent, .venue-description-createevent {
+  margin: 10px 0;
+  text-align: center;
+  align-items: center;
+}
+
+.confirm-button-createevent {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.searchbox-container-createevent {
+  display: flex;
+  justify-content: center; /* Center the search bar horizontally */
+  margin-top: 20px; /* Reduce margin below the search bar */
+}
+.search-box-createevent {
+  width: 100%; /* Set the width to 50% */
+  padding-left: 7rem;
+  padding-right: 7rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.venue-address-createevent {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.venue-address-createevent svg {
+  margin-right: 5px;
+  color: #eeba2b;
+}
+
+
+
+
 
 
 

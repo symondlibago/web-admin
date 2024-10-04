@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown, FaTimes, FaMapMarkerAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
 const eventTypes = ["Wedding", "Birthday", "Reunion", "Debut", "Others"];
+const venues = [
+    { id: '1', venuename: 'Cove Garden Resort', image: require('./images/venue1.jpg'), address: 'Zone 3 Old Road, Cagayan de Oro, 9000 Misamis Oriental', description: 'Nestled on the shore of the magnificent Macajalar Bay, Cove Garden Resort is the perfect event venue for you, your loved ones, and your colleagues.' },
+    { id: '2', venuename: 'Garcia Residencia', image: require('./images/venue2.jpg'), address: ' Captain E Jabulin St Centro, Cagayan de Oro, 9000 Misamis Oriental', description: 'GARCIA RESIDENCIA -A modern American style venue for any occasion situated in Cagayan de Oro City. We cater venue rental for: ➡️ Weddings ➡️ Debut ➡️ Birthdays ➡️' },
+    { id: '3', venuename: 'Elarvee', image: require('./images/venue3.jpg'), address: 'CJVV+C66, S Diversion Rd, Cagayan de Oro, 9000 Misamis Oriental', description: 'Party planner sa Lungsod ng Cagayan de Oro' },
+    { id: '4', venuename: 'Casa de Canitoan', image: require('./images/venue4.jpg'), address: 'Macapagal Dr, Cagayan de Oro, 9000 Misamis Oriental', description: 'Property Name: Casa de Canitoan ; Street Address: Macapagal Drive ; Apt, suite, floor etc. : Casa de Canitoan ; City : Cagayan de Oro City - Misamis Oriental.' },
+    { id: '5', venuename: '4 Kings Event Center Uptown', image: require('./images/venue5.jpg'), address: 'FJ3C+P5F, Pacific St, Cagayan de Oro, 9000 Misamis Oriental', description: 'Fronting Terrazzo Restaurant, behind Prawn House Seafood Restaurant. 4 KINGS EVENT CENTER is the ideal spot to celebrate your occasions!' },
+    { id: '6', venuename: 'Cove Garden Resort', image: require('./images/venue1.jpg'), address: 'Zone 3 Old Road, Cagayan de Oro, 9000 Misamis Oriental', description: 'Nestled on the shore of the magnificent Macajalar Bay, Cove Garden Resort is the perfect event venue for you, your loved ones, and your colleagues.' },
+    { id: '7', venuename: 'Garcia Residencia', image: require('./images/venue2.jpg'), address: ' Captain E Jabulin St Centro, Cagayan de Oro, 9000 Misamis Oriental', description: 'GARCIA RESIDENCIA -A modern American style venue for any occasion situated in Cagayan de Oro City. We cater venue rental for: ➡️ Weddings ➡️ Debut ➡️ Birthdays ➡️' },
+    { id: '8', venuename: 'Elarvee', image: require('./images/venue3.jpg'), address: 'CJVV+C66, S Diversion Rd, Cagayan de Oro, 9000 Misamis Oriental', description: 'Party planner sa Lungsod ng Cagayan de Oro' },
+    { id: '9', venuename: 'Casa de Canitoan', image: require('./images/venue4.jpg'), address: 'Macapagal Dr, Cagayan de Oro, 9000 Misamis Oriental', description: 'Property Name: Casa de Canitoan ; Street Address: Macapagal Drive ; Apt, suite, floor etc. : Casa de Canitoan ; City : Cagayan de Oro City - Misamis Oriental.' },
+    { id: '10', venuename: '4 Kings Event Center Uptown', image: require('./images/venue5.jpg'), address: 'FJ3C+P5F, Pacific St, Cagayan de Oro, 9000 Misamis Oriental', description: 'Fronting Terrazzo Restaurant, behind Prawn House Seafood Restaurant. 4 KINGS EVENT CENTER is the ideal spot to celebrate your occasions!' },
+];
 
 const CreateEvent = () => {
     const navigate = useNavigate();
     const [selectedType, setSelectedType] = useState('');
     const [customEventType, setCustomEventType] = useState('');
     const [eventName, setEventName] = useState('');
-    // const [eventDescription, setEventDescription] = useState('');
     const [eventDate, setEventDate] = useState('');
-    // const [invitationMessage, setInvitationMessage] = useState('');
-    // const [peopleToInvite, setPeopleToInvite] = useState('');
-    const [venue, setVenue] = useState('');
-    // const [packageType, setPackageType] = useState('');
     const [pax, setPax] = useState('');
+    const [venue, setVenue] = useState('');
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [venueOverlayOpen, setVenueOverlayOpen] = useState(false); // For venue selection overlay
+    const [venueDetailsOverlay, setVenueDetailsOverlay] = useState(null); // For selected venue details
+    const [searchTerm, setSearchTerm] = useState(''); // For venue search
 
     const handleCancel = () => {
         navigate(-1);
@@ -30,13 +41,9 @@ const CreateEvent = () => {
         const eventData = {
             type: eventType,
             name: eventName,
-            // description: eventDescription,
             date: eventDate,
             pax: parseInt(pax, 10),
-            // invitation_message: invitationMessage,
-            // people_to_invite: peopleToInvite,
             venue: venue,
-            // package_type: packageType,
         };
 
         try {
@@ -59,6 +66,36 @@ const CreateEvent = () => {
         setSelectedType(type);
         setDropdownOpen(false);
     };
+
+    const openVenueOverlay = () => {
+        setVenueOverlayOpen(true);
+    };
+
+    const selectVenue = (venue) => {
+        setVenueDetailsOverlay(venue);
+    };
+
+    const confirmVenueSelection = () => {
+        setVenue(venueDetailsOverlay.venuename);
+        closedVenueDetailsOverlay();
+    };
+    const closedVenueDetailsOverlay = () => {
+        setVenueDetailsOverlay(null);
+        setVenueOverlayOpen(false);
+    };
+    const closeVenueDetailsOverlay = () => {
+        setVenueDetailsOverlay(null);
+    };
+
+    const closeVenueOverlay = () => {
+        setVenueOverlayOpen(false); // Close the overlay
+    };
+
+    // Filter venues based on search term
+    const filteredVenues = venues.filter((venue) =>
+        venue.venuename.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        venue.address.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="gradient-container-createevent">
@@ -98,7 +135,7 @@ const CreateEvent = () => {
                         </div>
                     )}
 
-                    {/* Existing fields for event details */}
+                    {/* Event Details Inputs */}
                     <div className="input-container-createevent">
                         <input
                             type="text"
@@ -108,16 +145,6 @@ const CreateEvent = () => {
                             onChange={(e) => setEventName(e.target.value)}
                         />
                     </div>
-
-                    {/* <div className="input-container-createevent">
-                        <input
-                            type="text"
-                            className="text-input-createevent"
-                            placeholder="Description"
-                            value={eventDescription}
-                            onChange={(e) => setEventDescription(e.target.value)}
-                        />
-                    </div> */}
                     <div className="input-container-createevent date-input-createevent">
                         <input
                             type="date"
@@ -136,34 +163,6 @@ const CreateEvent = () => {
                             onChange={(e) => setPax(e.target.value)}
                         />
                     </div>
-                    {/* <div className="input-container-createevent">
-                        <input
-                            type="text"
-                            className="text-input-createevent"
-                            placeholder="Invitation Message"
-                            value={invitationMessage}
-                            onChange={(e) => setInvitationMessage(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div className="input-container-createevent">
-                        <input
-                            type="text"
-                            className="text-input-createevent"
-                            placeholder="People to Invite"
-                            value={peopleToInvite}
-                            onChange={(e) => setPeopleToInvite(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div className="input-container-createevent venue-input-createevent">
-                        <input
-                            type="text"
-                            className="text-input-createevent"
-                            placeholder="Choose Package"
-                            value={packageType}
-                            onChange={(e) => setPackageType(e.target.value)}
-                        />
-                        <FaChevronDown size={24} color="#B0B0B0" className="icon-right-createevent" />
-                    </div> */}
                     <div className="input-container-createevent venue-input-createevent">
                         <input
                             type="text"
@@ -178,12 +177,67 @@ const CreateEvent = () => {
                         <button className="cancel-button-createevent" onClick={handleCancel}>
                             Cancel
                         </button>
+                        <button className="choose-venue-button-createevent" onClick={openVenueOverlay}>
+                            Choose Venue
+                        </button>
                         <button className="next-button-createevent" onClick={handleNext}>
                             Next
                         </button>
                     </div>
                 </div>
             </div>
+
+            {/* Venue Selection Overlay */}
+            {venueOverlayOpen && (
+                <div className="overlay-createevent">
+                    <FaTimes className="close-button1-createevent" onClick={closeVenueOverlay} />
+                    <div className="venue-selection-container-createevent">
+                        <div className="searchbox-container-createevent">
+                            <input
+                                type="text"
+                                className="search-box-createevent"
+                                placeholder="Search your Venue here!"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="venue-selection-container-createevent">
+                            {/* Filtered Venue List */}
+                            {filteredVenues.map((venue) => (
+                                <div key={venue.id} className="venue-item-createevent">
+                                    <div className="venue-box-createevent">
+                                        <img src={venue.image} alt={venue.venuename} className="venue-image-createevent" />
+                                        <h3 className="venue-name-createevent">{venue.venuename}</h3>
+                                        <p className="venue-address-createevent">
+                                            <FaMapMarkerAlt /> {venue.address}
+                                        </p>
+                                        <button className="venue-choose-button-createevent" onClick={() => selectVenue(venue)}>
+                                            Choose
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Venue Details Overlay */}
+            {venueDetailsOverlay && (
+                <div className="overlay-createevent">
+                    <div className="venue-details-container-createevent">
+                        <FaTimes className="close-button-createevent" onClick={closeVenueDetailsOverlay} />
+                        <img src={venueDetailsOverlay.image} alt={venueDetailsOverlay.venuename} className="venue-details-image-createevent" />
+                        <h2 className="venue-name-createevent">{venueDetailsOverlay.venuename}</h2>
+                        <p className="venue-address-createevent">{venueDetailsOverlay.address}</p>
+                        <p className="venue-description-createevent">{venueDetailsOverlay.description}</p>
+                        <button className="venue-select-button-createevent" onClick={confirmVenueSelection}>
+                            Select Venue
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
