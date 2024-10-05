@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
-import { IoMdCreate,IoMdAdd } from 'react-icons/io';
+import { IoMdAdd } from 'react-icons/io';
+import { IoArrowBack, IoAdd } from 'react-icons/io5'; // Import the necessary icons
 import profilePic from './images/pro_pic.png';
 
 const EditProfile = () => {
@@ -76,12 +77,7 @@ const EditProfile = () => {
                 Save
               </button>
             </div>
-            <div className="button-container-edit">
-              <button className="create-event-button-edit" onClick={() => navigate('/create-event-portfolio')}>
-                <IoMdAdd size={24} color="white" />
-                <span className="create-event-text-edit">Create New Package</span>
-              </button>
-            </div>
+            
             <div className="button-container-edit">
               <button className="create-event-button-edit" onClick={() => handleRoleNavigation('Service Provider')}>
                 <IoMdAdd size={24} color="white" />

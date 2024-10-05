@@ -6,8 +6,7 @@ import Dashboard from './dashboard';
 import Navbar from './navbar'; // Import the Navbar component
 import Notification from './notification';
 import Events from './events';
-import CreateEvent from './createevent';
-import ChooseServiceProv from './serviceprovider';
+import { CreateEvent, ChoosePackage, ChooseServiceProv, GuestPage } from './createevent';
 import Attendees from './attendees';
 import Inventory from './inventory';
 import Equipment from './equipment';
@@ -24,8 +23,6 @@ import Messages from './messages';
 import Success from './success';
 import PortfolioAdmin from './portfolioadmin';
 import Schedule from './schedule';
-import ChoosePackage from './choosepackage';
-import GuestPage from './addguest';
 import About from './about';
 import AddSched from './addsched';
 function App() {
@@ -39,6 +36,7 @@ function App() {
           <Route path="/notifications" element={<><Navbar /><Notification/></>} />
           <Route path="/events" element={<><Navbar /><Events/></>} />
           <Route path="/create-event" element={<><Navbar /><CreateEvent/></>} />
+          <Route path="/choose-package" element={<><Navbar /><ChoosePackage/></>} />
           <Route path="/choose-service-provider" element={<><Navbar /><ChooseServiceProv/></>} />
           <Route path="/attendee-tracker" element={<><Navbar /><Events/></>} />
           <Route path="/inventory-tracker" element={<><Navbar /><Events/></>} />
@@ -58,7 +56,6 @@ function App() {
           <Route path="/messages" element={<><Navbar /><Messages/></>} />
           <Route path="/success" element={<><Navbar /><Success/></>} />
           <Route path="/schedule" element={<><Navbar /><Schedule/></>} />
-          <Route path="/choose-package" element={<><Navbar /><ChoosePackage/></>} />
           <Route path="/add-guest" element={<><Navbar /><GuestPage/></>} />
           <Route path="/about" element={<><Navbar /><About/></>} />
           <Route path="/add-schedule" element={<><Navbar /><AddSched/></>} />

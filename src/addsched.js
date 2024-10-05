@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaChevronDown } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { IoArrowBack, IoAdd } from 'react-icons/io5';
 import './App.css'; // Ensure this CSS file is created for custom styles
 
 const eventTypes = ["Wedding", "Birthday", "Conference", "Meeting", "Party"];
 
 const AddSched = () => {
+  const navigate = useNavigate(); // Use the navigate hook
   const [eventName, setEventName] = useState("");
   const [eventType, setEventType] = useState("");
   const [eventDate, setEventDate] = useState(null);
@@ -50,6 +53,9 @@ const AddSched = () => {
 
   return (
     <div className="addschedule-container">
+      <button onClick={() => navigate('/schedule')} className="back-button-addschedule">
+        <IoArrowBack size={32} color="#FFC42B" />
+      </button>
       <h2>Add Schedule</h2>
 
       <div className="form-group-addschedule">
@@ -64,22 +70,21 @@ const AddSched = () => {
       </div>
 
       <div className="form-group-addschedule">
-  <label>Choose Event Type:</label>
-  <div className="dropdown-container-addschedule">
-    <div className="dropdown-button-addschedule" onClick={toggleDropdown}>
-      {selectedType || "Select Event Type"}
-      <FaChevronDown />
-    </div>
-    <div className={`dropdown-menu-addschedule ${dropdownOpen ? 'show' : ''}`}>
-      {eventTypes.map((type, index) => (
-        <button key={index} onClick={() => handleSelectEventType(type)}>
-          {type}
-        </button>
-      ))}
-    </div>
-  </div>
-</div>
-
+        <label>Choose Event Type:</label>
+        <div className="dropdown-container-addschedule">
+          <div className="dropdown-button-addschedule" onClick={toggleDropdown}>
+            {selectedType || "Select Event Type"}
+            <FaChevronDown />
+          </div>
+          <div className={`dropdown-menu-addschedule ${dropdownOpen ? 'show' : ''}`}>
+            {eventTypes.map((type, index) => (
+              <button key={index} onClick={() => handleSelectEventType(type)}>
+                {type}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <div className="form-group-addschedule">
         <label>Choose Event Date:</label>

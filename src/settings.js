@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { IoArrowBack } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import './App.css'; // Import the CSS file for styling
 
 const CustomSelect = ({ options, value, onChange }) => {
@@ -36,6 +38,7 @@ const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [textSize, setTextSize] = useState('Medium');
+  const navigate = useNavigate();  // Initialize navigate here
 
   const handleSave = () => {
     alert('Settings updated successfully');
@@ -43,6 +46,11 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
+      {/* Single Back Button at Upper Left Corner */}
+      <button onClick={() => navigate('/dashboard')} className="back-button-addschedule">
+        <IoArrowBack size={32} color="#FFC42B" />
+      </button>
+
       <h1 className="settings-header">Settings</h1>
       
       <div className="settings-item">
@@ -88,12 +96,12 @@ const Settings = () => {
       </div>
 
       <div className="settings-item">
-  <div className="button-container">
-    <button className="settings-save-button" onClick={handleSave}>
-      Save Settings
-    </button>
-  </div>
-</div>
+        <div className="button-container">
+          <button className="settings-save-button" onClick={handleSave}>
+            Save Settings
+          </button>
+        </div>
+      </div>
 
     </div>
   );

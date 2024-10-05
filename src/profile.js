@@ -136,10 +136,6 @@ const Profile = () => {
               <IoMdCreate size={24} color="black" />
               <span className="edit-button-text-profile">Edit Profile</span>
             </button>
-            <button className="portfolio-button-profile" onClick={() => navigate('/portfolioadmin')}>
-              <IoMdArrowForward size={24} color="black" />
-              <span className="portfolio-button-text-profile">Portfolio</span>
-            </button>
           </div>
         </div>
 

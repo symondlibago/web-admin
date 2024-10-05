@@ -65,7 +65,7 @@ const EventPortfolio = () => {
 
         <button className="create-portfolio-button-portfolio" onClick={handleCreatePortfolio}>
           <IoAdd size={24} color="white" />
-          <span className="create-portfolio-text-portfolio">Create Service Portfolio</span>
+          <span className="create-portfolio-text-portfolio">Create Package Details</span>
         </button>
       </div>
     </div>
