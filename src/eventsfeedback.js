@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Pie } from 'react-chartjs-2';  // Import Pie chart
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faMapMarker, faHeart, faHeartBroken, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const initialEventsData = [
-  { id: '1', title: 'Mr. & Mrs. Malik Wedding', image: 'event1.png', date: '2024-07-01', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '2', title: 'Elizabeth Birthday', image: 'event2.png', date: '2024-08-12', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '3', title: 'Class of 1979 Reunion', image: 'event3.png', date: '2024-09-25', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '4', title: 'Corporate Party', image: 'event1.png', date: '2024-10-30', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '5', title: 'Annual Gala', image: 'event2.png', date: '2024-11-15', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '6', title: 'New Year Celebration', image: 'event3.png', date: '2024-12-31', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '7', title: 'Music Festival', image: 'event1.png', date: '2024-06-22', address: 'CDO', buttons: ['Delete', 'Feedback'] },
-  { id: '8', title: 'Art Exhibition', image: 'event2.png', date: '2024-07-05', address: 'CDO', buttons: ['Delete', 'Feedback'] },
+  { id: '1', title: 'Mr. & Mrs. Malik Wedding', date: '2024-07-01', address: 'CDO', buttons: [ 'Feedback'] },
+  { id: '2', title: 'Elizabeth Birthday', date: '2024-08-12', address: 'CDO', buttons: ['Feedback'] },
+  { id: '3', title: 'Class of 1979 Reunion', date: '2024-09-25', address: 'CDO', buttons: ['Feedback'] },
+  { id: '4', title: 'Corporate Party', date: '2024-10-30', address: 'CDO', buttons: [ 'Feedback'] },
+  { id: '5', title: 'Annual Gala', date: '2024-11-15', address: 'CDO', buttons: [ 'Feedback'] },
+  { id: '6', title: 'New Year Celebration', date: '2024-12-31', address: 'CDO', buttons: [ 'Feedback'] },
+  { id: '7', title: 'Music Festival', date: '2024-06-22', address: 'CDO', buttons: ['Feedback'] },
+  { id: '8', title: 'Art Exhibition', date: '2024-07-05', address: 'CDO', buttons: ['Feedback'] },
 ];
 
-function Events() {
+function EventsFeedback() {
   const [search, setSearch] = useState('');
   const [filteredEvents, setFilteredEvents] = useState(initialEventsData);
-  const [likedEvents, setLikedEvents] = useState({});
   const navigate = useNavigate();
 
   const handleSearch = (text) => {
@@ -35,21 +35,31 @@ function Events() {
     }
   };
 
-  const toggleLike = (eventId) => {
-    setLikedEvents((prevState) => ({
-      ...prevState,
-      [eventId]: !prevState[eventId],
-    }));
-  };
 
   const handleDelete = (eventId) => {
     const newData = filteredEvents.filter((item) => item.id !== eventId);
     setFilteredEvents(newData);
   };
 
+  // Pie chart data configuration
+  const pieData = {
+    labels: ['Positive', 'Negative', 'Neutral'],
+    datasets: [
+      {
+        label: 'feedback',
+        data: [65, 20, 15], // Example data
+        backgroundColor: ['green', 'red', 'yellow'], // Example colors
+        hoverBackgroundColor: ['green', 'red', 'yellow'],
+      },
+    ],
+  };
+
   const renderEventItem = (item) => (
     <div key={item.id} className="item-container-eventfeedback">
-      <img src={require(`./images/${item.image}`)} alt={item.title} className="image-eventfeedback" />
+    
+      <div className="pie-chart-container-eventfeedback">
+        <Pie data={pieData} /> {/* Replace image with pie chart */}
+      </div>
       <h3 className="title-eventfeedback">{item.title}</h3>
       <div className="detail-container-eventfeedback">
         <div className="detail-row-eventfeedback">
@@ -61,12 +71,7 @@ function Events() {
           <span className="detail-text-eventfeedback">{item.address}</span>
         </div>
       </div>
-      <button
-        className={`heart-icon-eventfeedback ${likedEvents[item.id] ? 'heart-liked-eventfeedback' : ''}`}
-        onClick={() => toggleLike(item.id)}
-      >
-        <FontAwesomeIcon icon={likedEvents[item.id] ? faHeart : faHeartBroken} size="lg" />
-      </button>
+      
       <div className="buttons-container-eventfeedback">
         {item.buttons.map((button, index) => (
           <button
@@ -105,9 +110,7 @@ function Events() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
-export default Events;
-
-
+export default EventsFeedback;

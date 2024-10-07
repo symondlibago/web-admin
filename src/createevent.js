@@ -616,16 +616,15 @@ const ReviewOverlay = ({ isOpen, onClose, packagesData, allEventsData, guests })
 
 
   
-  const GuestPage = ({ packagesData, allEventsData, selectedEvent }) => {
-    const [guests, setGuests] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const location = useLocation();
-    const { eventData } = location.state || {};
-  
-    // Handling guest addition
-    const handleAddGuest = () => {
+const GuestPage = ({ packagesData, allEventsData, selectedEvent }) => {
+  const [guests, setGuests] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  // Handling guest addition
+  const handleAddGuest = () => {
       if (!name.trim() || !email.trim()) {
           alert("Please fill in both name and email.");
           return;
@@ -637,83 +636,113 @@ const ReviewOverlay = ({ isOpen, onClose, packagesData, allEventsData, guests })
       setGuests([...guests, { name, email }]);
       setName('');
       setEmail('');
-    };
-  
-    // Handling guest removal
-    const handleRemoveGuest = (index) => {
+  };
+
+  // Handling guest removal
+  const handleRemoveGuest = (index) => {
       const newGuests = guests.filter((_, i) => i !== index);
       setGuests(newGuests);
-    };
-  
-    const handleBookEvent = () => {
-      setModalVisible(true); // Show the review overlay
-    };
-  
-    const handleCloseModal = () => {
-      setModalVisible(false); // Close the overlay
-    };
-  
-    return (
-      <div className="guest-page">
-        <h1>Add Guest</h1>
-        <div className="guest-container">
-          <div className="left-section">
-            <label>Name of the Guest</label>
-            <input
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label>Email of the Guest</label>
-            <input
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button onClick={handleAddGuest}>Add Guest</button>
-          </div>
-  
-          <div className="right-section">
-            <table className="guest-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {guests.map((guest, index) => (
-                  <tr key={index}>
-                    <td>{guest.name}</td>
-                    <td>{guest.email}</td>
-                    <td>
-                      <button onClick={() => handleRemoveGuest(index)}>Remove Guest</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-  
-        <button onClick={handleBookEvent}>Book Event</button>
-  
-        <ReviewOverlay 
-  isOpen={modalVisible} 
-  onClose={handleCloseModal}
-  selectedEvent={selectedEvent} // Ensure this is the correct value
-  packagesData={packagesData} 
-  allEventsData={allEventsData} 
-  guests={guests} 
-/>
-
-
-      </div>
-    );
   };
+
+  const handleBookEvent = () => {
+      setModalVisible(true); // Show the review overlay
+  };
+
+  const handleCloseModal = () => {
+      setModalVisible(false); // Close the overlay
+  };
+
+  const openOverlay = () => {
+      setOverlayVisible(true);
+  };
+
+  const closeOverlay = () => {
+      setOverlayVisible(false);
+  };
+
+  return (
+      <div className="guest-page-container-guestpage">
+          <h1 className="header-guestpage">Add Guest</h1>
+          <div className="guest-container-guestpage">
+              <div className="right-section-guestpage">
+                  <table className="guest-table-guestpage">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {guests.map((guest, index) => (
+                              <tr key={index}>
+                                  <td>{guest.name}</td>
+                                  <td>{guest.email}</td>
+                                  <td>
+                                      <button
+                                          className="remove-btn-guestpage"
+                                          onClick={() => handleRemoveGuest(index)}
+                                      >
+                                          Remove
+                                      </button>
+                                  </td>
+                              </tr>
+                          ))}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+          <button className="add-guest-btn-guestpage" onClick={openOverlay}>
+              Add Guest
+          </button>
+
+          <button className="book-event-btn-guestpage" onClick={handleBookEvent}>
+              Book Event
+          </button>
+
+          {overlayVisible && (
+              <div className="overlay-guestpage">
+                  <div className="overlay-content-guestpage">
+                      <button className="close-btn-guestpage" onClick={closeOverlay}>
+                          X
+                      </button>
+                      <h2 className="overlay-header-guestpage">Add Guest</h2>
+                      <label className="name-label-guestpage">Name</label>
+                      <input
+                          type="text"
+                          placeholder="Enter name"
+                          value={name}
+                          className="name-input-guestpage"
+                          onChange={(e) => setName(e.target.value)}
+                      />
+                      <label className="email-label-guestpage">Email</label>
+                      <input
+                          type="email"
+                          placeholder="Enter email"
+                          value={email}
+                          className="email-input-guestpage"
+                          onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <button className="confirm-add-btn-guestpage" onClick={handleAddGuest}>
+                          Add
+                      </button>
+                  </div>
+              </div>
+          )}
+
+          <ReviewOverlay
+              isOpen={modalVisible}
+              onClose={handleCloseModal}
+              selectedEvent={selectedEvent}
+              packagesData={packagesData}
+              allEventsData={allEventsData}
+              guests={guests}
+          />
+      </div>
+  );
+};
+
 
 export { CreateEvent, ChoosePackage, ChooseServiceProv, GuestPage };
  

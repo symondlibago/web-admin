@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css'; // Ensure your CSS file is created and imported
 import { useNavigate, useLocation } from 'react-router-dom'; // For navigation and state management
 import profilePic from './images/pro_pic.png'; // Ensure you use the correct image path
+import { IoArrowBack } from 'react-icons/io5'; // Import the necessary icons
+
 
 const AddRole = () => {
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ const AddRole = () => {
 
   return (
     <div className="gradient-container-addrole">
+    <button onClick={() => navigate('/edit-profile')} className="back-button-addrole">
+        <IoArrowBack size={32} color="#FFC42B" />
+      </button>
       <div className="scroll-view-addrole">
         <div className="container-addrole">
           <h1 className="header-text-addrole">Add Role</h1>

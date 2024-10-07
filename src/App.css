@@ -323,8 +323,10 @@ body, html, #root {
   overflow-x: auto;
   padding-bottom: 20px;
   position: relative;
-  width: 100%;
+  width: 98%;
+  cursor: pointer;
 }
+
 
 .package-item-dashboard {
   background: rgba(255, 255, 255, 0.56);
@@ -483,12 +485,17 @@ button {
 .overlay-content-dashboard-overlay {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
   width: 500px;
   max-width: 90%;
   text-align: center;
   position: relative;
+  border: 2px solid #eeba2b;
+  border-radius: 10px 0px 10px 0px;
   
+}
+
+.overlay-content-dashboard-overlay h4, h3 {
+  color: #eeba2b;
 }
 
 .close-button-dashboard-overlay {
@@ -751,7 +758,7 @@ button:hover {
 }
 
 .footer-text {
-  font-size: 0.9rem;
+  font-size: 0.5rem;
   color: black; /* Default text color */
 }
 
@@ -1858,6 +1865,12 @@ button:hover {
   padding: 20px;
   background: white; /* Set background to white */
 }
+.back-button-attendee {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 
 .header-wrapper {
   display: flex;
@@ -2201,33 +2214,12 @@ button:hover {
 
 /* INVENTORY */
 
-.status-dots-inventory {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.status-dot-inventory {
-  width: 1.5rem; /* Smaller size */
-  height: 1.5rem; /* Smaller size */
-  border-radius: 50%;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: border 0.3s;
-}
-
-.status-label-inventory {
-  margin-left: 10px;
-  font-size: 14px;
-  color: black; /* Adjust the color as needed */
-}
-
 .inventory-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: white; /* Changed to white */
-  color: black; /* Changed to black for general text */
+  background: white;
+  color: black;
 }
 
 .content-inventory {
@@ -2237,23 +2229,40 @@ button:hover {
 
 .header-section-inventory {
   margin-top: 10px;
+  position: relative; /* Add relative position to position the Back button */
+}
+
+.back-button-inventory {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.back-button-inventory:hover {
+  background-color: transparent;
 }
 
 .header-text-inventory {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  color: #FFC42B; /* Keep the Inventory Tracker text yellow */
+  color: #FFC42B;
 }
 
 .header-highlight-inventory {
-  color: #FFC42B; /* Keep the highlighted parts yellow */
+  color: #FFC42B;
 }
 
 .header-line-inventory {
   border: 0;
-  height: 1px; /* Increase height for better visibility */
-  background: linear-gradient(to right, transparent, black, transparent); /* Stronger black fading */
+  height: 1px;
+  background: linear-gradient(to right, transparent, black, transparent);
   margin: 10px 0;
 }
 
@@ -2261,14 +2270,12 @@ button:hover {
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
-  background: transparent;
 }
 
 .table-header-inventory {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  background-color: transparent;
 }
 
 .table-header-text-inventory {
@@ -2281,27 +2288,25 @@ button:hover {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid transparent; /* Ensure no visible lines */
 }
 
 .table-row-text-inventory {
   flex: 1;
   text-align: center;
-  color: black; /* General table text is now black */
+  color: black;
 }
 
 .summary-inventory {
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
-  background: transparent;
   text-align: center;
 }
 
 .summary-text-inventory {
   font-size: 16px;
   margin: 5px 0;
-  color: black; /* Ensure summary text is black */
+  color: black;
 }
 
 
@@ -2319,11 +2324,19 @@ button:hover {
 /* Header Styles */
 .header-equipment {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background: transparent;
+  align-items: center; /* Center items vertically */
+  padding: 10px 20px; /* Add some padding */
+}
+.back-button-equipment {
+  background: none; /* No background */
+  border: none; /* No border */
+  color: black; /* Button text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-right: 10px; /* Space between button and text */
+}
+
+.back-button-equipment:hover {
+background-color: transparent;
 }
 
 .menu-button-equipment {
@@ -2333,9 +2346,9 @@ button:hover {
   cursor: pointer;
 }
 
-.header-title-equipment {
-  text-align: center;
-  flex: 1;
+.header-text-equipment {
+  flex: 1; /* Allow text to take remaining space */
+  text-align: center; /* Align text to the left */
 }
 
 .header-text-equipment {
@@ -2646,6 +2659,13 @@ button:hover {
   justify-content: space-between;
 }
 
+.month-text-profile {
+  font-size: 18px; 
+  font-weight: bold; 
+  color: #000; 
+}
+
+
 /* Down Arrow Icon */
 .month-folder-profile::after {
   content: '▼';
@@ -2800,6 +2820,7 @@ button:hover {
   max-width: 800px;
   position: relative;
   overflow-x: auto;
+  border: 2px solid #eeba2b;
 }
 
 .close-button-profile {
@@ -2886,6 +2907,17 @@ button:hover {
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
 }
+
+.back-button-edit {
+  position: fixed;
+  top: 70px; /* Adjust this value to position vertically */
+  left: 20px; /* Adjust this value to position horizontally */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 100; /* Ensure it's above other elements */
+}
+
 
 .scroll-view-edit {
   flex-grow: 1;
@@ -3049,7 +3081,6 @@ button:hover {
 
 
 /* ADD ROLE */
-/* ADD ROLE */
 .gradient-container-addrole {
   display: flex;
   flex-direction: column;
@@ -3058,6 +3089,16 @@ button:hover {
   color: black; /* Changed to black */
   justify-content: center;
   overflow: hidden; /* Hide scrollbar */
+}
+
+.back-button-addrole {
+  position: fixed;
+  top: 80px; /* Adjust this value to position vertically */
+  left: 20px; /* Adjust this value to position horizontally */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 100; /* Ensure it's above other elements */
 }
 
 .scroll-view-addrole {
@@ -3827,6 +3868,12 @@ textarea.text-input-addrole {
     grid-template-columns: 1fr; /* 1 item per row */
   }
 }
+
+.pie-chart-container-eventfeedback {
+  display: flex;
+  justify-content: center;}
+
+
 
 /* Container for both sections */
 /* GROUP */
@@ -4962,132 +5009,162 @@ background-color: #eeba2b;
 
 
 /* GUEST PAGE */
-/* Overall container */
-.guestpage-guestpage {
-  text-align: center;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
 
-/* Header */
-.header-guestpage {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-/* Container for left and right sections */
-.guest-container-guestpage {
+/* Container for the Guest Page */
+.guest-page-container-guestpage {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Header - Centered */
+.header-guestpage {
+  text-align: center;
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Left Section Styles */
-.left-section-guestpage {
-  flex: 1;
-  padding: 20px;
-  text-align: center;
+/* Guest Container */
+.guest-container-guestpage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-/* Input styles */
-.label-guestpage {
-  display: block;
-  margin: 10px 0 5px;
-}
-
-.input-guestpage {
-  border: none;
-  border-bottom: 2px solid #EEBA2B; /* Custom line color */
-  padding: 10px;
-  width: 50%; /* Adjust width for shorter line */
-  font-size: 1rem;
-  outline: none; /* Remove outline on focus */
-}
-
-.input-guestpage::placeholder {
-  color: #888; /* Placeholder color */
-}
-
-.input-guestpage:focus {
-  border-bottom: 2px solid #EEBA2B; /* Maintain custom line color on focus */
-}
-
-/* Add Guest button */
-.add-guest-btn-guestpage {
-  background-color: #EEBA2B;
-  color: white;
-  border: none;
-  border-radius: 1rem;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin: 20px auto; /* Center button */
-  display: block; /* Ensure it's a block-level element */
-}
-
-.add-guest-btn-guestpage:hover {
-  background-color: #EEBA2B;
-}
-
-/* Right Section Styles */
+/* Right Section (Table) - Centered on Screen */
 .right-section-guestpage {
-  flex: 1;
-  padding: 20px;
+  width: 60%;
+  display: flex;
+  justify-content: center;
 }
 
-/* Guest Table Styles */
 .guest-table-guestpage {
   width: 100%;
   border-collapse: collapse;
+  text-align: left;
 }
 
-/* Header Styles */
-.guest-table-guestpage th {
-  background-color: #EEBA2B; /* Custom header background */
-  color: white; /* White text */
-  padding: 10px;
-}
-
-/* Row Styles */
-.guest-table-guestpage tr {
-  background-color: transparent; /* Default row background */
-}
-
+.guest-table-guestpage th,
 .guest-table-guestpage td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  color: black; /* Default text color for table cells */
+  border: 1px solid #000; /* Visible border lines */
+  padding: 10px;
+  text-align: center;
 }
 
-/* Remove Guest Button */
-.remove-guest-btn-guestpage {
-  background-color: #dc3545; /* Red for remove */
+.guest-table-guestpage th {
+  background-color: #eeba2b;
+  color: white;
+}
+
+.remove-btn-guestpage {
+  background-color: #ff4d4d;
   color: white;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.remove-guest-btn-guestpage:hover {
-  background-color: #c82333; /* Darker red on hover */
+.remove-btn-guestpage:hover {
+  background-color: #cc0000;
 }
 
-/* Book Event Button */
+/* Add Guest and Book Event Buttons */
+.add-guest-btn-guestpage,
 .book-event-btn-guestpage {
-  background-color: #EEBA2B;
+  background-color: #eeba2b;
   color: white;
+  padding: 10px 20px;
   border: none;
-  padding: 10px 30px;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 20px;
+  margin: 10px;
 }
 
+.add-guest-btn-guestpage:hover,
 .book-event-btn-guestpage:hover {
-  background-color: #EEBA2B;
+  background-color: #eeba2b;
 }
 
-.modal-overlay-guestpage {
+/* Overlay Styles */
+.overlay-guestpage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content-guestpage {
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  height: auto;
+  position: relative;
+  border-radius: 10px;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #eeba2b;
+}
+
+/* Close Button in the Upper Right Corner */
+.close-btn-guestpage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Overlay Header */
+.overlay-header-guestpage {
+  font-size: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #eeba2b;
+}
+
+/* Label and Input Styles for the Modal */
+.name-label-guestpage,
+.email-label-guestpage {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.name-input-guestpage,
+.email-input-guestpage {
+  width: 95%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Confirm Add Button */
+.confirm-add-btn-guestpage {
+  width: 30%;
+  background-color: #eeba2b;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.confirm-add-btn-guestpage:hover {
+  background-color: #eeba2b;
+}.modal-overlay-guestpage {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -5125,52 +5202,102 @@ background-color: #eeba2b;
   margin-top: 10px;
 }
 
+
 /* ABOUT */
 
-.about-container {
+.about-container-about {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align the header */
+  align-items: center;
   padding: 20px;
-  height: 100vh; /* Full height */
-  background-color: white; /* Light background */
+  height: 100vh;
+  background-color: white;
 }
 
-.about-header {
-  font-size: 2.5rem; /* Header font size */
-  margin-bottom: 20px; /* Space below the header */
+.about-header-about {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
   color: #eeba2b;
 }
 
-.about-content {
+.event-buttons-about {
   display: flex;
-  align-items: center;
-  width: 100%; /* Full width */
-  max-width: 1200px; /* Max width to maintain readability */
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.about-left, .about-right {
-  width: 50%; /* Each side takes up almost half of the width */
-  background-color: white; /* White background for the content */
-  padding: 20px; /* Padding inside each section */
-  align-items: center;
-
+.event-buttons-about button {
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: 2px solid #eeba2b;
+  padding: 10px 20px;
+  color: black;
+  margin: 0 10px;
+  cursor: pointer;
+  position: relative; /* For underline effect */
+  overflow: hidden;
 }
 
-.about-left {
-  margin-right: 20px; /* Space between sections */
+.event-buttons-about button::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #eeba2b;
+  transition: width 0.4s ease-in-out; /* Underline animation */
 }
 
-.about-subheader {
-  font-size: 1.5rem; /* Subheader font size */
-  margin-bottom: 10px; /* Space below subheader */
-  text-align: center; /* Center the subheader */
-  color:#eeba2b;
+.event-buttons-about button:hover::before {
+  width: 100%; /* Full underline on hover */
 }
 
-p {
-  color: #333; /* Darker text for readability */
+
+.active-button-about {
+  background-color: #eeba2b;
+  color: white;
 }
+
+.description-container-about {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+}
+
+.description-text-about {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.fade-in-about {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.fade-out-about {
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 
 /* ADD SCHEDULE */
 .addschedule-container {
@@ -5345,6 +5472,8 @@ p {
   color: black;
   font-size: 0.9rem;
 }
+
+
 
 
 

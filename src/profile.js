@@ -149,7 +149,7 @@ const Profile = () => {
                 </div> 
           {sortedEventsData.map(({ month }) => (
             <div className="month-folder-profile" key={month} onClick={() => setSelectedMonth(month)}>
-              <h3>{month}</h3>
+              <h3 className='month-text-profile'>{month}</h3>
             </div>
           ))}
         </div>

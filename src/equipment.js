@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import { IoArrowBack } from 'react-icons/io5'; // Import the necessary icons
 import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 
 const Equipment = () => {
@@ -13,7 +14,7 @@ const Equipment = () => {
   const [removeMode, setRemoveMode] = useState(false);
   const [itemsToRemove, setItemsToRemove] = useState([]);
   const eventId = location.state?.eventId;
-
+  const navigate = useNavigate(); 
   const fetchInventory = useCallback(async () => {
     if (!eventId) {
       console.error("Event ID is not defined.");
@@ -108,13 +109,16 @@ const updateSortItemsInDB = async (equip_id, number_of_sort_items) => {
   return (
     <div className="equipment-container">
       <header className="header-equipment">
-        <div className="header-title-equipment">
-          <h1 className="header-text-equipment">
-            <span className="header-highlight">Equipment</span> Tracker
-          </h1>
-          <hr className="header-line" />
-        </div>
-      </header>
+  <button className="back-button-equipment" onClick={() => navigate('/events')}>
+    <IoArrowBack size={32} color="#eeba2b" />
+  </button>
+  <h1 className="header-text-equipment">
+    <span className="header-highlight">Equipment</span> Tracker
+  </h1>
+</header>
+<hr className="header-line" />
+
+
 
       <div className="table-container-equipment">
         <div className="table-equipment">

@@ -233,7 +233,7 @@ function Dashboard() {
             </button>
             <img src={selectedPackage.image} alt={selectedPackage.packagename} className="image-dashboard-overlay" />
             <h3>{selectedPackage.packagename}</h3>
-            <p>Price: {selectedPackage.price}</p>
+            <h3>Price: {selectedPackage.price}</h3>
             <p>
               Description: This package offers a comprehensive solution for your event needs. With top-notch services and amenities, Package{' '}
               {selectedPackage.packagename} ensures a memorable experience for all your guests.

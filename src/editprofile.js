@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
-import { IoArrowBack, IoAdd } from 'react-icons/io5'; // Import the necessary icons
+import { IoArrowBack } from 'react-icons/io5'; // Import the necessary icons
 import profilePic from './images/pro_pic.png';
 
 const EditProfile = () => {
@@ -22,6 +22,9 @@ const EditProfile = () => {
 
   return (
     <div className="gradient-container-edit">
+    <button onClick={() => navigate('/profile')} className="back-button-edit">
+        <IoArrowBack size={32} color="#FFC42B" />
+      </button> 
       <div className="scroll-view-edit">
         <div className="container-edit">
           <h1 className="header-text-edit">Edit Profile</h1>

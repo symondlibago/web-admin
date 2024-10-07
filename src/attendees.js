@@ -4,6 +4,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { FaPlus, FaTimes, FaMinus } from 'react-icons/fa';
 import './App.css';
 import event1Image from './images/event1.png'; // Adjust the path to your local images
+import { IoArrowBack } from 'react-icons/io5'; // Import the necessary icons
+import { useNavigate } from 'react-router-dom';
 
 // Register the necessary components for Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -54,6 +56,7 @@ const Attendees = () => {
   const [showOverlay, setShowOverlay] = useState(false);
   const [newAttendee, setNewAttendee] = useState({ id: 0, name: '', date: '', table: '', status: '#00FF00' });
   const [showRemovePopup, setShowRemovePopup] = useState(false);
+  const navigate = useNavigate();
   const [attendeeToRemove, setAttendeeToRemove] = useState(null);
 
   const handleFilter = (filter) => {
@@ -141,6 +144,9 @@ const Attendees = () => {
 
   return (
     <div className="main-container">
+    <button onClick={() => navigate('/events')} className="back-button-attendee">
+        <IoArrowBack size={32} color="#FFC42B" />
+      </button>
       <div className="header-wrapper">
         <h1 className="header-title">
           <span className="title-highlight">Attendee</span> Tracker
