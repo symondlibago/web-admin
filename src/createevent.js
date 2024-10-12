@@ -203,7 +203,6 @@ const CreateEvent = () => {
                             value={venue}
                             onChange={(e) => setVenue(e.target.value)}
                         />
-                        <FaChevronDown size={24} color="#B0B0B0" className="icon-right-createevent" />
                     </div>
                     <div className="button-container-createevent">
                         <button className="cancel-button-createevent" onClick={handleCancel}>
@@ -555,6 +554,14 @@ const ReviewOverlay = ({ isOpen, onClose, packagesData, allEventsData, guests })
   const eventData = JSON.parse(localStorage.getItem('eventData'));
   const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage')); // Retrieve selectedPackage
   const addedEvents = JSON.parse(localStorage.getItem('addedEvents')); 
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+
+  const handleBookEvent = () => {
+    setModalVisible(true); // Show the overlay when booking an event
+  };
+  const handleCloseModal = () => {
+    setModalVisible(false); // Close the overlay
+  };
 
   console.log('Selected Package:', selectedPackage); // Debugging log
 
@@ -606,8 +613,26 @@ const ReviewOverlay = ({ isOpen, onClose, packagesData, allEventsData, guests })
         ) : (
           <p>No guests added.</p>
         )}
+        <button className="book-event-btn-guestpage" onClick={handleBookEvent}>
+        Book Event
+      </button>
+      <Modal
+        open={modalVisible}
+        onClose={handleCloseModal}
+        className="modal-overlay-guestpage"
+      >
+        <div className="modal-content-guestpage">
+          <button className="close-modal-btn-guestpage" onClick={handleCloseModal}>
+            &times; {/* X Button */}
+          </button>
+          <img src={require('./images/popup.png')} alt="Popup" className="popup-image-guestpage" />
+          <p className="modal-text-guestpage">Your event has been booked!</p>
+        </div>
+      </Modal>
       </div>
+     
     </div>
+    
   </Box>
 </Modal>
   );

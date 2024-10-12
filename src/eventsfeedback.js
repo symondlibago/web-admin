@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMapMarker, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const initialEventsData = [
-  { id: '1', title: 'Mr. & Mrs. Malik Wedding', date: '2024-07-01', address: 'CDO', buttons: [ 'Feedback'] },
+  { id: '1', title: 'Mr. & Mrs. Malik Wedding', date: '2024-07-01', address: 'CDO', buttons: ['Feedback'] },
   { id: '2', title: 'Elizabeth Birthday', date: '2024-08-12', address: 'CDO', buttons: ['Feedback'] },
   { id: '3', title: 'Class of 1979 Reunion', date: '2024-09-25', address: 'CDO', buttons: ['Feedback'] },
-  { id: '4', title: 'Corporate Party', date: '2024-10-30', address: 'CDO', buttons: [ 'Feedback'] },
-  { id: '5', title: 'Annual Gala', date: '2024-11-15', address: 'CDO', buttons: [ 'Feedback'] },
-  { id: '6', title: 'New Year Celebration', date: '2024-12-31', address: 'CDO', buttons: [ 'Feedback'] },
+  { id: '4', title: 'Corporate Party', date: '2024-10-30', address: 'CDO', buttons: ['Feedback'] },
+  { id: '5', title: 'Annual Gala', date: '2024-11-15', address: 'CDO', buttons: ['Feedback'] },
+  { id: '6', title: 'New Year Celebration', date: '2024-12-31', address: 'CDO', buttons: ['Feedback'] },
   { id: '7', title: 'Music Festival', date: '2024-06-22', address: 'CDO', buttons: ['Feedback'] },
   { id: '8', title: 'Art Exhibition', date: '2024-07-05', address: 'CDO', buttons: ['Feedback'] },
 ];
@@ -35,7 +35,6 @@ function EventsFeedback() {
     }
   };
 
-
   const handleDelete = (eventId) => {
     const newData = filteredEvents.filter((item) => item.id !== eventId);
     setFilteredEvents(newData);
@@ -46,7 +45,7 @@ function EventsFeedback() {
     labels: ['Positive', 'Negative', 'Neutral'],
     datasets: [
       {
-        label: 'feedback',
+        label: 'Feedback',
         data: [65, 20, 15], // Example data
         backgroundColor: ['green', 'red', 'yellow'], // Example colors
         hoverBackgroundColor: ['green', 'red', 'yellow'],
@@ -54,11 +53,17 @@ function EventsFeedback() {
     ],
   };
 
+  // Pie chart options to adjust size
+  const pieOptions = {
+    width: 150, // Adjust width as needed
+    height: 150, // Adjust height as needed
+    maintainAspectRatio: false, // Prevents the chart from maintaining aspect ratio
+  };
+
   const renderEventItem = (item) => (
     <div key={item.id} className="item-container-eventfeedback">
-    
       <div className="pie-chart-container-eventfeedback">
-        <Pie data={pieData} /> {/* Replace image with pie chart */}
+        <Pie data={pieData} options={pieOptions} /> {/* Apply options to Pie chart */}
       </div>
       <h3 className="title-eventfeedback">{item.title}</h3>
       <div className="detail-container-eventfeedback">
@@ -71,7 +76,6 @@ function EventsFeedback() {
           <span className="detail-text-eventfeedback">{item.address}</span>
         </div>
       </div>
-      
       <div className="buttons-container-eventfeedback">
         {item.buttons.map((button, index) => (
           <button
@@ -81,7 +85,7 @@ function EventsFeedback() {
               if (button === 'Delete') {
                 handleDelete(item.id);
               } else if (button === 'Feedback') {
-                navigate('feedback-events');
+                navigate('/feedback-events');
               }
             }}
           >
@@ -110,7 +114,7 @@ function EventsFeedback() {
         </div>
       </div>
     </div>
-  );  
+  );
 }
 
 export default EventsFeedback;

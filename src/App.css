@@ -3409,117 +3409,150 @@ textarea.text-input-addrole {
 
 /* EVENT PORFOLIO */
 .gradient-container-portfolio {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: #FFFFFF; /* Background color set to white */
-  color: #000000; /* Text color set to black */
+  background: white;
   padding: 20px;
+  height: 100vh;
 }
 
 .container-portfolio {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header-portfolio {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
 }
 
 .back-button-portfolio {
-  background: none;
+  background: transparent;
   border: none;
-  margin-right: 10px;
-  cursor: pointer;
-}
-.back-button-addschedule {
-  position: absolute;  /* Position the button absolutely */
-  left: 10px; /* Set the button 10px from the left */
-  background-color: transparent; /* Make the background transparent */
-  border: none; /* Remove any border */
   cursor: pointer;
 }
 
 .header-text-portfolio {
-  font-size: 24px;
-  font-weight: bold;
-  color: #FFC42B; /* Keep header text color for emphasis */
-  flex: 1;
   text-align: center;
+  flex: 1;
+  font-size: 24px;
+  color: #333;
+}
+
+.line-portfolio {
+  border-top: 2px dashed #FFC42B;
+  margin: 20px 0;
+}
+
+.labels-portfolio {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.label-portfolio {
+  font-size: 14px;
+  margin-top: 15px;
+  display: block;
+}
+
+.text-input-portfolio {
+  width: 97%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s;
+}
+
+.text-input-portfolio:focus {
+  border-color: #FFC42B;
+  outline: none;
+}
+
+.broken-box-container-portfolio {
+  border: 2px dashed #FFC42B; /* Dashed border for the broken box */
+  padding: 70px;
+  border-radius: 8px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center; /* Center align the contents */
+  align-items: center; /* Vertically center the contents */
 }
 
 .cover-photo-container-portfolio {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border-radius: 10px;
-  padding: 100px 30px;
-  margin-bottom: 20px;
-  border: 2px dashed #000000; /* Broken lines color changed to black */
+  background-color: #EEBA2B;
+  padding: 10px 20px; /* Added horizontal padding */
+  border-radius: 4px;
   cursor: pointer;
+  border: none; /* Remove default border */
+  color: white; /* Ensure text color is white */
+  font-size: 16px; /* Increase font size */
 }
 
 .cover-photo-icon-portfolio {
   margin-right: 10px;
 }
 
-.cover-photo-text-portfolio {
-  color: #000000; /* Text color set to black */
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.line-portfolio {
-  width: 100%;
-  height: 2px;
-  margin: 20px 0;
-  background: linear-gradient(to right, #00000000, #000000, #00000000); /* Broken line color changed to black */
-}
-
-.label-portfolio, .labels-portfolio {
-  font-size: 14px;
-  color: #000000; /* Text color set to black */
-  margin-bottom: 10px;
-}
-
-.labels-portfolio {
-  font-size: 20px;
-}
-
-.text-input-portfolio {
-  background-color: #FFFFFF; /* Background color set to white */
-  border-radius: 10px;
-  padding: 15px;
-  height: 50px;
-  color: #000000; /* Text color set to black */
-  font-size: 16px;
-  margin-bottom: 15px;
-  border: 1px solid #B0B0B0;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3); /* Added box shadow */
+.center-button-container-portfolio {
+  display: flex;
+  justify-content: center; /* Center the create button */
+  margin-top: 20px;
 }
 
 .create-portfolio-button-portfolio {
-  background-color: #FFC42B; /* Button background color */
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 15px;
-  border-radius: 10px;
-  border: 2px solid #FFC42B; /* Border color matches the button background */
+  background-color: #EEBA2B;
+  padding: 10px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 .create-portfolio-text-portfolio {
-  color: #000000; /* Text color set to black */
-  font-size: 16px;
-  font-weight: bold;
-  margin-left: 10px;
+  margin-left: 5px;
+  color: white;
 }
+
+.cover-photo-section-portfolio {
+  display: flex;
+  flex-direction: column; /* Stack the image and button vertically */
+  align-items: center;
+  width: 100%;
+}
+
+.cover-photo-preview-portfolio {
+  width: 100%;  /* Ensure the image fits inside the broken box */
+  height: auto;  /* Keep the aspect ratio */
+  border-radius: 8px;
+  margin-bottom: 10px; /* Add some space between the image and button */
+}
+
+.file-input-portfolio {
+  display: none;  /* Hide the default file input */
+}
+
+.choose-cover-button-portfolio {
+  background-color: #EEBA2B;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.choose-cover-text-portfolio {
+  color: white;
+  cursor: pointer;
+}
+
+
+
 
 
 /* FEEDBACK */
@@ -3777,7 +3810,7 @@ textarea.text-input-addrole {
   padding: 10px;
   position: relative;
   box-sizing: border-box;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   width: 100%; /* Ensure item-container takes full width available in the grid */
 }
 
